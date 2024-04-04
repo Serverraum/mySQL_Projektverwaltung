@@ -140,5 +140,20 @@ namespace mySQL_Projektverwaltung
             id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             isDoubleClick = false;
         }
+
+        private void label1_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

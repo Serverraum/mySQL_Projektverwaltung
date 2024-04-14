@@ -135,11 +135,6 @@ namespace mySQL_Projektverwaltung
             }
         }
 
-        private void GetIdToDelete_DGVprojHours(object sender, DataGridViewCellEventArgs e)
-        {
-            id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            isDoubleClick = false;
-        }
 
         private void label1_MouseCaptureChanged(object sender, EventArgs e)
         {

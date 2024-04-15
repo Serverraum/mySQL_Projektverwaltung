@@ -29,32 +29,45 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_name = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_LS = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.mtb_date = new System.Windows.Forms.MaskedTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_proj_save = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tb_shortdesc = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tb_email = new System.Windows.Forms.TextBox();
+            this.tb_tel = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cb_AG = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tb_DB_File = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Button_SetDB = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.editProj = new System.Windows.Forms.CheckBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -66,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -79,23 +93,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // tb_name
             // 
-            this.textBox1.Location = new System.Drawing.Point(48, 152);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tb_name.Enabled = false;
+            this.tb_name.Location = new System.Drawing.Point(48, 152);
+            this.tb_name.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_name.Name = "tb_name";
+            this.tb_name.Size = new System.Drawing.Size(132, 20);
+            this.tb_name.TabIndex = 1;
+            this.tb_name.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 150);
+            this.richTextBox1.Location = new System.Drawing.Point(4, 115);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(264, 175);
+            this.richTextBox1.Size = new System.Drawing.Size(286, 97);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -109,15 +124,17 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // cb_LS
             // 
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(18, 68);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(92, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cb_LS.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_LS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_LS.Enabled = false;
+            this.cb_LS.Location = new System.Drawing.Point(18, 68);
+            this.cb_LS.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_LS.Name = "cb_LS";
+            this.cb_LS.Size = new System.Drawing.Size(92, 21);
+            this.cb_LS.TabIndex = 4;
+            this.cb_LS.SelectionChangeCommitted += new System.EventHandler(this.cb_LS_SelectionChangeCommitted);
             // 
             // label1
             // 
@@ -141,59 +158,89 @@
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // maskedTextBox1
+            // mtb_date
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(104, 257);
-            this.maskedTextBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(76, 20);
-            this.maskedTextBox1.TabIndex = 7;
+            this.mtb_date.Enabled = false;
+            this.mtb_date.Location = new System.Drawing.Point(104, 257);
+            this.mtb_date.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_date.Mask = "00/00/0000";
+            this.mtb_date.Name = "mtb_date";
+            this.mtb_date.Size = new System.Drawing.Size(76, 20);
+            this.mtb_date.TabIndex = 7;
+            this.mtb_date.ValidatingType = typeof(System.DateTime);
+            this.mtb_date.TextChanged += new System.EventHandler(this.mtb_date_TextChanged);
             // 
             // tabControl1
             // 
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.ShowToolTips = true;
-            this.tabControl1.Size = new System.Drawing.Size(1054, 392);
+            this.tabControl1.Size = new System.Drawing.Size(1164, 484);
             this.tabControl1.TabIndex = 8;
             this.tabControl1.Click += new System.EventHandler(this.Main_Load);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button4);
+            this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.splitContainer1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(1046, 363);
+            this.tabPage1.Size = new System.Drawing.Size(1156, 455);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Auftrag/Projekt";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(111, 6);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(76, 19);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "Proj.-Wahl";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(9, 9);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "ProjID(Vorläufig)";
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.editProj);
+            this.groupBox1.Controls.Add(this.bt_proj_save);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.tb_shortdesc);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.tb_email);
+            this.groupBox1.Controls.Add(this.tb_tel);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.cb_AG);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.maskedTextBox1);
+            this.groupBox1.Controls.Add(this.cb_LS);
+            this.groupBox1.Controls.Add(this.tb_name);
+            this.groupBox1.Controls.Add(this.mtb_date);
             this.groupBox1.Location = new System.Drawing.Point(7, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
@@ -203,6 +250,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // bt_proj_save
+            // 
+            this.bt_proj_save.BackgroundImage = global::mySQL_Projektverwaltung.Properties.Resources.save;
+            this.bt_proj_save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_proj_save.Enabled = false;
+            this.bt_proj_save.FlatAppearance.BorderSize = 0;
+            this.bt_proj_save.ImageKey = "(Keine)";
+            this.bt_proj_save.Location = new System.Drawing.Point(162, 12);
+            this.bt_proj_save.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_proj_save.Name = "bt_proj_save";
+            this.bt_proj_save.Size = new System.Drawing.Size(24, 24);
+            this.bt_proj_save.TabIndex = 20;
+            this.bt_proj_save.UseVisualStyleBackColor = true;
+            this.bt_proj_save.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bt_proj_save_MouseClick);
             // 
             // label7
             // 
@@ -214,13 +276,15 @@
             this.label7.TabIndex = 17;
             this.label7.Text = "Kurzbeschreibung/Short Description";
             // 
-            // textBox4
+            // tb_shortdesc
             // 
-            this.textBox4.Location = new System.Drawing.Point(4, 307);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(176, 20);
-            this.textBox4.TabIndex = 16;
+            this.tb_shortdesc.Enabled = false;
+            this.tb_shortdesc.Location = new System.Drawing.Point(4, 307);
+            this.tb_shortdesc.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_shortdesc.Name = "tb_shortdesc";
+            this.tb_shortdesc.Size = new System.Drawing.Size(176, 20);
+            this.tb_shortdesc.TabIndex = 16;
+            this.tb_shortdesc.TextChanged += new System.EventHandler(this.tb_shortdesc_TextChanged);
             // 
             // label6
             // 
@@ -262,21 +326,25 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "Name:";
             // 
-            // textBox3
+            // tb_email
             // 
-            this.textBox3.Location = new System.Drawing.Point(48, 212);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(132, 20);
-            this.textBox3.TabIndex = 11;
+            this.tb_email.Enabled = false;
+            this.tb_email.Location = new System.Drawing.Point(48, 212);
+            this.tb_email.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_email.Name = "tb_email";
+            this.tb_email.Size = new System.Drawing.Size(132, 20);
+            this.tb_email.TabIndex = 11;
+            this.tb_email.TextChanged += new System.EventHandler(this.tb_email_TextChanged);
             // 
-            // textBox2
+            // tb_tel
             // 
-            this.textBox2.Location = new System.Drawing.Point(48, 181);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(132, 20);
-            this.textBox2.TabIndex = 10;
+            this.tb_tel.Enabled = false;
+            this.tb_tel.Location = new System.Drawing.Point(48, 181);
+            this.tb_tel.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_tel.Name = "tb_tel";
+            this.tb_tel.Size = new System.Drawing.Size(132, 20);
+            this.tb_tel.TabIndex = 10;
+            this.tb_tel.TextChanged += new System.EventHandler(this.tb_tel_TextChanged);
             // 
             // label2
             // 
@@ -288,15 +356,18 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Arbeitsgruppe/Group\r\n";
             // 
-            // comboBox2
+            // cb_AG
             // 
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(18, 106);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(92, 21);
-            this.comboBox2.TabIndex = 8;
+            this.cb_AG.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_AG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_AG.Enabled = false;
+            this.cb_AG.FormattingEnabled = true;
+            this.cb_AG.Location = new System.Drawing.Point(18, 106);
+            this.cb_AG.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_AG.Name = "cb_AG";
+            this.cb_AG.Size = new System.Drawing.Size(92, 21);
+            this.cb_AG.TabIndex = 8;
+            this.cb_AG.SelectionChangeCommitted += new System.EventHandler(this.cb_AG_SelectionChangeCommitted);
             // 
             // splitContainer1
             // 
@@ -314,28 +385,42 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label9);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(828, 329);
-            this.splitContainer1.SplitterDistance = 272;
+            this.splitContainer1.Size = new System.Drawing.Size(938, 421);
+            this.splitContainer1.SplitterDistance = 307;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 9;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.listView1);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Location = new System.Drawing.Point(2, 2);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(268, 325);
+            this.groupBox2.Size = new System.Drawing.Size(294, 417);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Details";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(526, 18);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 13);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Lehrstuhl/Chair";
             // 
             // dataGridView1
             // 
@@ -344,15 +429,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(2, 30);
+            this.dataGridView1.Location = new System.Drawing.Point(2, 44);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(551, 297);
+            this.dataGridView1.Size = new System.Drawing.Size(625, 375);
             this.dataGridView1.TabIndex = 7;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GetIdToDelete_DGVprojHours);
+            this.dataGridView1.VirtualMode = true;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NewRow_DGVprojHours);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Update);
             this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.DGVprojHours_UserDeletingRow);
             // 
             // tabPage2
@@ -362,7 +449,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1046, 363);
+            this.tabPage2.Size = new System.Drawing.Size(1156, 455);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Übersicht";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -393,29 +480,125 @@
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.tb_DB_File);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.Button_SetDB);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1156, 455);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Settings";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tb_DB_File
+            // 
+            this.tb_DB_File.Enabled = false;
+            this.tb_DB_File.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.tb_DB_File.Location = new System.Drawing.Point(44, 23);
+            this.tb_DB_File.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_DB_File.Name = "tb_DB_File";
+            this.tb_DB_File.Size = new System.Drawing.Size(562, 20);
+            this.tb_DB_File.TabIndex = 2;
+            this.tb_DB_File.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 8);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(106, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Pfad der Datenbank:";
+            // 
+            // Button_SetDB
+            // 
+            this.Button_SetDB.Location = new System.Drawing.Point(8, 23);
+            this.Button_SetDB.Margin = new System.Windows.Forms.Padding(2);
+            this.Button_SetDB.Name = "Button_SetDB";
+            this.Button_SetDB.Size = new System.Drawing.Size(31, 19);
+            this.Button_SetDB.TabIndex = 0;
+            this.Button_SetDB.Text = "DB";
+            this.Button_SetDB.UseVisualStyleBackColor = true;
+            this.Button_SetDB.Click += new System.EventHandler(this.Button_SetDB_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // editProj
+            // 
+            this.editProj.Appearance = System.Windows.Forms.Appearance.Button;
+            this.editProj.BackgroundImage = global::mySQL_Projektverwaltung.Properties.Resources.pen3;
+            this.editProj.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.editProj.Cursor = System.Windows.Forms.Cursors.Default;
+            this.editProj.Location = new System.Drawing.Point(133, 12);
+            this.editProj.Name = "editProj";
+            this.editProj.Size = new System.Drawing.Size(24, 24);
+            this.editProj.TabIndex = 22;
+            this.editProj.UseVisualStyleBackColor = true;
+            this.editProj.CheckedChanged += new System.EventHandler(this.editProj_CheckedChanged);
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(5, 251);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(284, 161);
+            this.listView1.TabIndex = 7;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(47, 226);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(243, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 229);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(23, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Dir:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1054, 392);
+            this.ClientSize = new System.Drawing.Size(1164, 484);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(200, 100);
+            this.MinimumSize = new System.Drawing.Size(200, 98);
             this.Name = "Main";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -423,13 +606,13 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_name;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_LS;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox mtb_date;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -440,15 +623,28 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ComboBox cb_AG;
+        private System.Windows.Forms.TextBox tb_shortdesc;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tb_email;
+        private System.Windows.Forms.TextBox tb_tel;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox tb_DB_File;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button Button_SetDB;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button bt_proj_save;
+        private System.Windows.Forms.CheckBox editProj;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

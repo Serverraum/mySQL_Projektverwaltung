@@ -25,34 +25,26 @@ namespace mySQL_Projektverwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         int id;
-        bool isDoubleClick = false;
+
         String connectString;
-        string configFilePath = "config.json";
         int projID = 0;
 
-        DatabaseConfig config;
+
         private ProjAuswahl projAuswahl;
 
         public ProjAuswahl()
         {
             InitializeComponent();
-            try
-            {
-                string json = File.ReadAllText(configFilePath);
-                config = JsonSerializer.Deserialize<DatabaseConfig>(json);
-            }
-            catch (FileNotFoundException)
-            {
-                // Falls die Datei nicht gefunden wird, zeige Fehler (sollte in Hauptform erstellt werden.)
-                MessageBox.Show("config.json nicht gefunden!");
-            }
-            connectString = config.DatabasePath;
+            connectString = DbConnParam.DbConn.Instance.connParamGetSQLite(); //Deprecated
+        }
 
-
-
-
+        public void UpdateSurface()
+        {
+            treeView1.Nodes.Clear();
+            ProjAuswahl_Load(this,new EventArgs());
 
         }
+
         protected virtual void OnTreeNodeClicked(TreeNodeClickedEventArgs e)
         {
             TreeNodeClicked?.Invoke(this, e);

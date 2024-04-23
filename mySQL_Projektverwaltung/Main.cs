@@ -14,7 +14,9 @@ using System.Text.Json.Serialization;
 using System.Windows.Media.Media3D;
 using System.Globalization;
 using System.Data.Common;
-using System.Security.Cryptography.X509Certificates;
+using System.Diagnostics;
+using System.Runtime.InteropServices.ComTypes;
+
 
 namespace mySQL_Projektverwaltung
 {
@@ -22,6 +24,7 @@ namespace mySQL_Projektverwaltung
 
     public partial class Main : Form
     {
+        ReadTest robertzeigtmirwas = new ReadTest();
         SQLiteConnection conn;
         SQLiteCommand cmd;
         SQLiteDataAdapter adapter;
@@ -35,44 +38,27 @@ namespace mySQL_Projektverwaltung
         DataTable dtAG = new DataTable();
         bool isDoubleClick = false;
         public String connectString;
-        string configFilePath = "config.json";
         int projID = 0;
         int i;
         public Boolean ProjLoad;
-        DatabaseConfig config;
         private ProjAuswahl projAuswahl;
-        private string filePath = "D:";
+        private string filePath = @"C:/";
         private bool isFile = false;
         private string currentlySelectedItemName = "";
 
         public Main()
         {
             InitializeComponent();
+            DbConnParam.DbConn.Instance.connLoadParam();
+
             //connectString = @"Data Source=" + Application.StartupPath + @"\Database\crud.db;version=3";
-            //connectString = @"Data Source=C:\Users\faesc\Desktop\Projekmanagement_App\projekt.db;version=3";
+            connectString = @"Data Source=C:\Users\faesc\Desktop\Projekmanagement_App\projekt.db;version=3";
 
 
-            // Versuche, die Konfigurationsdatei zu laden
-            try
-            {
-                string json = File.ReadAllText(configFilePath);
-                config = JsonSerializer.Deserialize<DatabaseConfig>(json);
-            }
-            catch (FileNotFoundException)
-            {
-                // Falls die Datei nicht gefunden wird, erstelle eine neue Konfiguration
-                config = new DatabaseConfig
-                {
-                    // Beispiel-Pfad zur SQLite-Datenbank
-                    DatabasePath = connectString//"C:\\path\\to\\your-database.db"
-                };
+            // Versuche, die Konfigurationsdatei zu laden; Can be removed
 
-                // Serialisiere und speichere die Standardkonfiguration
-                string defaultConfigJson = JsonSerializer.Serialize(config);
-                File.WriteAllText(configFilePath, defaultConfigJson);
-            }
-            connectString = config.DatabasePath;
-            tb_DB_File.Text = config.DatabasePath.Substring(12, config.DatabasePath.Length - 22);
+
+            tb_DB_File.Text = connectString.Substring(12, connectString.Length - 22);
 
         }
 
@@ -81,12 +67,13 @@ namespace mySQL_Projektverwaltung
             TreeNode clickedNode = e.ClickedNode;
             // Hier kannst du den geklickten Knoten verwenden, z. B.:
             //MessageBox.Show($"Knoten '{clickedNode.Text}' wurde in Form1 geklickt.'{clickedNode.Tag}' ");
-            if (clickedNode.Tag != null) {
+            if (clickedNode.Tag != null)
+            {
                 this.BringToFront();
                 ProjLoad = true;
                 //MessageBox.Show(clickedNode.Tag.ToString());
                 projID = Convert.ToInt32(clickedNode.Tag);
-                if (this.dataGridView1.AllowUserToAddRows == false )
+                if (this.dataGridView1.AllowUserToAddRows == false)
                 {
                     this.dataGridView1.AllowUserToAddRows = true;
                 }
@@ -102,12 +89,9 @@ namespace mySQL_Projektverwaltung
                 ReadDataProj();
 
                 ProjLoad = false;
-            }
-        }
 
-        public class DatabaseConfig
-        {
-            public string DatabasePath { get; set; }
+                tb_DB_File.Text = DbConnParam.DbConn.Instance.connParamGetSQLite();
+            }
         }
 
         private void ReadDataProj()
@@ -123,7 +107,7 @@ namespace mySQL_Projektverwaltung
                 dsProj.Reset();
                 adapter.Fill(dsProj);
                 dtProj = dsProj.Tables[0];
-                
+
                 tb_name.Text = dtProj.Rows[0][4].ToString();
                 tb_tel.Text = dtProj.Rows[0][5].ToString();
                 tb_email.Text = dtProj.Rows[0][6].ToString();
@@ -156,10 +140,11 @@ namespace mySQL_Projektverwaltung
                 {
                     while (reader.Read())
                     {
-                        
+
                         cb_LS.Items.Add(reader.GetValue(1).ToString());
-                        if (dtProj.Rows[0][2].ToString() == reader.GetValue(0).ToString()) {
-                            cb_LS.SelectedIndex = i; 
+                        if (dtProj.Rows[0][2].ToString() == reader.GetValue(0).ToString())
+                        {
+                            cb_LS.SelectedIndex = i;
 
                         }
                         i++;
@@ -198,10 +183,12 @@ namespace mySQL_Projektverwaltung
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void Main_Load(object sender, EventArgs e)
         {
             ReadDataProjHours(); //Arbeitsstunden für individuelles Projekt darstellen
         }
+
         private void ReadDataProjHours()
         {
             try
@@ -270,15 +257,7 @@ namespace mySQL_Projektverwaltung
             }
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -302,10 +281,7 @@ namespace mySQL_Projektverwaltung
             return sum;
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
@@ -379,40 +355,7 @@ namespace mySQL_Projektverwaltung
 
 
 
-        private void Button_SetDB_Click(object sender, EventArgs e)
-        {
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog
-            {
-                InitialDirectory = @"C:\",
-                Title = "Browse SQLite Files",
-
-                CheckFileExists = true,
-                CheckPathExists = true,
-
-                DefaultExt = "db",
-                Filter = "SQLite files (*.sqlite;*.db;*.sqlite3;*.db3)|*.sqlite;*.db;*.sqlite3;*.db3|All Files|*",
-                FilterIndex = 4,
-                RestoreDirectory = true,
-            };
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_DB_File.Text = openFileDialog1.FileName;
-                connectString = @"Data Source=" + openFileDialog1.FileName + @";version=3";
-
-                config = new DatabaseConfig
-                {
-                    // Beispiel-Pfad zur SQLite-Datenbank
-                    DatabasePath = @"Data Source=" + openFileDialog1.FileName + @";version=3" //"C:\\path\\to\\your-database.db"
-                };
-
-                // Serialisiere und speichere die Standardkonfiguration
-                string defaultConfigJson = JsonSerializer.Serialize(config);
-                File.WriteAllText(configFilePath, defaultConfigJson);
-            }
-        }
-
+     
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -429,9 +372,10 @@ namespace mySQL_Projektverwaltung
 
         private void DGV_Update(object sender, DataGridViewCellEventArgs e) // Update Zeile von DataGridView in Datenbank
         {
-            try{
+            try
+            {
                 conn.Open();
-                cmd = new SQLiteCommand(); 
+                cmd = new SQLiteCommand();
                 cmd.CommandText = @"UPDATE projTime set date=@date, description=@description, time_h=@time_h WHERE ID= $id";
                 cmd.Connection = conn;
                 cmd.Parameters.AddWithValue("$id", dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
@@ -473,60 +417,60 @@ namespace mySQL_Projektverwaltung
 
         private void NewRow_DGVprojHours(object sender, DataGridViewCellEventArgs e)
         {
-            
-                try
-                {
 
-                    if (e.RowIndex == dataGridView1.Rows.Count - 1)// && e.ColumnIndex == dataGridView1.Columns.Count - 1)
+            try
+            {
+
+                if (e.RowIndex == dataGridView1.Rows.Count - 1)// && e.ColumnIndex == dataGridView1.Columns.Count - 1)
+                {
+                    // Einen neuen Datensatz hinzufügen
+                    MessageBox.Show("Neuer Eintrag");
+                    try
                     {
-                        // Einen neuen Datensatz hinzufügen
-                        MessageBox.Show("Neuer Eintrag");
-                        try
-                        {
-                            conn.Open();
-                            cmd = new SQLiteCommand();
-                            cmd.CommandText = @"INSERT INTO projTime (date, description, time_h, ProjID, LSID, AGID) VALUES (@date, @description, @time_h, @projID, 1, 1)";
-                            cmd.Connection = conn;
-                            string currentDateTimeString = DateTime.Now.ToString("s");
-                            cmd.Parameters.AddWithValue("@date", currentDateTimeString);//dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-                            cmd.Parameters.AddWithValue("@description", dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                            cmd.Parameters.AddWithValue("@time_h", dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                            cmd.Parameters.AddWithValue("@projID", projID);
-                            int i = cmd.ExecuteNonQuery();
+                        conn.Open();
+                        cmd = new SQLiteCommand();
+                        cmd.CommandText = @"INSERT INTO projTime (date, description, time_h, ProjID, LSID, AGID) VALUES (@date, @description, @time_h, @projID, 1, 1)";
+                        cmd.Connection = conn;
+                        string currentDateTimeString = DateTime.Now.ToString("s");
+                        cmd.Parameters.AddWithValue("@date", currentDateTimeString);//dataGridView1.Rows[e.RowIndex].Cells[1].Value);
+                        cmd.Parameters.AddWithValue("@description", dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+                        cmd.Parameters.AddWithValue("@time_h", dataGridView1.Rows[e.RowIndex].Cells[3].Value);
+                        cmd.Parameters.AddWithValue("@projID", projID);
+                        int i = cmd.ExecuteNonQuery();
 
-                            if (i == 1)
-                            {
-                                MessageBox.Show("Successfully Updated!");
-                                ReadDataProjHours();
-                                dataGridView1.ClearSelection();
-                                dataGridView1.CurrentCell = null;
-                                isDoubleClick = false;
-                            }
-
-                            conn.Close();
-                        }
-                        catch (Exception ex)
+                        if (i == 1)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show("Successfully Updated!");
+                            ReadDataProjHours();
+                            dataGridView1.ClearSelection();
+                            dataGridView1.CurrentCell = null;
+                            isDoubleClick = false;
                         }
 
-                        // DataRow newRow = dataSet.Tables["YourTable"].NewRow();
-                        // dataSet.Tables["YourTable"].Rows.Add(newRow);
-
-                        // DataGridView aktualisieren
-                        //dataGridView1.Refresh();
+                        conn.Close();
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                    // DataRow newRow = dataSet.Tables["YourTable"].NewRow();
+                    // dataSet.Tables["YourTable"].Rows.Add(newRow);
+
+                    // DataGridView aktualisieren
+                    //dataGridView1.Refresh();
                 }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    //ToDo: NewLine oder empty
-                    MessageBox.Show("Argument out of Range; DataGridView1. TODO NEWLINE ODER EMPTY");
-                }
-                catch (System.InvalidCastException)
-                {
-                    MessageBox.Show("InvalidCastException;DataGridView1. DBNull");
-                }
-            
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                //ToDo: NewLine oder empty
+                MessageBox.Show("Argument out of Range; DataGridView1. TODO NEWLINE ODER EMPTY");
+            }
+            catch (System.InvalidCastException)
+            {
+                MessageBox.Show("InvalidCastException;DataGridView1. DBNull");
+            }
+
         }
 
         private void editProj_CheckedChanged(object sender, EventArgs e)
@@ -545,7 +489,7 @@ namespace mySQL_Projektverwaltung
             {
                 cb_LS.Enabled = false;
                 cb_AG.Enabled = false;
-                tb_name.Enabled=false;
+                tb_name.Enabled = false;
                 tb_tel.Enabled = false;
                 tb_email.Enabled = false;
                 mtb_date.Enabled = false;
@@ -560,6 +504,7 @@ namespace mySQL_Projektverwaltung
             try
             {
                 conn.Open();
+
                 cmd = new SQLiteCommand();
                 cmd.CommandText = @"SELECT LSID FROM ls WHERE LS=@LS";
                 cmd.Parameters.AddWithValue("@LS", cb_LS.SelectedItem.ToString());
@@ -576,6 +521,7 @@ namespace mySQL_Projektverwaltung
                 cmd.CommandText = @"UPDATE proj set date=@date, LSID=@LSID, AGID=@AGID, name=@name, email=@email, tel=@tel, desc_short=@desc_short WHERE ProjID= $id";
                 cmd.Connection = conn;
                 cmd.Parameters.AddWithValue("$id", projID);
+
 
                 string dateString = mtb_date.Text.ToString();
                 DateTime date;
@@ -602,10 +548,13 @@ namespace mySQL_Projektverwaltung
                 if (i == 1)
                 {
                     MessageBox.Show("Successfully Updated!");
+                    //update windows
                     ReadDataProjHours();
                     dataGridView1.ClearSelection();
                     dataGridView1.CurrentCell = null;
                     isDoubleClick = false;
+
+                    projAuswahl.UpdateSurface();
                 }
 
                 conn.Close();
@@ -632,51 +581,51 @@ namespace mySQL_Projektverwaltung
                 bt_proj_save.Enabled = true;
             }
 
-                conn.Open();
-                cmd = new SQLiteCommand();
-                cmd.CommandText = @"SELECT LSID FROM ls WHERE LS=@LS";
-                cmd.Parameters.AddWithValue("@LS", cb_LS.SelectedItem.ToString());
-                cmd.Connection = conn;
-                string LSID = cmd.ExecuteScalar().ToString(); //get LSID from name, da cb_LS keine Tags unterstützt
+            conn.Open();
+            cmd = new SQLiteCommand();
+            cmd.CommandText = @"SELECT LSID FROM ls WHERE LS=@LS";
+            cmd.Parameters.AddWithValue("@LS", cb_LS.SelectedItem.ToString());
+            cmd.Connection = conn;
+            string LSID = cmd.ExecuteScalar().ToString(); //get LSID from name, da cb_LS keine Tags unterstützt
 
-                String sql = "SELECT * FROM ag WHERE datecreated < @startDate AND (dateremoved > @endDate OR dateremoved IS NULL) AND LSID=@LSID"; //dtProj.Rows[0][1] => Projekt-Erstelldatum im ISO861-Format
+            String sql = "SELECT * FROM ag WHERE datecreated < @startDate AND (dateremoved > @endDate OR dateremoved IS NULL) AND LSID=@LSID"; //dtProj.Rows[0][1] => Projekt-Erstelldatum im ISO861-Format
 
-                cmd = new SQLiteCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = sql;
-                string dateString = mtb_date.Text.ToString();
-                DateTime date;
-                if (DateTime.TryParse(dateString, out date))
+            cmd = new SQLiteCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = sql;
+            string dateString = mtb_date.Text.ToString();
+            DateTime date;
+            if (DateTime.TryParse(dateString, out date))
+            {
+                // Konvertiere das Datum in das "s"-Format /sortierbare Form/
+                string formattedDate = date.ToString("s");
+                cmd.Parameters.AddWithValue("@startDate", formattedDate);
+                cmd.Parameters.AddWithValue("@endDate", formattedDate);
+            } //Fill Datum
+            else
+            {
+                // Handle den Fall, wenn das Parsen fehlschlägt
+                // Zum Beispiel: Fehlerbehandlung oder anderes Verhalten
+                throw new Exception("Ungültiges Datumsformat");
+            }
+            cmd.Parameters.AddWithValue("@LSID", LSID);
+            cb_AG.Items.Clear();
+            i = 0;
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    // Konvertiere das Datum in das "s"-Format /sortierbare Form/
-                    string formattedDate = date.ToString("s");
-                    cmd.Parameters.AddWithValue("@startDate", formattedDate);
-                    cmd.Parameters.AddWithValue("@endDate", formattedDate);
-                } //Fill Datum
-                else
-                {
-                    // Handle den Fall, wenn das Parsen fehlschlägt
-                    // Zum Beispiel: Fehlerbehandlung oder anderes Verhalten
-                    throw new Exception("Ungültiges Datumsformat");
-                }
-                cmd.Parameters.AddWithValue("@LSID", LSID);
-                cb_AG.Items.Clear();
-                i = 0;
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+
+                    cb_AG.Items.Add(reader.GetValue(2).ToString());
+                    if (dtProj.Rows[0][3].ToString() == reader.GetValue(0).ToString())
                     {
+                        cb_AG.SelectedIndex = i;
 
-                        cb_AG.Items.Add(reader.GetValue(2).ToString());
-                        if (dtProj.Rows[0][3].ToString() == reader.GetValue(0).ToString())
-                        {
-                            cb_AG.SelectedIndex = i;
-
-                        }
-                        i++;
                     }
+                    i++;
                 }
-                conn.Close();
+            }
+            conn.Close();
 
 
         }
@@ -711,6 +660,97 @@ namespace mySQL_Projektverwaltung
             {
                 bt_proj_save.Enabled = true;
             }
+        }
+
+        public void loadFilesAndDirectories()
+        {
+            DirectoryInfo fileList;
+            string tempFilePath = "";
+            FileAttributes fileAttr;
+            try
+            {
+
+                if (isFile)
+                {
+                    tempFilePath = filePath + "/" + currentlySelectedItemName;
+                    FileInfo fileDetails = new FileInfo(tempFilePath);
+                    fileNameLabel.Text = fileDetails.Name;
+                    fileTypeLabel.Text = fileDetails.Extension;
+                    fileAttr = File.GetAttributes(tempFilePath);
+                    Process.Start(tempFilePath);
+                }
+                else
+                {
+                    fileAttr = File.GetAttributes(filePath);
+
+                }
+
+                if ((fileAttr & FileAttributes.Directory) == FileAttributes.Directory)
+                {
+                    fileList = new DirectoryInfo(filePath);
+                    FileInfo[] files = fileList.GetFiles(); // GET ALL THE FILES
+                    DirectoryInfo[] dirs = fileList.GetDirectories(); // GET ALL THE DIRS
+                    string fileExtension = "";
+                    listView1.Items.Clear();
+
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        fileExtension = files[i].Extension.ToUpper();
+                        switch (fileExtension)
+                        {
+                            case ".MP3":
+                            case ".MP2":
+                                listView1.Items.Add(files[i].Name, 5);
+                                break;
+                            case ".EXE":
+                            case ".COM":
+                                listView1.Items.Add(files[i].Name, 7);
+                                break;
+
+                            case ".MP4":
+                            case ".AVI":
+                            case ".MKV":
+                                listView1.Items.Add(files[i].Name, 6);
+                                break;
+                            case ".PDF":
+                                listView1.Items.Add(files[i].Name, 4);
+                                break;
+                            case ".DOC":
+                            case ".DOCX":
+                                listView1.Items.Add(files[i].Name, 3);
+                                break;
+                            case ".PNG":
+                            case ".JPG":
+                            case ".JPEG":
+                                listView1.Items.Add(files[i].Name, 9);
+                                break;
+
+                            default:
+                                listView1.Items.Add(files[i].Name, 8);
+                                break;
+                        }
+
+                    }
+
+                    for (int i = 0; i < dirs.Length; i++)
+                    {
+                        listView1.Items.Add(dirs[i].Name, 10);
+                    }
+                }
+                else
+                {
+                    fileNameLabel.Text = this.currentlySelectedItemName;
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        private void Button_SetDB_Click(object sender, EventArgs e)
+        {
+            label8.Text = this.currentlySelectedItemName;
         }
     }
 }

@@ -41,6 +41,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.editProj = new System.Windows.Forms.CheckBox();
             this.bt_proj_save = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.tb_shortdesc = new System.Windows.Forms.TextBox();
@@ -54,6 +55,11 @@
             this.cb_AG = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.fileNameLabel = new System.Windows.Forms.Label();
+            this.fileTypeLabel = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tb_filepath = new System.Windows.Forms.TextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -64,10 +70,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.Button_SetDB = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.editProj = new System.Windows.Forms.CheckBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.settingsControl1 = new mySQL_Projektverwaltung.SettingsControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -182,7 +185,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.ShowToolTips = true;
-            this.tabControl1.Size = new System.Drawing.Size(1164, 484);
+            this.tabControl1.Size = new System.Drawing.Size(889, 510);
             this.tabControl1.TabIndex = 8;
             this.tabControl1.Click += new System.EventHandler(this.Main_Load);
             // 
@@ -196,11 +199,10 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(1156, 455);
+            this.tabPage1.Size = new System.Drawing.Size(881, 481);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Auftrag/Projekt";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // button4
             // 
@@ -249,7 +251,19 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // editProj
+            // 
+            this.editProj.Appearance = System.Windows.Forms.Appearance.Button;
+            this.editProj.BackgroundImage = global::mySQL_Projektverwaltung.Properties.Resources.pen3;
+            this.editProj.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.editProj.Cursor = System.Windows.Forms.Cursors.Default;
+            this.editProj.Location = new System.Drawing.Point(133, 12);
+            this.editProj.Name = "editProj";
+            this.editProj.Size = new System.Drawing.Size(24, 24);
+            this.editProj.TabIndex = 22;
+            this.editProj.UseVisualStyleBackColor = true;
+            this.editProj.CheckedChanged += new System.EventHandler(this.editProj_CheckedChanged);
             // 
             // bt_proj_save
             // 
@@ -381,24 +395,23 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label9);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(938, 421);
-            this.splitContainer1.SplitterDistance = 307;
+            this.splitContainer1.Size = new System.Drawing.Size(663, 447);
+            this.splitContainer1.SplitterDistance = 313;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 9;
-            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.fileNameLabel);
+            this.groupBox2.Controls.Add(this.fileTypeLabel);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.tb_filepath);
             this.groupBox2.Controls.Add(this.listView1);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.listBox1);
@@ -411,6 +424,56 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Details";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // fileNameLabel
+            // 
+            this.fileNameLabel.AutoSize = true;
+            this.fileNameLabel.Location = new System.Drawing.Point(4, 402);
+            this.fileNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Size = new System.Drawing.Size(23, 13);
+            this.fileNameLabel.TabIndex = 15;
+            this.fileNameLabel.Text = "Dir:";
+            // 
+            // fileTypeLabel
+            // 
+            this.fileTypeLabel.AutoSize = true;
+            this.fileTypeLabel.Location = new System.Drawing.Point(86, 402);
+            this.fileTypeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.fileTypeLabel.Name = "fileTypeLabel";
+            this.fileTypeLabel.Size = new System.Drawing.Size(23, 13);
+            this.fileTypeLabel.TabIndex = 14;
+            this.fileTypeLabel.Text = "Dir:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 229);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(23, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Dir:";
+            // 
+            // tb_filepath
+            // 
+            this.tb_filepath.Enabled = false;
+            this.tb_filepath.Location = new System.Drawing.Point(47, 226);
+            this.tb_filepath.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_filepath.Name = "tb_filepath";
+            this.tb_filepath.Size = new System.Drawing.Size(243, 20);
+            this.tb_filepath.TabIndex = 8;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(5, 251);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(284, 127);
+            this.listView1.TabIndex = 7;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.SmallIcon;
+            this.listView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView1_ItemSelectionChanged);
             // 
             // label9
             // 
@@ -434,7 +497,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(625, 375);
+            this.dataGridView1.Size = new System.Drawing.Size(346, 401);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.VirtualMode = true;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NewRow_DGVprojHours);
@@ -449,7 +512,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1156, 455);
+            this.tabPage2.Size = new System.Drawing.Size(881, 481);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Übersicht";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -482,14 +545,16 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.settingsControl1);
             this.tabPage3.Controls.Add(this.tb_DB_File);
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.Button_SetDB);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1156, 455);
+            this.tabPage3.Size = new System.Drawing.Size(881, 481);
             this.tabPage3.TabIndex = 2;
+            this.tabPage3.Tag = "dbConn";
             this.tabPage3.Text = "Settings";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -530,52 +595,23 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // editProj
+            // settingsControl1
             // 
-            this.editProj.Appearance = System.Windows.Forms.Appearance.Button;
-            this.editProj.BackgroundImage = global::mySQL_Projektverwaltung.Properties.Resources.pen3;
-            this.editProj.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.editProj.Cursor = System.Windows.Forms.Cursors.Default;
-            this.editProj.Location = new System.Drawing.Point(133, 12);
-            this.editProj.Name = "editProj";
-            this.editProj.Size = new System.Drawing.Size(24, 24);
-            this.editProj.TabIndex = 22;
-            this.editProj.UseVisualStyleBackColor = true;
-            this.editProj.CheckedChanged += new System.EventHandler(this.editProj_CheckedChanged);
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(5, 251);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(284, 161);
-            this.listView1.TabIndex = 7;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(47, 226);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(243, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 229);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(23, 13);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "Dir:";
+            this.settingsControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.settingsControl1.Location = new System.Drawing.Point(8, 86);
+            this.settingsControl1.MinimumSize = new System.Drawing.Size(223, 274);
+            this.settingsControl1.Name = "settingsControl1";
+            this.settingsControl1.Size = new System.Drawing.Size(865, 387);
+            this.settingsControl1.TabIndex = 3;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1164, 484);
+            this.ClientSize = new System.Drawing.Size(889, 510);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(200, 98);
@@ -632,7 +668,6 @@
         private System.Windows.Forms.TextBox tb_email;
         private System.Windows.Forms.TextBox tb_tel;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox tb_DB_File;
         private System.Windows.Forms.Label label8;
@@ -643,8 +678,12 @@
         private System.Windows.Forms.Button bt_proj_save;
         private System.Windows.Forms.CheckBox editProj;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_filepath;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label fileNameLabel;
+        private System.Windows.Forms.Label fileTypeLabel;
+        private SettingsControl settingsControl1;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 

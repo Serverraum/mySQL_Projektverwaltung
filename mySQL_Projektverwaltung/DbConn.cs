@@ -1,42 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
-using static mySQL_Projektverwaltung.Main;
-using System.Data;
-using System.Drawing;
-using System.Data.SQLite;
 using System.Text.Json.Serialization;
-using System.Windows.Media.Media3D;
-using System.Globalization;
-using System.Data.Common;
-using System.Diagnostics;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography.X509Certificates;
-using System.Data.Entity.Core.Mapping;
-using Org.BouncyCastle.Asn1.Mozilla;
+using System.Text.Json;
+using System.Windows;
+using System.Data;
+using System.Data.SQLite;
+//using MySql.Data.MySqlClient;
+using MySqlConnector;
+using System.Diagnostics.Eventing.Reader;
 
 namespace mySQL_Projektverwaltung
 {
     public class DbConnParam
     {
         [JsonInclude]
-        protected String SQLiteAddr;
+        protected string SQLiteAddr;
         [JsonInclude]
         protected int DbType; //1 =  SQLite; 2 = mySQL
         [JsonInclude]
-        protected String mySQL_Addr;//Address to Database
+        protected string mySQL_Addr;//Address to Database
         [JsonInclude]
-        protected String mySQL_Dat; //Database
+        protected string mySQL_Dat; //Database
         [JsonInclude]
-        protected String mySQL_PWD; //Password
+        protected string mySQL_PWD; //Password
         [JsonInclude]
-        protected String mySQL_UID; //Username
+        protected string mySQL_UID; //Username
         protected string configFilePath = "configdatabase.json";
 
         public class MySQLParam
@@ -58,11 +46,14 @@ namespace mySQL_Projektverwaltung
             private DbConn()
             {
             }
-            private string conn ="";
-            DbConnParam dbConnParam = new DbConnParam();
-            MySql.Data.MySqlClient.MySqlConnection connMySQL = new MySql.Data.MySqlClient.MySqlConnection();
-            SQLiteConnection connSQLite = new SQLiteConnection();
 
+            internal DbConnParam dbConnParam = new DbConnParam();
+            internal MySqlConnection connMySQL = new MySqlConnection();
+            internal SQLiteConnection connSQLite = new SQLiteConnection();
+            public SQLiteCommand cmdSQLite = new SQLiteCommand();
+            internal MySqlCommand cmdMySQL = new MySqlCommand();
+            internal SQLiteDataAdapter SQLiteAdapter = new SQLiteDataAdapter();
+            internal MySqlDataAdapter MySqlAdapter = new MySqlDataAdapter();
             /*###########################--------------------##############################*/
             /*########################### Start of Functions ##############################*/
             /*###########################--------------------##############################*/
@@ -74,7 +65,7 @@ namespace mySQL_Projektverwaltung
             /*******************************************************************************/
 
             public void connLoadParam()// Load Param from JSON
-            { 
+            {
 
                 try
                 {
@@ -95,17 +86,17 @@ namespace mySQL_Projektverwaltung
                         mySQL_Dat = "",
                         mySQL_PWD = ""
                     };
-            
+
 
                     // Serialisiere und speichere die Standardkonfiguration
                     string defaultConfigJson = JsonSerializer.Serialize(dbConnParam);
                     File.WriteAllText(dbConnParam.configFilePath, defaultConfigJson);
-                    MessageBox.Show("DB not configured","Warning");
+                    MessageBox.Show("DB not configured", "Warning");
                     // ToDo: config DB
                 }
             }
             public void connSaveParam()// Save Param to JSON
-            { 
+            {
                 string defaultConfigJson = JsonSerializer.Serialize(dbConnParam);
                 File.WriteAllText(dbConnParam.configFilePath, defaultConfigJson);
             }
@@ -154,29 +145,53 @@ namespace mySQL_Projektverwaltung
             /*                         Database-Interface-Functions                        */
             /*******************************************************************************/
 
+            /*-----------------------------------------------------------------------------*/
+            /*         3 Steps to Success:                                                 */
+            /* 1. Prepare: DbGetValue(sql_command)                                         */
+            /* 2. Add Params, if applicable: DbAddParams(paramname, param)                 */
+            /* 3. Get Data:                                                                */
+            /*      - DbDataAdapter (ToDo)                                                 */
+            /*      - DbScalar() for single Items                                          */
+            /*-----------------------------------------------------------------------------*/
+
+
+
             /*-----------------------------------Prepare-----------------------------------*/
 
-            public void DbGetValue(string cmd) { 
-            switch(dbConnParam.DbType)
+            public void DbGetValue(string cmd)
+            {
+                switch (dbConnParam.DbType)
                 {
-                    case 1: dbConnParam.DbType = 1;
+                    case 1:
+                        dbConnParam.DbType = 1;
                         SQLiteConnection connSQLite = new SQLiteConnection(dbConnParam.SQLiteAddr);
                         connSQLite.Open(); //open Connection
-                        SQLiteCommand cmdSQLite = connSQLite.CreateCommand(); //create Command
+                        cmdSQLite = connSQLite.CreateCommand(); //create Command
                         cmdSQLite.CommandText = cmd; //Applying commandtext to Command
+                        SQLiteAdapter = new SQLiteDataAdapter(cmd, connSQLite); //Also prepare DataAdapter, if needed for getting Dataset.
                         break;
-                    case 2: dbConnParam.DbType = 2; //same as above
-                        MySql.Data.MySqlClient.MySqlConnection connMySQL = new MySql.Data.MySqlClient.MySqlConnection(dbConnParam.mySQL_Addr + ";"+dbConnParam.mySQL_Dat+";"+dbConnParam.mySQL_UID+";"+dbConnParam.mySQL_PWD);
-                        connMySQL.Open();
-                        MySql.Data.MySqlClient.MySqlCommand mySqlCommand = connMySQL.CreateCommand();
-                        mySqlCommand.CommandText = cmd;
+                    case 2:
+                        dbConnParam.DbType = 2; //same as above   +       Server=localhost;database=DapperDB;Uid=root;Pwd=;Charset=utf8;Port=3307;SslMode=none
+                        
+                        try
+                        {
+                            connMySQL = new MySqlConnection("server="+ dbConnParam.mySQL_Addr + ";uid=" + dbConnParam.mySQL_UID + ";pwd=" + dbConnParam.mySQL_PWD+";database=" + dbConnParam.mySQL_Dat);                                                              
+                            connMySQL.Open();
+                        } 
+                        catch (MySqlException ex){
+                            MessageBox.Show(ex.Message);
+                        };
+                        //connMySQL.Open();
+                        cmdMySQL = connMySQL.CreateCommand();
+                        cmdMySQL.CommandText = cmd;
+                        MySqlAdapter = new MySqlDataAdapter(cmd, connMySQL);
                         break;
                     default: throw new Exception("No Database, DbGetValue");
                         //break;
                 }
-                
 
-            
+
+
             }
 
             /*----------------------------------AddParams----------------------------------*/
@@ -186,12 +201,12 @@ namespace mySQL_Projektverwaltung
                 switch (dbConnParam.DbType)
                 {
                     case 1:
-                        SQLiteCommand cmd_sqlite = new SQLiteCommand();
-                        cmd_sqlite.Parameters.AddWithValue(Param, Value);
+                        //SQLiteCommand cmd_sqlite = new SQLiteCommand();
+                        cmdSQLite.Parameters.AddWithValue(Param, Value);
                         break;
                     case 2:
-                        MySql.Data.MySqlClient.MySqlCommand cmd_mysql = new MySql.Data.MySqlClient.MySqlCommand();
-                        cmd_mysql.Parameters.AddWithValue(Param, Value);
+                        //MySqlCommand cmd_mysql = new MySqlCommand();
+                        cmdMySQL.Parameters.AddWithValue(Param, Value);
                         break;
                     default: throw new Exception("No Database, CmdAddParam");
                         //break;
@@ -199,6 +214,52 @@ namespace mySQL_Projektverwaltung
             }
 
             /*-----------------------------------GetData-----------------------------------*/
+            public DataSet DbGetDataSet()
+            {
+                DataSet ds = new DataSet();
+                switch (dbConnParam.DbType)
+                {
+                    case 1:
+                        SQLiteAdapter.Fill(ds);
+                        connSQLite.Close();
+                        return ds;
+                    case 2:
+                        if (connMySQL.State != ConnectionState.Closed)
+                        {
+                            MySqlAdapter.Fill(ds);
+                            connMySQL.Close();
+                            return ds;
+                        } else { return null; }
+                    default:
+                        throw new Exception("No DataBase");
+
+                }
+            }
+
+            public DataTable DbGetDataTable()//Datatable 0
+            {
+                DataSet ds = DbGetDataSet();
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+
+            public Object DbScalar()//Single Cell
+            {
+                switch (dbConnParam.DbType)
+                {
+                    case 1:
+                        return cmdSQLite.ExecuteScalar();
+                    case 2:
+                        if(connMySQL.State != ConnectionState.Closed)
+                        {
+                            return cmdMySQL.ExecuteScalar(); } else { return null; }
+                    default:
+                        throw new Exception("No DataBase, ExecuteScalar");
+                }
+            }
+
+
+
 
             /*
             conn = new SQLiteConnection(connectString);
@@ -212,8 +273,25 @@ namespace mySQL_Projektverwaltung
                 adapter.Fill(ds);
                 dt = ds.Tables[0];
             */
+            public void getData()
+            {
+                using (SQLiteDataReader reader = cmdSQLite.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        /*  RETURN DATA How?
+                        cb_AG.Items.Add(reader.GetValue(2).ToString());
+                        if (dtProj.Rows[0][3].ToString() == reader.GetValue(0).ToString())
+                        {
+                            cb_AG.SelectedIndex = i;
 
+                        }
+                        i++;  */
+                    }
+                }
 
+                connSQLite.Close();
+            }
 
 
 
@@ -242,3 +320,4 @@ namespace mySQL_Projektverwaltung
         }
     }
 }
+

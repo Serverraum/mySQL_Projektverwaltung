@@ -77,7 +77,7 @@ namespace mySQL_Projektverwaltung
                 {
                     this.dataGridView1.AllowUserToAddRows = true;
                 }
-                if (editProj.Checked == true)
+                if (editProj.Checked)
                 {
                     editProj.Checked = false;
                 }
@@ -742,15 +742,20 @@ namespace mySQL_Projektverwaltung
                     fileNameLabel.Text = this.currentlySelectedItemName;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
         }
 
+        public int iger=1;
         private void Button_SetDB_Click(object sender, EventArgs e)
         {
-            label8.Text = this.currentlySelectedItemName;
+            //label8.Text = this.currentlySelectedItemName;
+            DbConnParam.DbConn.Instance.DbGetValue("Select LS FROM ls WHERE lsid=@lsid");
+            DbConnParam.DbConn.Instance.CmdAddParam("lsid", iger);
+            label8.Text = DbConnParam.DbConn.Instance.DbScalar().ToString();
+            iger++;
         }
     }
 }

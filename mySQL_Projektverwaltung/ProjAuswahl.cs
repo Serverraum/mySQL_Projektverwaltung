@@ -10,7 +10,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static mySQL_Projektverwaltung.Main;
 
 
 namespace mySQL_Projektverwaltung

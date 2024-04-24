@@ -28,33 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjAuswahl));
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.SuspendLayout();
+            treeView1 = new System.Windows.Forms.TreeView();
+            SuspendLayout();
             // 
             // treeView1
             // 
-            resources.ApplyResources(this.treeView1, "treeView1");
-            this.treeView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.treeView1.Name = "treeView1";
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
+            treeView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            treeView1.Location = new System.Drawing.Point(14, 14);
+            treeView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            treeView1.Name = "treeView1";
+            treeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            treeView1.RightToLeftLayout = true;
+            treeView1.ShowRootLines = false;
+            treeView1.Size = new System.Drawing.Size(233, 508);
+            treeView1.TabIndex = 0;
+            treeView1.AfterSelect += treeView1_AfterSelect;
+            treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             // 
             // ProjAuswahl
             // 
-            resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.treeView1);
-            this.MaximizeBox = false;
-            this.Name = "ProjAuswahl";
-            this.TopMost = true;
-            this.Load += new System.EventHandler(this.ProjAuswahl_Load);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(261, 537);
+            Controls.Add(treeView1);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MaximumSize = new System.Drawing.Size(277, 2302);
+            MinimumSize = new System.Drawing.Size(137, 225);
+            Name = "ProjAuswahl";
+            Text = "Form1";
+            TopMost = true;
+            Load += ProjAuswahl_Load;
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView1;
+        public System.Windows.Forms.TreeView treeView1;
     }
 }

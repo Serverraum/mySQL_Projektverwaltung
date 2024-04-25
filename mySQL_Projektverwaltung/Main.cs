@@ -751,11 +751,18 @@ namespace mySQL_Projektverwaltung
         public int iger=1;
         private void Button_SetDB_Click(object sender, EventArgs e)
         {
-            //label8.Text = this.currentlySelectedItemName;
-            DbConnParam.DbConn.Instance.DbGetValue("Select LS FROM ls WHERE lsid=@lsid");
-            DbConnParam.DbConn.Instance.CmdAddParam("lsid", iger);
-            label8.Text = DbConnParam.DbConn.Instance.DbScalar().ToString();
-            iger++;
+            try
+            {
+                //label8.Text = this.currentlySelectedItemName;
+                DbConnParam.DbConn.Instance.DbAddCmd("Select LS FROM ls WHERE lsid=@lsid");
+                DbConnParam.DbConn.Instance.CmdAddParam("lsid", iger);
+                label8.Text = DbConnParam.DbConn.Instance.DbScalar().ToString();
+                iger++;
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show(Exception);
+            }
         }
     }
 }

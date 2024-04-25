@@ -147,7 +147,7 @@ namespace mySQL_Projektverwaltung
 
             /*-----------------------------------------------------------------------------*/
             /*         3 Steps to Success:                                                 */
-            /* 1. Prepare: DbGetValue(sql_command)                                         */
+            /* 1. Prepare: DbAddCmd(sql_command)                                         */
             /* 2. Add Params, if applicable: DbAddParams(paramname, param)                 */
             /* 3. Get Data:                                                                */
             /*      - DbDataAdapter (ToDo)                                                 */
@@ -158,7 +158,7 @@ namespace mySQL_Projektverwaltung
 
             /*-----------------------------------Prepare-----------------------------------*/
 
-            public void DbGetValue(string cmd)
+            public void DbAddCmd(string cmd)
             {
                 switch (dbConnParam.DbType)
                 {
@@ -186,7 +186,7 @@ namespace mySQL_Projektverwaltung
                         cmdMySQL.CommandText = cmd;
                         MySqlAdapter = new MySqlDataAdapter(cmd, connMySQL);
                         break;
-                    default: throw new Exception("No Database, DbGetValue");
+                    default: throw new Exception("No Database, DbAddCmd");
                         //break;
                 }
 

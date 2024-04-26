@@ -36,6 +36,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="lib\**" />
+    <EmbeddedResource Remove="lib\**" />
+    <None Remove="lib\**" />
+    <Page Remove="lib\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,9 +92,6 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
   </ItemGroup>
   <Target Name="AfterResolveReferences">
     <ItemGroup>

@@ -34,14 +34,12 @@ namespace mySQL_Projektverwaltung
         public ProjAuswahl()
         {
             InitializeComponent();
-            connectString = DbConnParam.DbConn.Instance.connParamGetSQLite(); //Deprecated
         }
 
         public void UpdateSurface()
         {
             treeView1.Nodes.Clear();
-            ProjAuswahl_Load(this,new EventArgs());
-
+            ProjAuswahl_Load(this, new EventArgs());
         }
 
         protected virtual void OnTreeNodeClicked(TreeNodeClickedEventArgs e)
@@ -63,18 +61,10 @@ namespace mySQL_Projektverwaltung
         {
             try
             {
-                conn = new SQLiteConnection(connectString);
-                conn.Open();
-                cmd = new SQLiteCommand();
-                //String sql = "SET IDENTITY_INSERT proj OFF;";
-                //adapter = new SQLiteDataAdapter(sql, conn);
                 String sql = "SELECT * FROM proj"; //WHERE projID=" + projID;
-                adapter = new SQLiteDataAdapter(sql, conn);
-                ds.Reset();
-                adapter.Fill(ds);
-                dt = ds.Tables[0];
+                DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                dt = DbConnParam.DbConn.Instance.DbGetDataTable();
                 PopulateTreeView(treeView1 as TreeView, dt);
-                conn.Close();
             }
             catch (Exception ex)
             {

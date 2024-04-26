@@ -37,7 +37,6 @@
             treeView1.Location = new System.Drawing.Point(14, 14);
             treeView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             treeView1.Name = "treeView1";
-            treeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             treeView1.RightToLeftLayout = true;
             treeView1.ShowRootLines = false;
             treeView1.Size = new System.Drawing.Size(233, 508);

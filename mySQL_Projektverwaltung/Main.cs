@@ -51,16 +51,14 @@ namespace mySQL_Projektverwaltung
             InitializeComponent();
             DbConnParam.DbConn.Instance.connLoadParam();
 
-            //connectString = @"Data Source=" + Application.StartupPath + @"\Database\crud.db;version=3";
+            //can be removed
             connectString = @"Data Source=C:\Users\faesc\Desktop\Projekmanagement_App\projekt.db;version=3";
-
-
-            // Versuche, die Konfigurationsdatei zu laden; Can be removed
-
-
-            tb_DB_File.Text = connectString.Substring(12, connectString.Length - 22);
-
         }
+        public void LoadProject(int projID)
+        {
+            project_TimeControl1.ReLoad_Project_TimeControl(projID);
+        }
+
 
         private void ProjAuswahl_TreeNodeClicked(object sender, TreeNodeClickedEventArgs e)
         {
@@ -73,10 +71,9 @@ namespace mySQL_Projektverwaltung
                 ProjLoad = true;
                 //MessageBox.Show(clickedNode.Tag.ToString());
                 projID = Convert.ToInt32(clickedNode.Tag);
-                if (this.dataGridView1.AllowUserToAddRows == false)
-                {
-                    this.dataGridView1.AllowUserToAddRows = true;
-                }
+                LoadProject(projID);
+
+
                 if (editProj.Checked)
                 {
                     editProj.Checked = false;

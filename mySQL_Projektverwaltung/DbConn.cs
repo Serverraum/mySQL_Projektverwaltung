@@ -147,11 +147,15 @@ namespace mySQL_Projektverwaltung
 
             /*-----------------------------------------------------------------------------*/
             /*         3 Steps to Success:                                                 */
-            /* 1. Prepare: DbAddCmd(sql_command)                                         */
-            /* 2. Add Params, if applicable: DbAddParams(paramname, param)                 */
-            /* 3. Get Data:                                                                */
-            /*      - DbDataAdapter (ToDo)                                                 */
+            /* 1. Prepare: DbAddCmd(sql_command)                                           */
+            /* 2. Add Params, if applicable: CmdAddParams(paramname, param)                */
+            /* 3.1 Get Data:                                                               */
+            /*      - DbGetDataSet()                                                       */
+            /*      - DbGetDataTable()                                                     */
             /*      - DbScalar() for single Items                                          */
+            /*      - DbExecuteReader() (TODO) - InLine-Data-Manipulation                  */
+            /* 3.2 Set Data:                                                               */
+            /*      - DbExecuteNonQuery()                                                  */
             /*-----------------------------------------------------------------------------*/
 
 
@@ -250,15 +254,32 @@ namespace mySQL_Projektverwaltung
                     case 1:
                         return cmdSQLite.ExecuteScalar();
                     case 2:
-                        if(connMySQL.State != ConnectionState.Closed)
+                        if (connMySQL.State != ConnectionState.Closed)
                         {
-                            return cmdMySQL.ExecuteScalar(); } else { return null; }
+                            return cmdMySQL.ExecuteScalar();
+                        }
+                        else { return null; }
                     default:
                         throw new Exception("No DataBase, ExecuteScalar");
                 }
             }
 
-
+            public int DbExecuteNonQuery()
+            {
+                switch (dbConnParam.DbType)
+                {
+                    case 1:
+                        return cmdSQLite.ExecuteNonQuery();
+                    case 2:
+                        if (connMySQL.State != ConnectionState.Closed)
+                        {
+                            return cmdMySQL.ExecuteNonQuery();
+                        }
+                        else { return 0; }
+                    default:
+                        throw new Exception("No DataBase, ExecuteScalar");
+                }
+            }
 
 
             /*
@@ -293,7 +314,7 @@ namespace mySQL_Projektverwaltung
                 connSQLite.Close();
             }
 
-           
+
 
 
 

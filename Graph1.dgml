@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@10)" Category="File" Bounds="736.954512687174,75.592906591965,185.898000144959,25.9980001449585" Label="SettingsControl.Designer.cs" Reference="$(VsSolution)\mySQL_Projektverwaltung\SettingsControl.Designer.cs" UseManualLocation="True" />
+    <Node Id="(@11)" Category="File" Bounds="737.012687467209,19.606012609853,146.714666811625,25.9980001449585" Label="SettingsControl.resx" Reference="$(VsSolution)\mySQL_Projektverwaltung\SettingsControl.resx" UseManualLocation="True" />
+    <Node Id="(@5)" Category="File" Bounds="420.801777280172,31.1597218513489,99.8413334782917,25.9980001449585" Label="Program.cs" Reference="$(VsSolution)\mySQL_Projektverwaltung\Program.cs" UseManualLocation="True" />
+    <Node Id="@2" Category="File" Bounds="684.000003019969,-33.0663170313714,119.164666811625,25.9980001449585" Label="ProjAuswahl.cs" Reference="$(VsSolution)\mySQL_Projektverwaltung\ProjAuswahl.cs" UseManualLocation="True" />
+    <Node Id="@4" Category="File" Bounds="666.33975275027,29.1061761624408,156.301333478292,25" Group="Collapsed" Label="SettingsControl.cs" Reference="$(VsSolution)\mySQL_Projektverwaltung\SettingsControl.cs" UseManualLocation="True" />
+    <Node Id="@7" Category="File" Bounds="550.643110758464,30.6076512336731,80.8146668116251,25.9980001449585" Label="Main.cs" Reference="$(VsSolution)\mySQL_Projektverwaltung\Main.cs" UseManualLocation="True" />
+    <Node Id="@9" Category="File" Bounds="884,30,97.7413334782918,25.9980001449585" Label="DbConn.cs" Reference="$(VsSolution)\mySQL_Projektverwaltung\DbConn.cs" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="(@5)" Target="@7" Bounds="520.643110758464,43.8333340794361,21.0000947243268,0.0963494386322594" />
+    <Link Source="@2" Target="@9" Bounds="782.597760558559,-7.0683217048645,102.718929007128,34.2234743127373" />
+    <Link Source="@4" Target="(@10)" Category="Contains" />
+    <Link Source="@4" Target="(@11)" Category="Contains" />
+    <Link Source="@4" Target="@9" Bounds="822.641086228561,42.183994484519,52.3591595230828,0.387125061927357" />
+    <Link Source="@7" Target="@2" Bounds="622.189755873287,-3.60126150094636,81.9479113259264,34.2089127346195" />
+    <Link Source="@7" Target="@4" Bounds="631.457809480031,42.7423940776082,25.8827080680081,0.337446123802891" />
+  </Links>
+  <Categories>
+    <Category Id="Contains" Label="Enthält" Description="Gibt an, ob die Quelle der Verknüpfung das Zielobjekt enthält" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Enthalten in" IsContainment="True" OutgoingActionLabel="Enthält" />
+    <Category Id="File" Label="Datei" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" NavigationActionLabel="Dateien" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="Group" Label="Gruppe" Description="Knoten als Gruppe anzeigen" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="Icon" Label="Symbol" Description="Symbol" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsReference" Label="IsReference" Description="Anmerkung, um eine Eigenschaft zu einer Verweiseigenschaft zu machen." DataType="System.Boolean" />
+    <Property Id="Label" Label="Bezeichnung" Description="Anzeigbare Bezeichnung eines Objekts, das Anmerkungen einblenden werden kann" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="Reference" Label="Verweis" Description="Verweis" DataType="System.String" IsReference="True" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="ToolTip" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="FileName" Label="FileName" ValueType="Uri" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/ProjAuswahl.cs" />
+    <Alias n="2" Id="(@1)" />
+    <Alias n="3" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/SettingsControl.cs" />
+    <Alias n="4" Id="(@3)" />
+    <Alias n="5" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/Program.cs" />
+    <Alias n="6" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/Main.cs" />
+    <Alias n="7" Id="(@6)" />
+    <Alias n="8" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/DbConn.cs" />
+    <Alias n="9" Id="(@8)" />
+    <Alias n="10" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/SettingsControl.Designer.cs" />
+    <Alias n="11" Uri="FileName=$(VsSolutionUri)/mySQL_Projektverwaltung/SettingsControl.resx" />
+  </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Zirkelverweise" ToolTip="Der Knoten ist Teil einer stark gekoppelten Komponente." ValueLabel="Knoten">
+      <Condition Expression="IsStronglyConnected" />
+      <Setter Property="Stroke" Value="#D02030" />
+      <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Zirkelverweise" ToolTip="Der Knoten ist Teil einer stark gekoppelten Komponente." ValueLabel="Links">
+      <Condition Expression="IsCircularLink" />
+      <Setter Property="Stroke" Value="#D02030" />
+      <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+  </Styles>
+  <Paths>
+    <Path Id="VsSolution" Value="C:\Users\faesc\source\repos\mySQL_Projektverwaltung" />
+    <Path Id="VsSolutionUri" Value="file:///C:/Users/faesc/source/repos/mySQL_Projektverwaltung" />
+  </Paths>
+</DirectedGraph>

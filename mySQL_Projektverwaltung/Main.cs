@@ -247,12 +247,6 @@ namespace mySQL_Projektverwaltung
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (editProj.Checked == true)
-            {
-                bt_proj_save.Enabled = true;
-            }
-        }
 
 
 

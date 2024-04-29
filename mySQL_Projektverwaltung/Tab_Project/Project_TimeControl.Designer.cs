@@ -49,7 +49,6 @@
             dataGridView1.VirtualMode = true;
             dataGridView1.CellClick += NewRow_DGVprojHours;
             dataGridView1.CellEndEdit += DGV_Update;
-            dataGridView1.CurrentCellDirtyStateChanged += DGV_Update;
             dataGridView1.UserDeletingRow += DGVprojHours_UserDeletingRow;
             // 
             // button1

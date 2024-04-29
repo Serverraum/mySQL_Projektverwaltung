@@ -72,7 +72,7 @@ namespace mySQL_Projektverwaltung
                     //DbConnParam dbConnParam = new DbConnParam();
                     string json = File.ReadAllText(path: dbConnParam.configFilePath);
                     dbConnParam = JsonSerializer.Deserialize<DbConnParam>(json);
-                    //.mySQL_Addr = @"Data Source=" + "T" + @";version=3";
+                    connOpen();
                 }
                 catch (FileNotFoundException)
                 {
@@ -101,10 +101,39 @@ namespace mySQL_Projektverwaltung
                 File.WriteAllText(dbConnParam.configFilePath, defaultConfigJson);
             }
 
-
+            public void connClose()
+            {
+                switch (dbConnParam.DbType)
+                {
+                    case 1:
+                        connSQLite.Close(); //open Connection
+                        break;
+                    case 2:
+                        connMySQL.Close();
+                        break;
+                    default: MessageBox.Show("DB not configured", "Warning"); break;
+                }
+            }
+            public void connOpen()
+            {
+                switch (dbConnParam.DbType)
+                {
+                    case 1:
+                        connSQLite = new SQLiteConnection(dbConnParam.SQLiteAddr);
+                        connSQLite.Open(); //open Connection
+                        break;
+                    case 2:
+                        connMySQL = new MySqlConnection("server=" + dbConnParam.mySQL_Addr + ";uid=" + dbConnParam.mySQL_UID + ";pwd=" + dbConnParam.mySQL_PWD + ";database=" + dbConnParam.mySQL_Dat);
+                        connMySQL.Open();
+                        break;
+                    default: MessageBox.Show("DB not configured", "Warning"); break;
+                }
+            }
             public void connParamNewDbType(int DbType)// Set DbType 1:SQLite or 2:mySQL
             {
+                connClose();
                 dbConnParam.DbType = DbType;
+                connOpen();
             }
             public void connParamNewSQLite(string connectionString) // Save new SQLiteParams to JSON
             {
@@ -167,25 +196,11 @@ namespace mySQL_Projektverwaltung
                 switch (dbConnParam.DbType)
                 {
                     case 1:
-                        dbConnParam.DbType = 1;
-                        SQLiteConnection connSQLite = new SQLiteConnection(dbConnParam.SQLiteAddr);
-                        connSQLite.Open(); //open Connection
                         cmdSQLite = connSQLite.CreateCommand(); //create Command
                         cmdSQLite.CommandText = cmd; //Applying commandtext to Command
                         SQLiteAdapter = new SQLiteDataAdapter(cmd, connSQLite); //Also prepare DataAdapter, if needed for getting Dataset.
                         break;
                     case 2:
-                        dbConnParam.DbType = 2; //same as above   +       Server=localhost;database=DapperDB;Uid=root;Pwd=;Charset=utf8;Port=3307;SslMode=none
-                        
-                        try
-                        {
-                            connMySQL = new MySqlConnection("server="+ dbConnParam.mySQL_Addr + ";uid=" + dbConnParam.mySQL_UID + ";pwd=" + dbConnParam.mySQL_PWD+";database=" + dbConnParam.mySQL_Dat);                                                              
-                            connMySQL.Open();
-                        } 
-                        catch (MySqlException ex){
-                            MessageBox.Show(ex.Message);
-                        };
-                        //connMySQL.Open();
                         cmdMySQL = connMySQL.CreateCommand();
                         cmdMySQL.CommandText = cmd;
                         MySqlAdapter = new MySqlDataAdapter(cmd, connMySQL);
@@ -225,15 +240,14 @@ namespace mySQL_Projektverwaltung
                 {
                     case 1:
                         SQLiteAdapter.Fill(ds);
-                        connSQLite.Close();
                         return ds;
                     case 2:
                         if (connMySQL.State != ConnectionState.Closed)
                         {
                             MySqlAdapter.Fill(ds);
-                            connMySQL.Close();
                             return ds;
-                        } else { return null; }
+                        }
+                        else { return null; }
                     default:
                         throw new Exception("No DataBase");
 
@@ -311,7 +325,7 @@ namespace mySQL_Projektverwaltung
                     }
                 }
 
-                connSQLite.Close();
+
             }
 
 

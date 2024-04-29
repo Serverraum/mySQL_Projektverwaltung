@@ -352,7 +352,7 @@ namespace mySQL_Projektverwaltung
 
 
 
-     
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -745,7 +745,7 @@ namespace mySQL_Projektverwaltung
             }
         }
 
-        public int iger=1;
+        public int iger = 1;
         private void Button_SetDB_Click(object sender, EventArgs e)
         {
             try
@@ -760,6 +760,11 @@ namespace mySQL_Projektverwaltung
             {
                 //MessageBox.Show(Exception);
             }
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DbConnParam.DbConn.Instance.connClose();
         }
     }
 }

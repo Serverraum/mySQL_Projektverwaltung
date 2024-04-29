@@ -620,6 +620,7 @@
             MinimumSize = new System.Drawing.Size(231, 107);
             Name = "Main";
             Text = "Form1";
+            FormClosed += Main_FormClosed;
             Load += Main_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

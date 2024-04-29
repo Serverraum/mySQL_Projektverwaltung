@@ -115,10 +115,15 @@ namespace mySQL_Projektverwaltung
 
                 if (i == 1)
                 {
-                    MessageBox.Show("Successfully Updated!");
-                    dataGridView1.ClearSelection();
-                    dataGridView1.CurrentCell = null;
-                    ReadDataProjHours();
+                    this.BeginInvoke(new MethodInvoker(() => //Async Update, sonst Recursion-Error: System.InvalidOperationException: "Der Vorgang ist ungültig, da er einen Wiedereintrittsaufruf an die SetCurrentCellAddressCore-Funktion zur Folge hat."
+
+                    {
+                        MessageBox.Show("Successfully Updated!");
+                        ReadDataProjHours();
+                        dataGridView1.ClearSelection();
+                        dataGridView1.CurrentCell = null;
+                    }));
+                    //ReadDataProjHours();
                 }
             }
             catch (Exception ex)
@@ -165,7 +170,7 @@ namespace mySQL_Projektverwaltung
                 string sql = "SELECT * FROM projTime WHERE projID=" + projID;
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
                 DataTable dt = DbConnParam.DbConn.Instance.DbGetDataTable();
-
+                
                 // Konvertiere das Datum in der ersten Spalte in das ShortDateString-Format
                 foreach (DataRow row in dt.Rows)
                 {
@@ -191,7 +196,7 @@ namespace mySQL_Projektverwaltung
                     }
                 }
 
-
+                
                 dataGridView1.DataSource = dt;
                 dataGridView1.Columns[1].HeaderText = "Datum";
                 dataGridView1.Columns[2].HeaderText = "Beschreibung";
@@ -209,15 +214,6 @@ namespace mySQL_Projektverwaltung
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void DGV_Update(object sender, EventArgs e)
-        {
-            if (dataGridView1.IsCurrentRowDirty)
-            {
-                MessageBox.Show("Dirty");
-            }
-            else { MessageBox.Show("Clean"); }
         }
     }
 }

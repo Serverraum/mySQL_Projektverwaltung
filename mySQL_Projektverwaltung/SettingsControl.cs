@@ -1,34 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static mySQL_Projektverwaltung.Main;
 
 namespace mySQL_Projektverwaltung
 {
     public partial class SettingsControl : UserControl
     {
-        //DbConn dbConn = new DbConn();
-
         public SettingsControl()
         {
             InitializeComponent();
-        }
-
-        /*##########################---------------------##############################*/
-        /*########################## Start of UI-Control ##############################*/
-        /*##########################---------------------##############################*/
-        //only graphical Stuff is made here
-
-        private void tb_DB_File_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -177,11 +156,11 @@ namespace mySQL_Projektverwaltung
 
         private void bt_Save_Click(object sender, EventArgs e)
         {
+            DbConnParam.DbConn.Instance.connParamNewSQLite(tb_DB_File.Text);
+            DbConnParam.DbConn.Instance.connParamNewMySQL(tb_server.Text, tb_database.Text, tb_uid.Text, tb_pwd.Text);
             //Set Database-Type
             if (rb_SQLite.Checked) { DbConnParam.DbConn.Instance.connParamNewDbType(1); } else if (rb_mySQL.Checked) { DbConnParam.DbConn.Instance.connParamNewDbType(2); }
 
-            DbConnParam.DbConn.Instance.connParamNewSQLite(tb_DB_File.Text);
-            DbConnParam.DbConn.Instance.connParamNewMySQL(tb_server.Text, tb_database.Text, tb_uid.Text, tb_pwd.Text);
         }
     }
 }

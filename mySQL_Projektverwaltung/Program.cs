@@ -20,6 +20,7 @@ namespace mySQL_Projektverwaltung
         [STAThread]
         static void Main()
         {
+            System.Environment.SetEnvironmentVariable("SQLite_NoConfigure", "1");
             AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SQLite;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace mySQL_Projektverwaltung
@@ -214,6 +207,30 @@ namespace mySQL_Projektverwaltung
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+
+        //To be implemented
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //label9.Text = SumColumn(dataGridView1, 3).ToString();
+        }
+
+        private decimal SumColumn(DataGridView dgv, int columnIndex)
+        {
+            decimal sum = 0;
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (row.Cells[columnIndex].Value != null)
+                {
+                    decimal cellValue;
+                    if (decimal.TryParse(row.Cells[columnIndex].Value.ToString(), out cellValue))
+                    {
+                        sum += cellValue;
+                    }
+                }
+            }
+            return sum;
         }
     }
 }

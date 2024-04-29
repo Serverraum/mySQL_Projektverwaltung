@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Windows;
+﻿//using MySql.Data.MySqlClient;
+using MySqlConnector;
+using System;
 using System.Data;
 using System.Data.SQLite;
-//using MySql.Data.MySqlClient;
-using MySqlConnector;
-using System.Diagnostics.Eventing.Reader;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace mySQL_Projektverwaltung
 {
@@ -220,11 +220,11 @@ namespace mySQL_Projektverwaltung
                 switch (dbConnParam.DbType)
                 {
                     case 1:
-                        //SQLiteCommand cmd_sqlite = new SQLiteCommand();
+                        SQLiteAdapter.SelectCommand.Parameters.AddWithValue(Param, Value);
                         cmdSQLite.Parameters.AddWithValue(Param, Value);
                         break;
                     case 2:
-                        //MySqlCommand cmd_mysql = new MySqlCommand();
+                        MySqlAdapter.SelectCommand.Parameters.AddWithValue(Param, Value);
                         cmdMySQL.Parameters.AddWithValue(Param, Value);
                         break;
                     default: throw new Exception("No Database, CmdAddParam");

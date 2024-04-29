@@ -45,9 +45,6 @@
     <Compile Update="SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

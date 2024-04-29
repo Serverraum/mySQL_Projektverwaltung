@@ -73,7 +73,6 @@
             tb_DB_File.Size = new System.Drawing.Size(123, 23);
             tb_DB_File.TabIndex = 5;
             tb_DB_File.TabStop = false;
-            tb_DB_File.TextChanged += tb_DB_File_TextChanged;
             // 
             // label8
             // 

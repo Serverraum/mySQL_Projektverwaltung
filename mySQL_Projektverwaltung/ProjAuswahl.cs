@@ -88,7 +88,7 @@ namespace mySQL_Projektverwaltung
 
                 int projId = Convert.ToInt32(row["ProjID"]);
                 string projectName = row["desc_short"].ToString();
-                bool finished = Convert.ToBoolean(row["Finished"]);
+                bool finished = Convert.ToBoolean(row["completed"]);
 
                 TreeNode projectNode = new TreeNode(projectName);
                 projectNode.Tag = projId;

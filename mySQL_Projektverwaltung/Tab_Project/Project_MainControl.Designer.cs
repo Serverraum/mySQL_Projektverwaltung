@@ -46,7 +46,7 @@
             label4 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             bt_proj_save = new System.Windows.Forms.Button();
-            checkBox1 = new System.Windows.Forms.CheckBox();
+            bt_completed = new System.Windows.Forms.Button();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -167,7 +167,7 @@
             tableLayoutPanel1.Controls.Add(label1, 0, 1);
             tableLayoutPanel1.Controls.Add(editProj, 4, 0);
             tableLayoutPanel1.Controls.Add(bt_proj_save, 3, 0);
-            tableLayoutPanel1.Controls.Add(checkBox1, 1, 13);
+            tableLayoutPanel1.Controls.Add(bt_completed, 1, 13);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(2, 18);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -312,19 +312,19 @@
             bt_proj_save.UseVisualStyleBackColor = true;
             bt_proj_save.Click += bt_proj_save_Click;
             // 
-            // checkBox1
+            // bt_completed
             // 
-            checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
-            checkBox1.AutoSize = true;
-            tableLayoutPanel1.SetColumnSpan(checkBox1, 4);
-            checkBox1.Location = new System.Drawing.Point(13, 393);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new System.Drawing.Size(245, 24);
-            checkBox1.TabIndex = 23;
-            checkBox1.Text = "Project Completed?";
-            checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            checkBox1.UseVisualStyleBackColor = true;
+            bt_completed.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            bt_completed.AutoSize = true;
+            tableLayoutPanel1.SetColumnSpan(bt_completed, 4);
+            bt_completed.Enabled = false;
+            bt_completed.Location = new System.Drawing.Point(13, 393);
+            bt_completed.Name = "bt_completed";
+            bt_completed.Size = new System.Drawing.Size(245, 24);
+            bt_completed.TabIndex = 23;
+            bt_completed.Text = "Project Completed?";
+            bt_completed.UseVisualStyleBackColor = true;
+            bt_completed.Click += bt_completed_Click;
             // 
             // Project_MainControl
             // 
@@ -360,6 +360,6 @@
         private System.Windows.Forms.TextBox tb_tel;
         private System.Windows.Forms.TextBox tb_name;
         private System.Windows.Forms.Button bt_proj_save;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button bt_completed;
     }
 }

@@ -22,7 +22,7 @@ namespace mySQL_Projektverwaltung
             if ((fileAttr & FileAttributes.Directory) == FileAttributes.Directory)
             {
                 isFile = false;
-                tb_filepath.Text = filePath + "/" + currentlySelectedItemName;
+                string test = filePath + "/" + currentlySelectedItemName;
             }
             else
             {

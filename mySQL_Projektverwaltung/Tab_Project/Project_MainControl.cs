@@ -34,10 +34,6 @@ namespace mySQL_Projektverwaltung.Tab_Project
             {
                 editProj.Checked = false;
             }
-            if (bt_completed.Enabled == false)
-            {
-                bt_completed.Enabled = true;
-            }
             /**/
             if (bt_proj_save.Enabled == true)
             {
@@ -116,26 +112,13 @@ namespace mySQL_Projektverwaltung.Tab_Project
         }
         private void editProj_CheckedChanged(object sender, EventArgs e)
         {
-            if (editProj.Checked == true)
-            {
-                cb_LS.Enabled = true;
-                cb_AG.Enabled = true;
-                tb_name.Enabled = true;
-                tb_tel.Enabled = true;
-                tb_email.Enabled = true;
-                mtb_date.Enabled = true;
-                tb_shortdesc.Enabled = true;
-            }
-            else
-            {
-                cb_LS.Enabled = false;
-                cb_AG.Enabled = false;
-                tb_name.Enabled = false;
-                tb_tel.Enabled = false;
-                tb_email.Enabled = false;
-                mtb_date.Enabled = false;
-                tb_shortdesc.Enabled = false;
-            }
+            bt_completed.Enabled = editProj.Checked;
+            cb_LS.Enabled = editProj.Checked;
+            tb_name.Enabled = editProj.Checked;
+            tb_tel.Enabled = editProj.Checked;
+            tb_email.Enabled = editProj.Checked;
+            mtb_date.Enabled = editProj.Checked;
+            tb_shortdesc.Enabled = editProj.Checked;
         }
         private void bt_proj_save_Click(object sender, EventArgs e)
         {
@@ -172,7 +155,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 DbConnParam.DbConn.Instance.CmdAddParam("@name", tb_name.Text.ToString());
                 DbConnParam.DbConn.Instance.CmdAddParam("@email", tb_email.Text.ToString());
                 DbConnParam.DbConn.Instance.CmdAddParam("@tel", tb_tel.Text.ToString());
-                DbConnParam.DbConn.Instance.CmdAddParam("@desc_long","");
+                DbConnParam.DbConn.Instance.CmdAddParam("@desc_long", "");
                 DbConnParam.DbConn.Instance.CmdAddParam("@desc_short", tb_shortdesc.Text.ToString());
                 DbConnParam.DbConn.Instance.CmdAddParam("@completed", completed);
                 int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();

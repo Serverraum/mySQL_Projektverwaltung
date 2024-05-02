@@ -83,7 +83,7 @@ namespace mySQL_Projektverwaltung
             }
         }
 
-   
+
         public void Main_Load(object sender, EventArgs e)
         {
             if (projID > 0)
@@ -91,7 +91,7 @@ namespace mySQL_Projektverwaltung
                 LoadProject(projID);
             }
         }
-       
+
         private void button4_Click(object sender, EventArgs e)
         {
             projAuswahl = new ProjAuswahl();
@@ -101,94 +101,9 @@ namespace mySQL_Projektverwaltung
         }
 
 
+
+
        
- 
-        public void loadFilesAndDirectories()
-        {
-            DirectoryInfo fileList;
-            string tempFilePath = "";
-            FileAttributes fileAttr;
-            try
-            {
-
-                if (isFile)
-                {
-                    tempFilePath = filePath + "/" + currentlySelectedItemName;
-                    FileInfo fileDetails = new FileInfo(tempFilePath);
-                    fileNameLabel.Text = fileDetails.Name;
-                    fileTypeLabel.Text = fileDetails.Extension;
-                    fileAttr = File.GetAttributes(tempFilePath);
-                    Process.Start(tempFilePath);
-                }
-                else
-                {
-                    fileAttr = File.GetAttributes(filePath);
-
-                }
-
-                if ((fileAttr & FileAttributes.Directory) == FileAttributes.Directory)
-                {
-                    fileList = new DirectoryInfo(filePath);
-                    FileInfo[] files = fileList.GetFiles(); // GET ALL THE FILES
-                    DirectoryInfo[] dirs = fileList.GetDirectories(); // GET ALL THE DIRS
-                    string fileExtension = "";
-                    listView1.Items.Clear();
-
-                    for (int i = 0; i < files.Length; i++)
-                    {
-                        fileExtension = files[i].Extension.ToUpper();
-                        switch (fileExtension)
-                        {
-                            case ".MP3":
-                            case ".MP2":
-                                listView1.Items.Add(files[i].Name, 5);
-                                break;
-                            case ".EXE":
-                            case ".COM":
-                                listView1.Items.Add(files[i].Name, 7);
-                                break;
-
-                            case ".MP4":
-                            case ".AVI":
-                            case ".MKV":
-                                listView1.Items.Add(files[i].Name, 6);
-                                break;
-                            case ".PDF":
-                                listView1.Items.Add(files[i].Name, 4);
-                                break;
-                            case ".DOC":
-                            case ".DOCX":
-                                listView1.Items.Add(files[i].Name, 3);
-                                break;
-                            case ".PNG":
-                            case ".JPG":
-                            case ".JPEG":
-                                listView1.Items.Add(files[i].Name, 9);
-                                break;
-
-                            default:
-                                listView1.Items.Add(files[i].Name, 8);
-                                break;
-                        }
-
-                    }
-
-                    for (int i = 0; i < dirs.Length; i++)
-                    {
-                        listView1.Items.Add(dirs[i].Name, 10);
-                    }
-                }
-                else
-                {
-                    fileNameLabel.Text = this.currentlySelectedItemName;
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
         public int iger = 1;
         private void Button_SetDB_Click(object sender, EventArgs e)
         {
@@ -209,6 +124,27 @@ namespace mySQL_Projektverwaltung
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             DbConnParam.DbConn.Instance.connClose();
+        }
+
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel2_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

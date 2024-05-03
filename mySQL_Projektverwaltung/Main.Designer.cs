@@ -39,8 +39,9 @@
             splitContainer_horiz_right = new System.Windows.Forms.SplitContainer();
             splitContainer_mid_horiz = new System.Windows.Forms.SplitContainer();
             richTextBox1 = new System.Windows.Forms.RichTextBox();
+            project_FolderControl1 = new Tab_Project.Project_FolderControl();
             splitContainer_right_vert = new System.Windows.Forms.SplitContainer();
-            pictureList1 = new mySQL_Projektverwaltung.PictureList();
+            pictureList1 = new PictureList();
             project_TimeControl1 = new Project_TimeControl();
             tabPage2 = new System.Windows.Forms.TabPage();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -50,7 +51,6 @@
             tb_DB_File = new System.Windows.Forms.TextBox();
             label8 = new System.Windows.Forms.Label();
             Button_SetDB = new System.Windows.Forms.Button();
-            project_FolderControl1 = new Tab_Project.Project_FolderControl();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_left).BeginInit();
@@ -247,6 +247,14 @@
             richTextBox1.TabIndex = 23;
             richTextBox1.Text = "";
             // 
+            // project_FolderControl1
+            // 
+            project_FolderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            project_FolderControl1.Location = new System.Drawing.Point(0, 0);
+            project_FolderControl1.Name = "project_FolderControl1";
+            project_FolderControl1.Size = new System.Drawing.Size(221, 448);
+            project_FolderControl1.TabIndex = 0;
+            // 
             // splitContainer_right_vert
             // 
             splitContainer_right_vert.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -274,6 +282,7 @@
             // 
             pictureList1.AutoSize = true;
             pictureList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureList1.Enabled = false;
             pictureList1.Location = new System.Drawing.Point(0, 0);
             pictureList1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureList1.MinimumSize = new System.Drawing.Size(152, 58);
@@ -297,7 +306,7 @@
             tabPage2.Margin = new System.Windows.Forms.Padding(2);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            tabPage2.Size = new System.Drawing.Size(817, 544);
+            tabPage2.Size = new System.Drawing.Size(955, 582);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Übersicht";
             tabPage2.UseVisualStyleBackColor = true;
@@ -340,7 +349,7 @@
             tabPage3.Location = new System.Drawing.Point(4, 27);
             tabPage3.Margin = new System.Windows.Forms.Padding(2);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new System.Drawing.Size(817, 544);
+            tabPage3.Size = new System.Drawing.Size(955, 582);
             tabPage3.TabIndex = 2;
             tabPage3.Tag = "dbConn";
             tabPage3.Text = "Settings";
@@ -388,14 +397,6 @@
             Button_SetDB.Text = "DB";
             Button_SetDB.UseVisualStyleBackColor = true;
             Button_SetDB.Click += Button_SetDB_Click;
-            // 
-            // project_FolderControl1
-            // 
-            project_FolderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            project_FolderControl1.Location = new System.Drawing.Point(0, 0);
-            project_FolderControl1.Name = "project_FolderControl1";
-            project_FolderControl1.Size = new System.Drawing.Size(221, 448);
-            project_FolderControl1.TabIndex = 0;
             // 
             // Main
             // 

@@ -18,18 +18,8 @@ namespace mySQL_Projektverwaltung
     {
         public event EventHandler<TreeNodeClickedEventArgs> TreeNodeClicked;
 
-        SQLiteConnection conn;
-        SQLiteCommand cmd;
-        SQLiteDataAdapter adapter;
-        DataSet ds = new DataSet();
         DataTable dt = new DataTable();
-        int id;
-
-        String connectString;
-        int projID = 0;
-
-
-        private ProjAuswahl projAuswahl;
+ 
 
         public ProjAuswahl()
         {

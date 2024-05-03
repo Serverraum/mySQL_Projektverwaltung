@@ -50,14 +50,12 @@ namespace mySQL_Projektverwaltung
         {
             InitializeComponent();
             DbConnParam.DbConn.Instance.connLoadParam();
-
-            //can be removed
-            connectString = @"Data Source=C:\Users\faesc\Desktop\Projekmanagement_App\projekt.db;version=3";
         }
         public void LoadProject(int projID)
         {
             project_TimeControl1.ReLoad_Project_TimeControl(projID);
             project_MainControl1.ReLoad_Project_MainControl(projID);
+            if (!pictureList1.Enabled) { pictureList1.Enabled = !pictureList1.Enabled; };
             pictureList1.ReLoad_Project_PictureList(projID);
 
         }

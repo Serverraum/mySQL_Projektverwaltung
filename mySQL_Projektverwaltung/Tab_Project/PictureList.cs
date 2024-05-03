@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Org.BouncyCastle.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -283,9 +285,9 @@ namespace mySQL_Projektverwaltung
 
         private void panPictures_Scroll(object sender, ScrollEventArgs e)
         {
- 
-                panPictures.Invalidate();
-               
+
+            panPictures.Invalidate();
+
         }
         private void panPictures_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -311,6 +313,10 @@ namespace mySQL_Projektverwaltung
             using (var stream = new MemoryStream())
             {
                 img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+
+                string lenght = stream.Length.ToString(); //_---------------------------------------------------------------------
+                if (stream.Length > 16777215) { throw new ArgumentOutOfRangeException("Picture-Size "+stream.Length.ToString() + " Bytes longer than 16777215 Bytes/15MiB"); }
+                MessageBox.Show(lenght + ", 16777215");
                 return stream.ToArray();
             }
         }
@@ -322,11 +328,19 @@ namespace mySQL_Projektverwaltung
             MessageBox.Show(projID.ToString() + ClickedIndex.ToString());
 
             //Do Database-Stuff
-            string sql = @"INSERT INTO pictures (projID, pic) VALUES (@projID, @pic)";
-            DbConnParam.DbConn.Instance.DbAddCmd(sql);
-            DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
-            DbConnParam.DbConn.Instance.CmdAddParam("@pic", ImageToByte2(bm));
-            int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+            try
+            {
+                string sql = @"INSERT INTO pictures (projID, pic) VALUES (@projID, @pic)";
+                DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                DbConnParam.DbConn.Instance.CmdAddParam("@pic", ImageToByte2(bm));
+                int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
         /*------ Remove Pics from DB and screen ------*/
         private void DeletePics(int index)
@@ -338,8 +352,24 @@ namespace mySQL_Projektverwaltung
         /*------ Load Pics from DB on ProjChange ------*/
         public void ReLoad_Project_PictureList(int ProjID)
         {
+            //Reset pictureindex, so after reload the first picture is shown.
+            pictureIndex = 0;
             //On Load of Project, set local ProjID-Var and load Pics
+            Pictures.Clear();
             projID = ProjID;
+            string sql = "SELECT * FROM pictures WHERE projID=@projID ";
+            DbConnParam.DbConn.Instance.DbAddCmd(sql);
+            DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+            DataTable dt = DbConnParam.DbConn.Instance.DbGetDataTable();
+            int index = 0;
+            foreach(DataRow dr in dt.Rows) {
+                MemoryStream stream = new MemoryStream((byte[])dr[2]);
+                //Stream str = (Stream)dr[2];
+                Bitmap bm = new Bitmap(stream);
+                Pictures.Insert(index, bm);
+                index++;
+            }
+            ArrangePanel();
 
         }
 

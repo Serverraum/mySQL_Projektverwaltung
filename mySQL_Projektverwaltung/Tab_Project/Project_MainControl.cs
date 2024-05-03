@@ -19,8 +19,6 @@ namespace mySQL_Projektverwaltung.Tab_Project
     public partial class Project_MainControl : UserControl
     {
         public int projID = 0;
-        private Main main;
-        private ProjAuswahl projAuswahl;
         DataTable dtProj = new DataTable();
         public Project_MainControl()
         {
@@ -102,13 +100,16 @@ namespace mySQL_Projektverwaltung.Tab_Project
             }
         }
 
-
-        private void tb_shortdesc_TextChanged(object sender, EventArgs e)
-        {
+        public void SaveStateChanged() {
             if (editProj.Checked == true)
             {
                 bt_proj_save.Enabled = true;
             }
+        }
+
+        private void tb_shortdesc_TextChanged(object sender, EventArgs e)
+        {
+            bt_proj_save.Enabled = true;
         }
         private void editProj_CheckedChanged(object sender, EventArgs e)
         {
@@ -120,7 +121,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             mtb_date.Enabled = editProj.Checked;
             tb_shortdesc.Enabled = editProj.Checked;
         }
-        private void bt_proj_save_Click(object sender, EventArgs e)
+        private void bt_proj_save_Click(object sender, EventArgs e) //Save Function
         {
             bt_proj_save.Enabled = false;
             try
@@ -142,8 +143,19 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
                 DbConnParam.DbConn.Instance.CmdAddParam("@id", projID);
 
-                /*Poll desc_long*/
 
+                /*Poll desc_long*/
+                string desc_long = "";
+                foreach (var item in Application.OpenForms)
+                {
+                    Main main = item as Main;
+                    if (main != null)
+                    {
+                       desc_long = main.project_DetailsControl1.Save_Project_DetailsControl();
+                    }
+                }
+                
+                // Save_Project_DetailsControl
                 /*Poll folder, not yet implemented*/
 
                 /*------ Add Params ------*/
@@ -155,7 +167,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 DbConnParam.DbConn.Instance.CmdAddParam("@name", tb_name.Text.ToString());
                 DbConnParam.DbConn.Instance.CmdAddParam("@email", tb_email.Text.ToString());
                 DbConnParam.DbConn.Instance.CmdAddParam("@tel", tb_tel.Text.ToString());
-                DbConnParam.DbConn.Instance.CmdAddParam("@desc_long", "");
+                DbConnParam.DbConn.Instance.CmdAddParam("@desc_long", desc_long);
                 DbConnParam.DbConn.Instance.CmdAddParam("@desc_short", tb_shortdesc.Text.ToString());
                 DbConnParam.DbConn.Instance.CmdAddParam("@completed", completed);
                 int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();

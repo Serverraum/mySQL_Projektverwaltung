@@ -16,6 +16,7 @@ using System.Globalization;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Runtime.InteropServices.ComTypes;
+using mySQL_Projektverwaltung.Tab_Project;
 
 
 namespace mySQL_Projektverwaltung
@@ -25,26 +26,14 @@ namespace mySQL_Projektverwaltung
     public partial class Main : Form
     {
         ReadTest robertzeigtmirwas = new ReadTest();
-        SQLiteConnection conn;
-        SQLiteCommand cmd;
-        SQLiteDataAdapter adapter;
-        DataSet ds = new DataSet();
-        DataSet dsProj = new DataSet();
-        DataSet dsLS = new DataSet();
-        DataSet dsAG = new DataSet();
-        DataTable dt = new DataTable();
-        DataTable dtProj = new DataTable();
-        DataTable dtLS = new DataTable();
-        DataTable dtAG = new DataTable();
-        bool isDoubleClick = false;
+
+
         public String connectString;
         int projID = 0;
         int i;
         public Boolean ProjLoad;
         private ProjAuswahl projAuswahl;
-        private string filePath = @"C:/";
-        private bool isFile = false;
-        private string currentlySelectedItemName = "";
+
 
         public Main()
         {
@@ -58,9 +47,12 @@ namespace mySQL_Projektverwaltung
             if (!pictureList1.Enabled) { pictureList1.Enabled = !pictureList1.Enabled; };
             pictureList1.ReLoad_Project_PictureList(projID);
 
+            if (!project_DetailsControl1.Enabled) { project_DetailsControl1.Enabled = !project_DetailsControl1.Enabled; };
+            project_DetailsControl1.ReLoad_Project_DetailsControl(projID);
         }
 
 
+ 
         private void ProjAuswahl_TreeNodeClicked(object sender, TreeNodeClickedEventArgs e)
         {
             TreeNode clickedNode = e.ClickedNode;

@@ -38,7 +38,7 @@
             project_MainControl1 = new Tab_Project.Project_MainControl();
             splitContainer_horiz_right = new System.Windows.Forms.SplitContainer();
             splitContainer_mid_horiz = new System.Windows.Forms.SplitContainer();
-            richTextBox1 = new System.Windows.Forms.RichTextBox();
+            project_DetailsControl1 = new Tab_Project.Project_DetailsControl();
             project_FolderControl1 = new Tab_Project.Project_FolderControl();
             splitContainer_right_vert = new System.Windows.Forms.SplitContainer();
             pictureList1 = new PictureList();
@@ -212,7 +212,7 @@
             splitContainer_horiz_right.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_horiz_right.Panel2MinSize = 150;
             splitContainer_horiz_right.Size = new System.Drawing.Size(747, 578);
-            splitContainer_horiz_right.SplitterDistance = 223;
+            splitContainer_horiz_right.SplitterDistance = 392;
             splitContainer_horiz_right.TabIndex = 0;
             // 
             // splitContainer_mid_horiz
@@ -225,7 +225,7 @@
             // 
             // splitContainer_mid_horiz.Panel1
             // 
-            splitContainer_mid_horiz.Panel1.Controls.Add(richTextBox1);
+            splitContainer_mid_horiz.Panel1.Controls.Add(project_DetailsControl1);
             splitContainer_mid_horiz.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_mid_horiz.Panel1MinSize = 100;
             // 
@@ -234,25 +234,24 @@
             splitContainer_mid_horiz.Panel2.Controls.Add(project_FolderControl1);
             splitContainer_mid_horiz.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_mid_horiz.Panel2MinSize = 100;
-            splitContainer_mid_horiz.Size = new System.Drawing.Size(223, 578);
-            splitContainer_mid_horiz.SplitterDistance = 124;
+            splitContainer_mid_horiz.Size = new System.Drawing.Size(392, 578);
+            splitContainer_mid_horiz.SplitterDistance = 170;
             splitContainer_mid_horiz.TabIndex = 0;
             // 
-            // richTextBox1
+            // project_DetailsControl1
             // 
-            richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            richTextBox1.Location = new System.Drawing.Point(0, 0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new System.Drawing.Size(221, 122);
-            richTextBox1.TabIndex = 23;
-            richTextBox1.Text = "";
+            project_DetailsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            project_DetailsControl1.Location = new System.Drawing.Point(0, 0);
+            project_DetailsControl1.Name = "project_DetailsControl1";
+            project_DetailsControl1.Size = new System.Drawing.Size(390, 168);
+            project_DetailsControl1.TabIndex = 0;
             // 
             // project_FolderControl1
             // 
             project_FolderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             project_FolderControl1.Location = new System.Drawing.Point(0, 0);
             project_FolderControl1.Name = "project_FolderControl1";
-            project_FolderControl1.Size = new System.Drawing.Size(221, 448);
+            project_FolderControl1.Size = new System.Drawing.Size(390, 402);
             project_FolderControl1.TabIndex = 0;
             // 
             // splitContainer_right_vert
@@ -274,7 +273,7 @@
             splitContainer_right_vert.Panel2.Controls.Add(project_TimeControl1);
             splitContainer_right_vert.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_right_vert.Panel2MinSize = 50;
-            splitContainer_right_vert.Size = new System.Drawing.Size(520, 578);
+            splitContainer_right_vert.Size = new System.Drawing.Size(351, 578);
             splitContainer_right_vert.SplitterDistance = 100;
             splitContainer_right_vert.TabIndex = 0;
             // 
@@ -287,7 +286,7 @@
             pictureList1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureList1.MinimumSize = new System.Drawing.Size(152, 58);
             pictureList1.Name = "pictureList1";
-            pictureList1.Size = new System.Drawing.Size(518, 98);
+            pictureList1.Size = new System.Drawing.Size(349, 98);
             pictureList1.TabIndex = 21;
             // 
             // project_TimeControl1
@@ -296,7 +295,7 @@
             project_TimeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             project_TimeControl1.Location = new System.Drawing.Point(0, 0);
             project_TimeControl1.Name = "project_TimeControl1";
-            project_TimeControl1.Size = new System.Drawing.Size(518, 472);
+            project_TimeControl1.Size = new System.Drawing.Size(349, 472);
             project_TimeControl1.TabIndex = 19;
             // 
             // tabPage2
@@ -455,16 +454,16 @@
         private System.Windows.Forms.Button button4;
         private SettingsControl settingsControl1;
         private System.Windows.Forms.TabPage tabPage3;
-        private Tab_Project.Project_MainControl project_MainControl1;
         private Project_TimeControl project_TimeControl1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private mySQL_Projektverwaltung.PictureList pictureList1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.SplitContainer splitContainer_horiz_left;
         private System.Windows.Forms.SplitContainer splitContainer_horiz_right;
         private System.Windows.Forms.SplitContainer splitContainer_mid_horiz;
         private System.Windows.Forms.SplitContainer splitContainer_right_vert;
         private Tab_Project.Project_FolderControl project_FolderControl1;
+        internal Tab_Project.Project_DetailsControl project_DetailsControl1;
+        internal Tab_Project.Project_MainControl project_MainControl1;
     }
 }
 

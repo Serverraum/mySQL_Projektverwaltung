@@ -58,6 +58,8 @@ namespace mySQL_Projektverwaltung
         {
             project_TimeControl1.ReLoad_Project_TimeControl(projID);
             project_MainControl1.ReLoad_Project_MainControl(projID);
+            pictureList1.ReLoad_Project_PictureList(projID);
+
         }
 
 

@@ -40,7 +40,7 @@
             splitContainer_mid_horiz = new System.Windows.Forms.SplitContainer();
             richTextBox1 = new System.Windows.Forms.RichTextBox();
             splitContainer_right_vert = new System.Windows.Forms.SplitContainer();
-            pictureList1 = new howto_edit_picture_list.PictureList();
+            pictureList1 = new mySQL_Projektverwaltung.PictureList();
             project_TimeControl1 = new Project_TimeControl();
             tabPage2 = new System.Windows.Forms.TabPage();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -457,7 +457,7 @@
         private Tab_Project.Project_MainControl project_MainControl1;
         private Project_TimeControl project_TimeControl1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private howto_edit_picture_list.PictureList pictureList1;
+        private mySQL_Projektverwaltung.PictureList pictureList1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.SplitContainer splitContainer_horiz_left;
         private System.Windows.Forms.SplitContainer splitContainer_horiz_right;

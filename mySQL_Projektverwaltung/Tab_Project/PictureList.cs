@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace howto_edit_picture_list
+namespace mySQL_Projektverwaltung
 {
     public partial class PictureList : UserControl
     {
@@ -304,11 +305,28 @@ namespace howto_edit_picture_list
 
 
         /*------ Insert Pics into DB and screen ------*/
+
+        public static byte[] ImageToByte2(Image img)
+        {
+            using (var stream = new MemoryStream())
+            {
+                img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                return stream.ToArray();
+            }
+        }
+
+
         private void InsertPics(int index, Bitmap bm)
         {
             Pictures.Insert(index, bm);
             MessageBox.Show(projID.ToString() + ClickedIndex.ToString());
+
             //Do Database-Stuff
+            string sql = @"INSERT INTO pictures (projID, pic) VALUES (@projID, @pic)";
+            DbConnParam.DbConn.Instance.DbAddCmd(sql);
+            DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+            DbConnParam.DbConn.Instance.CmdAddParam("@pic", ImageToByte2(bm));
+            int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
         }
         /*------ Remove Pics from DB and screen ------*/
         private void DeletePics(int index)
@@ -318,7 +336,7 @@ namespace howto_edit_picture_list
             MessageBox.Show(projID.ToString() + ClickedIndex.ToString());
         }
         /*------ Load Pics from DB on ProjChange ------*/
-        private void LoadPicsFromDB(int ProjID)
+        public void ReLoad_Project_PictureList(int ProjID)
         {
             //On Load of Project, set local ProjID-Var and load Pics
             projID = ProjID;

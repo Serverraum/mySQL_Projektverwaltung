@@ -326,7 +326,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 datestring = "";
                 throw new InvalidDateException("DateNotInIso8601: iso8601ToDate() needs '2023-04-11T00:00:00'");
             }
-            return dateIso8601;
+            return datestring;
         }
 
 

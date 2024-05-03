@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace howto_edit_picture_list
+namespace mySQL_Projektverwaltung
 {
     partial class PictureList
     {
@@ -33,7 +33,7 @@ namespace howto_edit_picture_list
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panPictures = new howto_edit_picture_list.PictureList.SelectablePanel();
+            this.panPictures = new mySQL_Projektverwaltung.PictureList.SelectablePanel();
             this.ctxPictures = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuMoveLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMoveRight = new System.Windows.Forms.ToolStripMenuItem();

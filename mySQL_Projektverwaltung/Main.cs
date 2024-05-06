@@ -46,13 +46,13 @@ namespace mySQL_Projektverwaltung
             project_MainControl1.ReLoad_Project_MainControl(projID);
             if (!pictureList1.Enabled) { pictureList1.Enabled = !pictureList1.Enabled; };
             pictureList1.ReLoad_Project_PictureList(projID);
-
             if (!project_DetailsControl1.Enabled) { project_DetailsControl1.Enabled = !project_DetailsControl1.Enabled; };
             project_DetailsControl1.ReLoad_Project_DetailsControl(projID);
+
         }
 
 
- 
+
         private void ProjAuswahl_TreeNodeClicked(object sender, TreeNodeClickedEventArgs e)
         {
             TreeNode clickedNode = e.ClickedNode;
@@ -71,7 +71,7 @@ namespace mySQL_Projektverwaltung
 
                 ProjLoad = false;
 
-                tb_DB_File.Text = DbConnParam.DbConn.Instance.connParamGetSQLite();
+               
             }
         }
 
@@ -95,24 +95,8 @@ namespace mySQL_Projektverwaltung
 
 
 
-       
-        public int iger = 1;
-        private void Button_SetDB_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //label8.Text = this.currentlySelectedItemName;
-                DbConnParam.DbConn.Instance.DbAddCmd("Select LS FROM ls WHERE lsid=@lsid");
-                DbConnParam.DbConn.Instance.CmdAddParam("lsid", iger);
-                label8.Text = DbConnParam.DbConn.Instance.DbScalar().ToString();
-                iger++;
-            }
-            catch (Exception)
-            {
-                //MessageBox.Show(Exception);
-            }
-        }
 
+       
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             DbConnParam.DbConn.Instance.connClose();

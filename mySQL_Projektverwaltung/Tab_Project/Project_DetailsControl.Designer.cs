@@ -33,6 +33,7 @@
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             button1 = new System.Windows.Forms.Button();
             richTextBox1 = new System.Windows.Forms.RichTextBox();
+            label2 = new System.Windows.Forms.Label();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -42,9 +43,9 @@
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.Controls.Add(label1);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            flowLayoutPanel1.Location = new System.Drawing.Point(5, 5);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(426, 21);
+            flowLayoutPanel1.Size = new System.Drawing.Size(416, 21);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -61,31 +62,44 @@
             // 
             flowLayoutPanel2.AutoSize = true;
             flowLayoutPanel2.Controls.Add(button1);
+            flowLayoutPanel2.Controls.Add(label2);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel2.Location = new System.Drawing.Point(0, 21);
+            flowLayoutPanel2.Location = new System.Drawing.Point(5, 26);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(426, 29);
+            flowLayoutPanel2.Size = new System.Drawing.Size(416, 51);
             flowLayoutPanel2.TabIndex = 1;
             // 
             // button1
             // 
+            button1.AutoSize = true;
             button1.Location = new System.Drawing.Point(3, 3);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
+            button1.Size = new System.Drawing.Size(108, 25);
             button1.TabIndex = 0;
             button1.Text = "ClearEffekts(N.F.)";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // richTextBox1
             // 
-            richTextBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            richTextBox1.Location = new System.Drawing.Point(5, 55);
+            richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            richTextBox1.Location = new System.Drawing.Point(5, 77);
             richTextBox1.Margin = new System.Windows.Forms.Padding(20);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new System.Drawing.Size(416, 402);
+            richTextBox1.Size = new System.Drawing.Size(416, 383);
             richTextBox1.TabIndex = 2;
             richTextBox1.Text = "test";
             richTextBox1.KeyPress += richTextBox1_KeyPress;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            label2.Location = new System.Drawing.Point(3, 31);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(367, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Please use Notepad.exe for extended Functionality";
             // 
             // Project_DetailsControl
             // 
@@ -95,10 +109,12 @@
             Controls.Add(flowLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
             Name = "Project_DetailsControl";
+            Padding = new System.Windows.Forms.Padding(5);
             Size = new System.Drawing.Size(426, 465);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -110,5 +126,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

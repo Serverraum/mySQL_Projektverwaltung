@@ -42,7 +42,12 @@
     <Page Remove="lib\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="SettingsControl.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Tab_Settings\SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -89,6 +94,12 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Target Name="AfterResolveReferences">
     <ItemGroup>

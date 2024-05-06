@@ -11,6 +11,14 @@ using System.Windows.Controls;
 
 namespace mySQL_Projektverwaltung
 {
+    public class Settings
+    {
+
+        [JsonPropertyName("onlinepvp_kills:all")]
+        public int PVP { get; set; }
+        [JsonPropertyName("onlinepve_kills:all")]
+        public int PVE { get; set; }
+    }
     public class DbConnParam
     {
         [JsonInclude]
@@ -25,7 +33,7 @@ namespace mySQL_Projektverwaltung
         protected string mySQL_PWD; //Password
         [JsonInclude]
         protected string mySQL_UID; //Username
-        protected string configFilePath = "configdatabase.json";
+        protected string configFilePath = "configdatabase.json"; //______________________________CONFIGSTRING!!!
 
         public class MySQLParam
         {

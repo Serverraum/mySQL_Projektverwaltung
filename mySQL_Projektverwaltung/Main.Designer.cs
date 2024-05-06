@@ -48,9 +48,9 @@
             button3 = new System.Windows.Forms.Button();
             tabPage3 = new System.Windows.Forms.TabPage();
             settingsControl1 = new SettingsControl();
-            tb_DB_File = new System.Windows.Forms.TextBox();
-            label8 = new System.Windows.Forms.Label();
-            Button_SetDB = new System.Windows.Forms.Button();
+            tabControl2 = new System.Windows.Forms.TabControl();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            tabPage5 = new System.Windows.Forms.TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_left).BeginInit();
@@ -73,6 +73,8 @@
             tabPage2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabControl2.SuspendLayout();
+            tabPage4.SuspendLayout();
             SuspendLayout();
             // 
             // button2
@@ -241,6 +243,7 @@
             // project_DetailsControl1
             // 
             project_DetailsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            project_DetailsControl1.Enabled = false;
             project_DetailsControl1.Location = new System.Drawing.Point(0, 0);
             project_DetailsControl1.Name = "project_DetailsControl1";
             project_DetailsControl1.Size = new System.Drawing.Size(390, 168);
@@ -341,10 +344,7 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(settingsControl1);
-            tabPage3.Controls.Add(tb_DB_File);
-            tabPage3.Controls.Add(label8);
-            tabPage3.Controls.Add(Button_SetDB);
+            tabPage3.Controls.Add(tabControl2);
             tabPage3.Location = new System.Drawing.Point(4, 27);
             tabPage3.Margin = new System.Windows.Forms.Padding(2);
             tabPage3.Name = "tabPage3";
@@ -356,46 +356,46 @@
             // 
             // settingsControl1
             // 
-            settingsControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             settingsControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            settingsControl1.Location = new System.Drawing.Point(9, 99);
+            settingsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            settingsControl1.Location = new System.Drawing.Point(3, 3);
             settingsControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             settingsControl1.MinimumSize = new System.Drawing.Size(259, 316);
             settingsControl1.Name = "settingsControl1";
-            settingsControl1.Size = new System.Drawing.Size(259, 316);
+            settingsControl1.Size = new System.Drawing.Size(941, 548);
             settingsControl1.TabIndex = 3;
             // 
-            // tb_DB_File
+            // tabControl2
             // 
-            tb_DB_File.Enabled = false;
-            tb_DB_File.ImeMode = System.Windows.Forms.ImeMode.On;
-            tb_DB_File.Location = new System.Drawing.Point(51, 27);
-            tb_DB_File.Margin = new System.Windows.Forms.Padding(2);
-            tb_DB_File.Name = "tb_DB_File";
-            tb_DB_File.Size = new System.Drawing.Size(655, 23);
-            tb_DB_File.TabIndex = 2;
-            tb_DB_File.TabStop = false;
+            tabControl2.Controls.Add(tabPage4);
+            tabControl2.Controls.Add(tabPage5);
+            tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl2.Location = new System.Drawing.Point(0, 0);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new System.Drawing.Size(955, 582);
+            tabControl2.TabIndex = 10;
             // 
-            // label8
+            // tabPage4
             // 
-            label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(7, 9);
-            label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(114, 15);
-            label8.TabIndex = 1;
-            label8.Text = "Pfad der Datenbank:";
+            tabPage4.Controls.Add(settingsControl1);
+            tabPage4.Location = new System.Drawing.Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            tabPage4.Size = new System.Drawing.Size(947, 554);
+            tabPage4.TabIndex = 0;
+            tabPage4.Text = "Datenbank";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
-            // Button_SetDB
+            // tabPage5
             // 
-            Button_SetDB.Location = new System.Drawing.Point(9, 27);
-            Button_SetDB.Margin = new System.Windows.Forms.Padding(2);
-            Button_SetDB.Name = "Button_SetDB";
-            Button_SetDB.Size = new System.Drawing.Size(36, 22);
-            Button_SetDB.TabIndex = 0;
-            Button_SetDB.Text = "DB";
-            Button_SetDB.UseVisualStyleBackColor = true;
-            Button_SetDB.Click += Button_SetDB_Click;
+            tabPage5.Location = new System.Drawing.Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            tabPage5.Size = new System.Drawing.Size(947, 554);
+            tabPage5.TabIndex = 1;
+            tabPage5.Text = "Gruppen";
+            tabPage5.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -436,7 +436,8 @@
             tabPage2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
-            tabPage3.PerformLayout();
+            tabControl2.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -447,9 +448,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox tb_DB_File;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button Button_SetDB;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button4;
         private SettingsControl settingsControl1;
@@ -464,6 +462,9 @@
         private Tab_Project.Project_FolderControl project_FolderControl1;
         internal Tab_Project.Project_DetailsControl project_DetailsControl1;
         internal Tab_Project.Project_MainControl project_MainControl1;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }
 

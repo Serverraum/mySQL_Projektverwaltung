@@ -9,6 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//  Hard Connection to/from:                 //
+//   - ProjMain  (project_MainControl1)      //
+//   (For Save-Function)                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 namespace mySQL_Projektverwaltung.Tab_Project
 {
     public partial class Project_DetailsControl : UserControl
@@ -46,6 +51,11 @@ namespace mySQL_Projektverwaltung.Tab_Project
                     main.project_MainControl1.SaveStateChanged();
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

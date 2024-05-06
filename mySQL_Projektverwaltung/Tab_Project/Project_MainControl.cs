@@ -14,6 +14,13 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using static mySQL_Projektverwaltung.Main;
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//  Hard Connection to/from:                 //
+//   - Desc_long (project_DetailsControl1)   //
+//   - Folder    (project_FolderControl1)    //
+//   (Both for Save-Function)                //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 namespace mySQL_Projektverwaltung.Tab_Project
 {
     public partial class Project_MainControl : UserControl
@@ -101,15 +108,15 @@ namespace mySQL_Projektverwaltung.Tab_Project
         }
 
         public void SaveStateChanged() {
-            if (editProj.Checked == true)
-            {
-                bt_proj_save.Enabled = true;
-            }
+            bt_proj_save.Enabled = true;
         }
 
         private void tb_shortdesc_TextChanged(object sender, EventArgs e)
         {
-            bt_proj_save.Enabled = true;
+            if (editProj.Checked == true)
+            {
+                bt_proj_save.Enabled = true;
+            }
         }
         private void editProj_CheckedChanged(object sender, EventArgs e)
         {

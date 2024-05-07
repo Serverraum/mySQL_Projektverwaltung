@@ -47,10 +47,11 @@
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             button3 = new System.Windows.Forms.Button();
             tabPage3 = new System.Windows.Forms.TabPage();
-            settingsControl1 = new SettingsControl();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage4 = new System.Windows.Forms.TabPage();
+            settingsControl1 = new SettingsControl();
             tabPage5 = new System.Windows.Forms.TabPage();
+            settingsControl_Folder1 = new SettingsControl_Folder();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_left).BeginInit();
@@ -75,6 +76,7 @@
             tabPage3.SuspendLayout();
             tabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
+            tabPage5.SuspendLayout();
             SuspendLayout();
             // 
             // button2
@@ -246,6 +248,7 @@
             project_DetailsControl1.Enabled = false;
             project_DetailsControl1.Location = new System.Drawing.Point(0, 0);
             project_DetailsControl1.Name = "project_DetailsControl1";
+            project_DetailsControl1.Padding = new System.Windows.Forms.Padding(5);
             project_DetailsControl1.Size = new System.Drawing.Size(390, 168);
             project_DetailsControl1.TabIndex = 0;
             // 
@@ -354,17 +357,6 @@
             tabPage3.Text = "Settings";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // settingsControl1
-            // 
-            settingsControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            settingsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            settingsControl1.Location = new System.Drawing.Point(3, 3);
-            settingsControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            settingsControl1.MinimumSize = new System.Drawing.Size(259, 316);
-            settingsControl1.Name = "settingsControl1";
-            settingsControl1.Size = new System.Drawing.Size(941, 548);
-            settingsControl1.TabIndex = 3;
-            // 
             // tabControl2
             // 
             tabControl2.Controls.Add(tabPage4);
@@ -387,8 +379,20 @@
             tabPage4.Text = "Datenbank";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // settingsControl1
+            // 
+            settingsControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            settingsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            settingsControl1.Location = new System.Drawing.Point(3, 3);
+            settingsControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            settingsControl1.MinimumSize = new System.Drawing.Size(259, 316);
+            settingsControl1.Name = "settingsControl1";
+            settingsControl1.Size = new System.Drawing.Size(941, 548);
+            settingsControl1.TabIndex = 3;
+            // 
             // tabPage5
             // 
+            tabPage5.Controls.Add(settingsControl_Folder1);
             tabPage5.Location = new System.Drawing.Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -396,6 +400,14 @@
             tabPage5.TabIndex = 1;
             tabPage5.Text = "Gruppen";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // settingsControl_Folder1
+            // 
+            settingsControl_Folder1.AutoSize = true;
+            settingsControl_Folder1.Location = new System.Drawing.Point(6, 6);
+            settingsControl_Folder1.Name = "settingsControl_Folder1";
+            settingsControl_Folder1.Size = new System.Drawing.Size(623, 223);
+            settingsControl_Folder1.TabIndex = 0;
             // 
             // Main
             // 
@@ -438,6 +450,8 @@
             tabPage3.ResumeLayout(false);
             tabControl2.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -465,6 +479,7 @@
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private SettingsControl_Folder settingsControl_Folder1;
     }
 }
 

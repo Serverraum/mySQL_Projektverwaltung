@@ -1,65 +1,55 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static mySQL_Projektverwaltung.SettingsControl_Folder;
 
-namespace mySQL_Projektverwaltung.Tab_Settings
+namespace mySQL_Projektverwaltung
 {
+
     public partial class SettingsControl_Folder : UserControl
     {
-        protected string configFilePath = "configfolder.json";
-        public class ProjFolder
-        {
-            public string MainFolder = "";
-            public string ProjRegex = "";
-        }
-        
         public SettingsControl_Folder()
         {
             InitializeComponent();
-        }/*
-        public void connLoadParam()// Load Param from JSON
-        {
-
-            try
-            {
-                string json = File.ReadAllText(path: configFilePath);
-                dbConnParam = JsonSerializer.Deserialize<DbConnParam>(json);
-            }
-            catch (FileNotFoundException)
-            {
-                // Falls die Datei nicht gefunden wird, erstelle eine neue Konfiguration
-                DbConnParam dbConnParam = new DbConnParam
-                {
-                    // Beispiel-Pfad zur SQLite-Datenbank
-                    SQLiteAddr = "",//"C:\\path\\to\\your-database.db"
-                    DbType = 0,
-                    mySQL_Addr = "",
-                    mySQL_Dat = "",
-                    mySQL_PWD = ""
-                };
-
-
-                // Serialisiere und speichere die Standardkonfiguration
-                string defaultConfigJson = JsonSerializer.Serialize(dbConnParam);
-                File.WriteAllText(dbConnParam.configFilePath, defaultConfigJson);
-                MessageBox.Show("DB not configured", "Warning");
-                // ToDo: config DB
-            }
-        }
-        public void connSaveParam()// Save Param to JSON
-        {
-            string defaultConfigJson = JsonSerializer.Serialize(dbConnParam);
-            File.WriteAllText(dbConnParam.configFilePath, defaultConfigJson);
         }
 
-        */
+        private void bt_folder_Click(object sender, EventArgs e) //Set Main Folder Path
+        {
+            var dlg = new FolderPicker();
+            if (Directory.Exists(Settings.Instance.projFolder.MainFolder)) { dlg.InputPath = Settings.Instance.projFolder.MainFolder; } else { dlg.InputPath = @"C:\"; };
+            //dlg.InputPath = Settings.Instance.projFolder.MainFolder;//@"c:\windows\system32";
+            dlg.Title = "Select Main Project Folder";
+            if (dlg.ShowDialog() == true)
+            {
+                MessageBox.Show(dlg.ResultPath);
+                Settings.Instance.projFolder.MainFolder = dlg.ResultPath;
+                tb_folder.Text = Settings.Instance.projFolder.MainFolder;
+            }
+        }
+
     }
+
+    public class ProjFolder
+    {
+        [JsonInclude]
+        public string MainFolder = "C:\\";
+        [JsonInclude]
+        public string ProjRegex = "Projekt";
+    }
+    public sealed partial class Settings
+    {
+        public ProjFolder projFolder { get; set; } = new ProjFolder();
+    }
+
 }

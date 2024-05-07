@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DbConn = mySQL_Projektverwaltung.DbConnParam.DbConn;
 
 
 namespace mySQL_Projektverwaltung
@@ -52,8 +53,8 @@ namespace mySQL_Projektverwaltung
             try
             {
                 String sql = "SELECT * FROM proj"; //WHERE projID=" + projID;
-                DbConnParam.DbConn.Instance.DbAddCmd(sql);
-                dt = DbConnParam.DbConn.Instance.DbGetDataTable();
+                DbConn.Instance.DbAddCmd(sql);
+                dt = DbConn.Instance.DbGetDataTable();
                 PopulateTreeView(treeView1 as TreeView, dt);
             }
             catch (Exception ex)

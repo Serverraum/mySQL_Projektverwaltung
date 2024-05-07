@@ -10,31 +10,6 @@ namespace mySQL_Projektverwaltung
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            tb_DB_File.Text = DbConnParam.DbConn.Instance.connParamGetSQLite();
-        }
-
-        private void tb_server_TextChanged(object sender, EventArgs e)
-        {
-            if (tb_server.Text.Length > 0) { hint_server.Visible = false; } else { hint_server.Visible = true; };
-        }
-
-        private void tb_database_TextChanged(object sender, EventArgs e)
-        {
-            if (tb_database.Text.Length > 0) { hint_database.Visible = false; } else { hint_database.Visible = true; };
-        }
-
-        private void tb_uid_TextChanged(object sender, EventArgs e)
-        {
-            if (tb_uid.Text.Length > 0) { hint_UID.Visible = false; } else { hint_UID.Visible = true; };
-        }
-
-        private void tb_pwd_TextChanged(object sender, EventArgs e)
-        {
-            if (tb_pwd.Text.Length > 0) { hint_pwd.Visible = false; } else { hint_pwd.Visible = true; };
-        }
-
         private void rb_SQLite_CheckedChanged(object sender, EventArgs e)
         {
             if (!rb_SQLite.Checked)
@@ -55,16 +30,12 @@ namespace mySQL_Projektverwaltung
             {
                 tb_server.Enabled = false;
                 label2.Enabled = false;
-                hint_server.BackColor = System.Drawing.SystemColors.Control;
                 tb_database.Enabled = false;
                 label3.Enabled = false;
-                hint_database.BackColor = System.Drawing.SystemColors.Control;
                 tb_uid.Enabled = false;
                 label4.Enabled = false;
-                hint_UID.BackColor = System.Drawing.SystemColors.Control;
                 tb_pwd.Enabled = false;
                 label5.Enabled = false;
-                hint_pwd.BackColor = System.Drawing.SystemColors.Control;
                 bt_showPWD.Enabled = false;
 
 
@@ -73,16 +44,12 @@ namespace mySQL_Projektverwaltung
             {
                 tb_server.Enabled = true;
                 label2.Enabled = true;
-                hint_server.BackColor = System.Drawing.SystemColors.Window;
                 tb_database.Enabled = true;
                 label3.Enabled = true;
-                hint_database.BackColor = System.Drawing.SystemColors.Window;
                 tb_uid.Enabled = true;
                 label4.Enabled = true;
-                hint_UID.BackColor = System.Drawing.SystemColors.Window;
                 tb_pwd.Enabled = true;
                 label5.Enabled = true;
-                hint_pwd.BackColor = System.Drawing.SystemColors.Window;
                 bt_showPWD.Enabled = true;
 
             };
@@ -120,7 +87,7 @@ namespace mySQL_Projektverwaltung
             {
                 tb_DB_File.Text = openFileDialog1.FileName;
 
-                  DbConnParam.DbConn.Instance.connParamNewSQLite(openFileDialog1.FileName);
+                DbConnParam.DbConn.Instance.connParamNewSQLite(openFileDialog1.FileName);
                 /*config = new DatabaseConfig
                 {
                     // Beispiel-Pfad zur SQLite-Datenbank
@@ -137,7 +104,7 @@ namespace mySQL_Projektverwaltung
         {
             //Load SQLite-String
             string SQLiteConn = DbConnParam.DbConn.Instance.connParamGetSQLite();
-            if ( !(SQLiteConn is null) && SQLiteConn.Length> 22) { tb_DB_File.Text = SQLiteConn.Substring(12, (SQLiteConn.Length-22)); } else { tb_DB_File.Text = ""; };
+            if (!(SQLiteConn is null) && SQLiteConn.Length > 22) { tb_DB_File.Text = SQLiteConn.Substring(12, (SQLiteConn.Length - 22)); } else { tb_DB_File.Text = ""; };
 
             //Load MySQL-String + DbType; Also check, if data is not null
 

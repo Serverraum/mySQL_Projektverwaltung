@@ -8,32 +8,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Controls;
+using mySQL_Projektverwaltung;
+using static mySQL_Projektverwaltung.DbConnParam;
+using System.Xml;
 
 namespace mySQL_Projektverwaltung
 {
-    public class Settings
-    {
 
-        [JsonPropertyName("onlinepvp_kills:all")]
-        public int PVP { get; set; }
-        [JsonPropertyName("onlinepve_kills:all")]
-        public int PVE { get; set; }
+    public sealed partial class Settings
+    {
+        private static readonly Lazy<Settings> lazy =
+                new Lazy<Settings>(() => new Settings());
+
+        public static Settings Instance { get { return lazy.Value; } }
+
+        public DbConnParam DbConnParam { get; set; } = new DbConnParam();
     }
+
     public class DbConnParam
     {
         [JsonInclude]
-        protected string SQLiteAddr;
+        protected internal string SQLiteAddr;
         [JsonInclude]
-        protected int DbType; //1 =  SQLite; 2 = mySQL
+        protected internal int DbType; //1 =  SQLite; 2 = mySQL
         [JsonInclude]
-        protected string mySQL_Addr;//Address to Database
+        protected internal string mySQL_Addr;//Address to Database
         [JsonInclude]
-        protected string mySQL_Dat; //Database
+        protected internal string mySQL_Dat; //Database
         [JsonInclude]
-        protected string mySQL_PWD; //Password
+        protected internal string mySQL_PWD; //Password
         [JsonInclude]
-        protected string mySQL_UID; //Username
-        protected string configFilePath = "configdatabase.json"; //______________________________CONFIGSTRING!!!
+        protected internal string mySQL_UID; //Username
+        protected internal string configFilePath = "configdatabase.json"; //______________________________CONFIGSTRING!!!
 
         public class MySQLParam
         {
@@ -70,6 +76,8 @@ namespace mySQL_Projektverwaltung
 
             /*******************************************************************************/
             /*                           JSON SAVE/LOAD-Functions                          */
+            /*                       ! --- ! INIT EVERY MODULE  ! --- !                    */
+            /*                       ! --- ! IN connLoadParam() ! --- !                    */
             /*******************************************************************************/
 
             public void connLoadParam()// Load Param from JSON
@@ -77,14 +85,25 @@ namespace mySQL_Projektverwaltung
 
                 try
                 {
+
                     //DbConnParam dbConnParam = new DbConnParam();
-                    string json = File.ReadAllText(path: dbConnParam.configFilePath);
-                    dbConnParam = JsonSerializer.Deserialize<DbConnParam>(json);
+                    string json = File.ReadAllText(path: Settings.Instance.DbConnParam.configFilePath);
+                    Settings settings = JsonSerializer.Deserialize<Settings>(json);
+                    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+                    /* --- --- ---  INIT Every Module  --- --- ---*/
+                    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+                    Settings.Instance.DbConnParam = settings.DbConnParam;
+                    Settings.Instance.projFolder = settings.projFolder;
                     connOpen();
                 }
                 catch (FileNotFoundException)
                 {
                     // Falls die Datei nicht gefunden wird, erstelle eine neue Konfiguration
+                    Settings settings = new Settings()
+                    {
+
+
+                    };
                     DbConnParam dbConnParam = new DbConnParam
                     {
                         // Beispiel-Pfad zur SQLite-Datenbank
@@ -105,13 +124,17 @@ namespace mySQL_Projektverwaltung
             }
             public void connSaveParam()// Save Param to JSON
             {
-                string defaultConfigJson = JsonSerializer.Serialize(dbConnParam);
-                File.WriteAllText(dbConnParam.configFilePath, defaultConfigJson);
+                //string defaultConfigJson = JsonSerializer.Serialize(Settings.Instance.DbConnParam);
+                //File.WriteAllText(Settings.Instance.DbConnParam.configFilePath, defaultConfigJson);
+                JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions();
+                jsonSerializerOptions.WriteIndented = true;
+                string defaultConfigJson = JsonSerializer.Serialize(Settings.Instance, jsonSerializerOptions);
+                File.WriteAllText(Settings.Instance.DbConnParam.configFilePath, defaultConfigJson);
             }
 
             public void connClose()
             {
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
                         connSQLite.Close(); //open Connection
@@ -124,14 +147,14 @@ namespace mySQL_Projektverwaltung
             }
             public void connOpen()
             {
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
-                        connSQLite = new SQLiteConnection(dbConnParam.SQLiteAddr);
+                        connSQLite = new SQLiteConnection(Settings.Instance.DbConnParam.SQLiteAddr);
                         connSQLite.Open(); //open Connection
                         break;
                     case 2:
-                        connMySQL = new MySqlConnection("server=" + dbConnParam.mySQL_Addr + ";uid=" + dbConnParam.mySQL_UID + ";pwd=" + dbConnParam.mySQL_PWD + ";database=" + dbConnParam.mySQL_Dat);
+                        connMySQL = new MySqlConnection("server=" + Settings.Instance.DbConnParam.mySQL_Addr + ";uid=" + Settings.Instance.DbConnParam.mySQL_UID + ";pwd=" + Settings.Instance.DbConnParam.mySQL_PWD + ";database=" + Settings.Instance.DbConnParam.mySQL_Dat);
                         connMySQL.Open();
                         break;
                     default: MessageBox.Show("DB not configured", "Warning"); break;
@@ -140,22 +163,22 @@ namespace mySQL_Projektverwaltung
             public void connParamNewDbType(int DbType)// Set DbType 1:SQLite or 2:mySQL
             {
                 connClose();
-                dbConnParam.DbType = DbType;
+                Settings.Instance.DbConnParam.DbType = DbType;
                 connOpen();
             }
             public void connParamNewSQLite(string connectionString) // Save new SQLiteParams to JSON
             {
 
                 String connectString = @"Data Source=" + connectionString + @";version=3";
-                dbConnParam.SQLiteAddr = connectString;
+                Settings.Instance.DbConnParam.SQLiteAddr = connectString;
                 connSaveParam();
             }
             public void connParamNewMySQL(string addr, string database, string uid, string password)//Save new mySQLParams to JSON
             {
-                dbConnParam.mySQL_Addr = addr;
-                dbConnParam.mySQL_Dat = database;
-                dbConnParam.mySQL_UID = uid;
-                dbConnParam.mySQL_PWD = password;
+                Settings.Instance.DbConnParam.mySQL_Addr = addr;
+                Settings.Instance.DbConnParam.mySQL_Dat = database;
+                Settings.Instance.DbConnParam.mySQL_UID = uid;
+                Settings.Instance.DbConnParam.mySQL_PWD = password;
                 connSaveParam();
             }
 
@@ -165,16 +188,16 @@ namespace mySQL_Projektverwaltung
 
             public string connParamGetSQLite()//returns Data to fill the UserInterface for SQLite
             {
-                return dbConnParam.SQLiteAddr;
+                return Settings.Instance.DbConnParam.SQLiteAddr;
             }
             public MySQLParam connParamGetMySQL()//returns Data to fill the UserInterface for mySQL
             {
                 MySQLParam mySQLParam = new MySQLParam();
-                mySQLParam.mySQL_Addr = dbConnParam.mySQL_Addr;
-                mySQLParam.mySQL_UID = dbConnParam.mySQL_UID;
-                mySQLParam.mySQL_PWD = dbConnParam.mySQL_PWD;
-                mySQLParam.mySQL_Dat = dbConnParam.mySQL_Dat;
-                mySQLParam.DbType = dbConnParam.DbType;
+                mySQLParam.mySQL_Addr = Settings.Instance.DbConnParam.mySQL_Addr;
+                mySQLParam.mySQL_UID = Settings.Instance.DbConnParam.mySQL_UID;
+                mySQLParam.mySQL_PWD = Settings.Instance.DbConnParam.mySQL_PWD;
+                mySQLParam.mySQL_Dat = Settings.Instance.DbConnParam.mySQL_Dat;
+                mySQLParam.DbType = Settings.Instance.DbConnParam.DbType;
                 return mySQLParam;
             }
 
@@ -201,7 +224,7 @@ namespace mySQL_Projektverwaltung
 
             public void DbAddCmd(string cmd)
             {
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
                         cmdSQLite = connSQLite.CreateCommand(); //create Command
@@ -225,7 +248,7 @@ namespace mySQL_Projektverwaltung
 
             public void CmdAddParam(string Param, object Value)
             {
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
                         SQLiteAdapter.SelectCommand.Parameters.AddWithValue(Param, Value);
@@ -244,7 +267,7 @@ namespace mySQL_Projektverwaltung
             public DataSet DbGetDataSet()
             {
                 DataSet ds = new DataSet();
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
                         SQLiteAdapter.Fill(ds);
@@ -271,7 +294,7 @@ namespace mySQL_Projektverwaltung
 
             public Object DbScalar()//Single Cell
             {
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
                         return cmdSQLite.ExecuteScalar();
@@ -288,7 +311,7 @@ namespace mySQL_Projektverwaltung
 
             public int DbExecuteNonQuery()
             {
-                switch (dbConnParam.DbType)
+                switch (Settings.Instance.DbConnParam.DbType)
                 {
                     case 1:
                         return cmdSQLite.ExecuteNonQuery();

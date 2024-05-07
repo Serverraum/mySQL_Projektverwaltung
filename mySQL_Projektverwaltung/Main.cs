@@ -17,6 +17,7 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Runtime.InteropServices.ComTypes;
 using mySQL_Projektverwaltung.Tab_Project;
+using System.Configuration;
 
 
 namespace mySQL_Projektverwaltung
@@ -34,11 +35,18 @@ namespace mySQL_Projektverwaltung
         public Boolean ProjLoad;
         private ProjAuswahl projAuswahl;
 
-
         public Main()
         {
+            //string sAttr = Properties.Settings.Default.test;
+            //splitContainer_horiz_left.SplitterDistance
             InitializeComponent();
             DbConnParam.DbConn.Instance.connLoadParam();
+            splitContainer_horiz_right.SplitterDistance = Settings.Instance.MainSlider.Slider1;
+            splitContainer_mid_horiz.SplitterDistance = Settings.Instance.MainSlider.Slider2;
+            splitContainer_right_vert.SplitterDistance = Settings.Instance.MainSlider.Slider3;
+
+
+            
         }
         public void LoadProject(int projID)
         {
@@ -99,8 +107,13 @@ namespace mySQL_Projektverwaltung
        
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Settings.Instance.MainSlider.Slider1 = splitContainer_horiz_right.SplitterDistance;
+            Settings.Instance.MainSlider.Slider2 = splitContainer_mid_horiz.SplitterDistance;
+            Settings.Instance.MainSlider.Slider3 = splitContainer_right_vert.SplitterDistance;
+            DbConnParam.DbConn.Instance.connSaveParam();
             DbConnParam.DbConn.Instance.connClose();
         }
+
 
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -122,5 +135,19 @@ namespace mySQL_Projektverwaltung
         {
 
         }
+    }
+
+    public class MainSlider
+    {
+        [JsonInclude]
+        public int Slider1 = 200;
+        [JsonInclude]
+        public int Slider2 = 200;
+        [JsonInclude]
+        public int Slider3 = 200;
+    }
+    public sealed partial class Settings
+    {
+        public MainSlider MainSlider { get; set; } = new MainSlider();
     }
 }

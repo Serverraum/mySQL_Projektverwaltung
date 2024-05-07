@@ -93,7 +93,8 @@ namespace mySQL_Projektverwaltung
                     /* --- --- ---  INIT Every Module  --- --- ---*/
                     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
                     Settings.Instance.DbConnParam = settings.DbConnParam;
-                    Settings.Instance.projFolder = settings.projFolder;
+                    Settings.Instance.ProjFolder = settings.ProjFolder;
+                    Settings.Instance.MainSlider = settings.MainSlider;
                     connOpen();
                 }
                 catch (FileNotFoundException)

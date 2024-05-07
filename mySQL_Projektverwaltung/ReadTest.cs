@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Interop;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
+using System.Configuration;
+using System.Drawing;
 
 namespace mySQL_Projektverwaltung
 {
@@ -25,7 +27,7 @@ namespace mySQL_Projektverwaltung
     }
 
 
-public class FolderPicker
+    public class FolderPicker
     {
         private readonly List<string> _resultPaths = new List<string>();
         private readonly List<string> _resultNames = new List<string>();

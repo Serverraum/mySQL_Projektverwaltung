@@ -197,7 +197,6 @@
             tb_uid.PlaceholderText = "guest";
             tb_uid.Size = new System.Drawing.Size(123, 23);
             tb_uid.TabIndex = 6;
-            tb_uid.TabStop = false;
             // 
             // tb_database
             // 
@@ -210,7 +209,6 @@
             tb_database.PlaceholderText = "database1";
             tb_database.Size = new System.Drawing.Size(123, 23);
             tb_database.TabIndex = 5;
-            tb_database.TabStop = false;
             // 
             // tb_pwd
             // 
@@ -223,7 +221,6 @@
             tb_pwd.PlaceholderText = "Password";
             tb_pwd.Size = new System.Drawing.Size(86, 23);
             tb_pwd.TabIndex = 7;
-            tb_pwd.TabStop = false;
             tb_pwd.UseSystemPasswordChar = true;
             // 
             // bt_showPWD

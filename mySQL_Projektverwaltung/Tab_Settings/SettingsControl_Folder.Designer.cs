@@ -29,11 +29,12 @@
         {
             bt_folder = new System.Windows.Forms.Button();
             tb_folder = new System.Windows.Forms.TextBox();
-            textBox2 = new System.Windows.Forms.TextBox();
+            tb_regex = new System.Windows.Forms.TextBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            button2 = new System.Windows.Forms.Button();
+            bt_save = new System.Windows.Forms.Button();
+            lb_regex = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,14 +59,15 @@
             tb_folder.Size = new System.Drawing.Size(536, 23);
             tb_folder.TabIndex = 1;
             // 
-            // textBox2
+            // tb_regex
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            tableLayoutPanel1.SetColumnSpan(textBox2, 3);
-            textBox2.Location = new System.Drawing.Point(84, 168);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(536, 23);
-            textBox2.TabIndex = 2;
+            tb_regex.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tableLayoutPanel1.SetColumnSpan(tb_regex, 3);
+            tb_regex.Location = new System.Drawing.Point(84, 168);
+            tb_regex.Name = "tb_regex";
+            tb_regex.Size = new System.Drawing.Size(536, 23);
+            tb_regex.TabIndex = 2;
+            tb_regex.TextChanged += tb_regex_TextChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -75,22 +77,24 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            tableLayoutPanel1.Controls.Add(textBox2, 1, 4);
+            tableLayoutPanel1.Controls.Add(tb_regex, 1, 4);
             tableLayoutPanel1.Controls.Add(tb_folder, 1, 2);
             tableLayoutPanel1.Controls.Add(bt_folder, 0, 2);
             tableLayoutPanel1.Controls.Add(label2, 0, 3);
             tableLayoutPanel1.Controls.Add(label1, 0, 1);
-            tableLayoutPanel1.Controls.Add(button2, 3, 5);
+            tableLayoutPanel1.Controls.Add(bt_save, 3, 6);
+            tableLayoutPanel1.Controls.Add(lb_regex, 1, 5);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.Size = new System.Drawing.Size(623, 284);
             tableLayoutPanel1.TabIndex = 3;
             // 
@@ -117,15 +121,26 @@
             label1.TabIndex = 4;
             label1.Text = "Projekt-Überordner";
             // 
-            // button2
+            // bt_save
             // 
-            button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            button2.Location = new System.Drawing.Point(545, 258);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(75, 23);
-            button2.TabIndex = 6;
-            button2.Text = "Speichern";
-            button2.UseVisualStyleBackColor = true;
+            bt_save.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            bt_save.Location = new System.Drawing.Point(545, 258);
+            bt_save.Name = "bt_save";
+            bt_save.Size = new System.Drawing.Size(75, 23);
+            bt_save.TabIndex = 6;
+            bt_save.Text = "Speichern";
+            bt_save.UseVisualStyleBackColor = true;
+            bt_save.Click += bt_save_Click;
+            // 
+            // lb_regex
+            // 
+            lb_regex.AutoSize = true;
+            tableLayoutPanel1.SetColumnSpan(lb_regex, 3);
+            lb_regex.Location = new System.Drawing.Point(84, 194);
+            lb_regex.Name = "lb_regex";
+            lb_regex.Size = new System.Drawing.Size(51, 15);
+            lb_regex.TabIndex = 7;
+            lb_regex.Text = "lb_regex";
             // 
             // SettingsControl_Folder
             // 
@@ -135,6 +150,7 @@
             Controls.Add(tableLayoutPanel1);
             Name = "SettingsControl_Folder";
             Size = new System.Drawing.Size(623, 284);
+            Load += SettingsControl_Folder_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -146,9 +162,10 @@
         private System.Windows.Forms.Button bt_folder;
         private System.Windows.Forms.TextBox tb_folder;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tb_regex;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button bt_save;
+        private System.Windows.Forms.Label lb_regex;
     }
 }

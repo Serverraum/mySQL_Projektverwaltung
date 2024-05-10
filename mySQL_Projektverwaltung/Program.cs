@@ -9,7 +9,6 @@ using System.Diagnostics;
 
 
 
-
 namespace mySQL_Projektverwaltung
 {
     internal static class Program

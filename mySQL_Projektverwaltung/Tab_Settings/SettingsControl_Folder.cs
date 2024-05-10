@@ -51,12 +51,22 @@ namespace mySQL_Projektverwaltung
             int textprojID = 12;
 
             string regextext = tb_regex.Text;
-            //string regexPattern = @"([[][A-Za-z0-9]*[\]])"; // [], [n], [M], [n5], ... werden gezählt.
-            string regexPattern = @"([[](?<group>[A-Za-z0-9]*)[\]])"; // [], [n], [M], [n5], ... werden gezählt.
+            
+
+            lb_regex.Text = FolderRegex(regextext, textprojID); //Add true for Debug
+
+
+        }
+
+        public string FolderRegex(string regextext, int projID, bool debug = false)
+        {
+            string regexPattern = @"([[](?<group>[A-Za-z0-9]*)[\]])"; // [], [n], [M], [n5], ... werden gezählt.  Elemente innerhalb der Klammer werden als ${group}-Variable gespeichert.
             Regex regex = new Regex(regexPattern);
             int count = regex.Count(regextext);
 
-            lb_regex.Text = "Count: " + count.ToString();
+            /*Debug*/
+            string debugstr;
+            debugstr = "Count: " + count.ToString();
 
             Match match = regex.Match(regextext);
             int i = 0;
@@ -65,33 +75,33 @@ namespace mySQL_Projektverwaltung
             {
                 if (count > i && i > 0) { match = match.NextMatch(); }
 
-                lb_regex.Text = lb_regex.Text + "\r\nLenght: " + match.Length + "\r\nIndex: " + match.Index + "\r\n" + match.Result("${group}");
-
-                //MatchEvaluator matchEvaluator = new MatchEvaluator(Match);
-                //matchEvaluator(match);
+                /*Debug*/ //Add found group
+                debugstr = debugstr + "\r\nLenght: " + match.Length + "\r\nIndex: " + match.Index + "\r\n" + match.Result("${group}");
 
 
-
-                Regex regex2 = new Regex("[n](?<nr>[1-9])"); //Leading Zeros
+                /*Zahl mit n Leading Zeros*/
+                Regex regex2 = new Regex("[n](?<nr>[1-9])");
                 Match match2 = regex2.Match(match.Result("${group}"));
                 if (match2.Success)
                 {
                     int len = Int32.Parse(match2.Result("${nr}"));
-                    string replacestr = textprojID.ToString("D" + len);
+                    string replacestr = projID.ToString("D" + len);
                     regextext = ReplaceFirst(regextext, match.Value, replacestr);
-                    //regextext = regex.Replace(regextext, replacestr ,match.Length, match.Index);
+                    //regextext = regex.Replace(regextext, replacestr ,match.Length, match.Index);//-Replaces all matches
                     regcnt++;
                 }
+                /*Zahl*/
                 else if (match.Result("${group}") == "n")
                 {
-                    string replacestr = textprojID.ToString();
+                    string replacestr = projID.ToString();
                     regextext = ReplaceFirst(regextext, match.Value, replacestr);
                     //regextext = regex.Replace(regextext, replacestr, match.Length, match.Index);
                     regcnt++;
                 }
 
-
-
+                /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+                /*--- Place for more Regex-Stuff ---*/
+                /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
 
@@ -101,12 +111,16 @@ namespace mySQL_Projektverwaltung
             }
             if (count == 0 || regcnt == 0) //FALLBACK     (Zahl hintenangestellt)
             {
-                regextext = regextext + textprojID.ToString();
+                regextext = regextext + projID.ToString();
             }
 
-            lb_regex.Text = lb_regex.Text + "\r\n" + regextext;
+            debugstr =  debugstr + "\r\n" + regextext;
 
-
+            switch (debug)
+            {
+                case false: return regextext;
+                case true: return debugstr;
+            }
         }
         public string ReplaceFirst(string text, string search, string replace)
         {
@@ -124,6 +138,7 @@ namespace mySQL_Projektverwaltung
             tb_regex.Text = Settings.Instance.ProjFolder.ProjRegex;
         }
     }
+    
 
     public class ProjFolder
     {

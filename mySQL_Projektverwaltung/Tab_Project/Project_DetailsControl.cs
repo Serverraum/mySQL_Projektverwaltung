@@ -18,9 +18,11 @@ namespace mySQL_Projektverwaltung.Tab_Project
 {
     public partial class Project_DetailsControl : UserControl
     {
-        public Project_DetailsControl()
+        Main main;
+        public Project_DetailsControl(Main main)
         {
             InitializeComponent();
+            this.main = main;
         }
         public void ReLoad_Project_DetailsControl(int projID)
         {
@@ -43,14 +45,17 @@ namespace mySQL_Projektverwaltung.Tab_Project
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             /*------ Change SaveState ------*/
-            foreach (var item in Application.OpenForms)
-            {
-                Main main = item as Main;
-                if (main != null)
-                {
-                    main.project_MainControl1.SaveStateChanged();
-                }
-            }
+            main.project_MainControl1.SaveStateChanged();
+            // Searched all Applications. Now this will be returned at first Startup of this function.
+            //
+            //foreach (var item in Application.OpenForms)
+            //{
+            //    Main main = item as Main;
+            //    if (main != null)
+            //    {
+            //        main.project_MainControl1.SaveStateChanged();
+            //    }
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)

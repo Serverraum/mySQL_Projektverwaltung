@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using static mySQL_Projektverwaltung.Main;
 
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //  Hard Connection to/from:                 //
 //   - Desc_long (project_DetailsControl1)   //
@@ -26,9 +27,11 @@ namespace mySQL_Projektverwaltung.Tab_Project
     public partial class Project_MainControl : UserControl
     {
         public int projID = 0;
+        Main main;
         DataTable dtProj = new DataTable();
-        public Project_MainControl()
+        public Project_MainControl(Main main)
         {
+            this.main = main;
             InitializeComponent();
         }
         public void ReLoad_Project_MainControl(int projId)
@@ -107,7 +110,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
             }
         }
 
-        public void SaveStateChanged() {
+        public void SaveStateChanged()
+        {
             bt_proj_save.Enabled = true;
         }
 
@@ -153,15 +157,9 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
                 /*Poll desc_long*/
                 string desc_long = "";
-                foreach (var item in Application.OpenForms)
-                {
-                    Main main = item as Main;
-                    if (main != null)
-                    {
-                       desc_long = main.project_DetailsControl1.Save_Project_DetailsControl();
-                    }
-                }
-                
+                desc_long = main.project_DetailsControl1.Save_Project_DetailsControl();
+
+
                 // Save_Project_DetailsControl
                 /*Poll folder, not yet implemented*/
 
@@ -193,15 +191,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                         }
                     }
                     /*------ Reload Main Project Page ------*/
-                    foreach (var item in Application.OpenForms)
-                    {
-                        Main main = item as Main;
-                        if (main != null)
-                        {
-                            main.LoadProject(projID);
-                        }
-                    }
-
+                    main.LoadProject(projID);
                 }
             }
             catch (Exception ex)
@@ -362,5 +352,10 @@ namespace mySQL_Projektverwaltung.Tab_Project
             completed = !completed;
             bt_completed_change(completed);
         }
+
+
+
+
     }
+
 }

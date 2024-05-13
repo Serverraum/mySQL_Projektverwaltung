@@ -162,7 +162,8 @@
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new System.Drawing.Size(200, 578);
             tableLayoutPanel2.TabIndex = 21;
             // 
@@ -211,6 +212,17 @@
             project_PrintControl1.Size = new System.Drawing.Size(95, 24);
             project_PrintControl1.TabIndex = 21;
             // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
             // splitContainer_horiz_right
             // 
             splitContainer_horiz_right.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -236,25 +248,19 @@
             // 
             splitContainer_mid_horiz.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             splitContainer_mid_horiz.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer_mid_horiz.Panel1.Controls.Add(project_DetailsControl1);
             splitContainer_mid_horiz.Location = new System.Drawing.Point(0, 0);
             splitContainer_mid_horiz.Name = "splitContainer_mid_horiz";
             splitContainer_mid_horiz.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer_mid_horiz.Panel1
             // 
-            splitContainer_mid_horiz.Panel1.Controls.Add(project_DetailsControl1);
             splitContainer_mid_horiz.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_mid_horiz.Panel1MinSize = 100;
             // 
             // splitContainer_mid_horiz.Panel2
             // 
             splitContainer_mid_horiz.Panel2.Controls.Add(project_FolderControl1);
-            splitContainer_mid_horiz.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            splitContainer_mid_horiz.Panel2MinSize = 100;
-            splitContainer_mid_horiz.Size = new System.Drawing.Size(433, 578);
-            splitContainer_mid_horiz.SplitterDistance = 170;
-            splitContainer_mid_horiz.TabIndex = 0;
-            // 
             // project_DetailsControl1
             // 
             project_DetailsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -264,6 +270,12 @@
             project_DetailsControl1.Padding = new System.Windows.Forms.Padding(5);
             project_DetailsControl1.Size = new System.Drawing.Size(431, 168);
             project_DetailsControl1.TabIndex = 0;
+            // 
+            splitContainer_mid_horiz.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            splitContainer_mid_horiz.Panel2MinSize = 100;
+            splitContainer_mid_horiz.Size = new System.Drawing.Size(433, 578);
+            splitContainer_mid_horiz.SplitterDistance = 170;
+            splitContainer_mid_horiz.TabIndex = 0;
             // 
             // project_FolderControl1
             // 
@@ -337,19 +349,19 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(button2, 0, 0);
             tableLayoutPanel1.Controls.Add(button3, 0, 1);
-            tableLayoutPanel1.Location = new System.Drawing.Point(7, 15);
+            tableLayoutPanel1.Size = new System.Drawing.Size(191, 457);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(191, 457);
+            button3.Location = new System.Drawing.Point(8, 236);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // button3
             // 
             button3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            button3.Location = new System.Drawing.Point(8, 236);
+            button3.Location = new System.Drawing.Point(8, 264);
             button3.Margin = new System.Windows.Forms.Padding(8);
             button3.MaximumSize = new System.Drawing.Size(0, 80);
             button3.Name = "button3";
@@ -358,13 +370,13 @@
             button3.Text = "button3";
             button3.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tabcontrol3
             // 
             tabPage3.Controls.Add(tabControl2);
             tabPage3.Location = new System.Drawing.Point(4, 27);
             tabPage3.Margin = new System.Windows.Forms.Padding(2);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new System.Drawing.Size(955, 582);
+            tabPage3.Size = new System.Drawing.Size(192, 69);
             tabPage3.TabIndex = 2;
             tabPage3.Tag = "dbConn";
             tabPage3.Text = "Settings";
@@ -372,13 +384,13 @@
             // 
             // tabControl2
             // 
-            tabControl2.Controls.Add(tabPage4);
+            tabControl2.Size = new System.Drawing.Size(955, 582);
             tabControl2.Controls.Add(tabPage5);
             tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl2.Location = new System.Drawing.Point(0, 0);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(955, 582);
+            tabControl2.Size = new System.Drawing.Size(192, 69);
             tabControl2.TabIndex = 10;
             // 
             // tabPage4
@@ -387,7 +399,7 @@
             tabPage4.Location = new System.Drawing.Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            tabPage4.Size = new System.Drawing.Size(947, 554);
+            tabPage4.Size = new System.Drawing.Size(184, 41);
             tabPage4.TabIndex = 0;
             tabPage4.Text = "Datenbank";
             tabPage4.UseVisualStyleBackColor = true;
@@ -400,7 +412,7 @@
             settingsControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             settingsControl1.MinimumSize = new System.Drawing.Size(259, 316);
             settingsControl1.Name = "settingsControl1";
-            settingsControl1.Size = new System.Drawing.Size(941, 548);
+            settingsControl1.Size = new System.Drawing.Size(259, 316);
             settingsControl1.TabIndex = 3;
             // 
             // tabPage5
@@ -448,7 +460,6 @@
             splitContainer_horiz_right.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_right).EndInit();
             splitContainer_horiz_right.ResumeLayout(false);
-            splitContainer_mid_horiz.Panel1.ResumeLayout(false);
             splitContainer_mid_horiz.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer_mid_horiz).EndInit();
             splitContainer_mid_horiz.ResumeLayout(false);

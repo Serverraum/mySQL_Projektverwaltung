@@ -47,7 +47,7 @@ namespace mySQL_Projektverwaltung
             splitContainer_right_vert.SplitterDistance = Settings.Instance.MainSlider.Slider3;
 
 
-            
+
         }
         public void LoadProject(int projID)
         {
@@ -82,7 +82,7 @@ namespace mySQL_Projektverwaltung
 
                 ProjLoad = false;
 
-               
+
             }
         }
 
@@ -107,7 +107,7 @@ namespace mySQL_Projektverwaltung
 
 
 
-       
+
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Settings.Instance.MainSlider.Slider1 = splitContainer_horiz_right.SplitterDistance;

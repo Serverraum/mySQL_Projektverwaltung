@@ -18,7 +18,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices.ComTypes;
 using mySQL_Projektverwaltung.Tab_Project;
 using System.Configuration;
-
+using QuestPDF.Infrastructure;
 
 namespace mySQL_Projektverwaltung
 {
@@ -39,6 +39,7 @@ namespace mySQL_Projektverwaltung
         {
             //string sAttr = Properties.Settings.Default.test;
             //splitContainer_horiz_left.SplitterDistance
+            QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
             InitializeComponent();
             DbConnParam.DbConn.Instance.connLoadParam();
             splitContainer_horiz_right.SplitterDistance = Settings.Instance.MainSlider.Slider1;
@@ -56,6 +57,8 @@ namespace mySQL_Projektverwaltung
             pictureList1.ReLoad_Project_PictureList(projID);
             if (!project_DetailsControl1.Enabled) { project_DetailsControl1.Enabled = !project_DetailsControl1.Enabled; };
             project_DetailsControl1.ReLoad_Project_DetailsControl(projID);
+            project_FolderControl1.ReLoad_Project_FolderControl(projID);
+            project_PrintControl1.ReLoad_Project_PrintControl(projID);
 
         }
 
@@ -112,28 +115,6 @@ namespace mySQL_Projektverwaltung
             Settings.Instance.MainSlider.Slider3 = splitContainer_right_vert.SplitterDistance;
             DbConnParam.DbConn.Instance.connSaveParam();
             DbConnParam.DbConn.Instance.connClose();
-        }
-
-
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint_1(object sender, PaintEventArgs e)
-        {
-
         }
     }
 

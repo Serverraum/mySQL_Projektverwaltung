@@ -33,7 +33,7 @@
             listView1 = new System.Windows.Forms.ListView();
             label1 = new System.Windows.Forms.Label();
             button2 = new System.Windows.Forms.Button();
-            textBox1 = new System.Windows.Forms.TextBox();
+            tb_folder = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
@@ -82,12 +82,12 @@
             button2.Text = "Download Files";
             button2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // tb_folder
             // 
-            textBox1.Location = new System.Drawing.Point(144, 220);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(301, 23);
-            textBox1.TabIndex = 5;
+            tb_folder.Location = new System.Drawing.Point(144, 220);
+            tb_folder.Name = "tb_folder";
+            tb_folder.Size = new System.Drawing.Size(301, 23);
+            tb_folder.TabIndex = 5;
             // 
             // label2
             // 
@@ -103,7 +103,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(tb_folder);
             Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(listView1);
@@ -122,7 +122,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_folder;
         private System.Windows.Forms.Label label2;
     }
 }

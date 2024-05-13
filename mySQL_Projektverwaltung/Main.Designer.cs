@@ -34,11 +34,12 @@
             splitContainer_horiz_left = new System.Windows.Forms.SplitContainer();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             label10 = new System.Windows.Forms.Label();
+            project_MainControl1 = new Tab_Project.Project_MainControl(this);
             button4 = new System.Windows.Forms.Button();
-            project_MainControl1 = new Tab_Project.Project_MainControl();
+            project_PrintControl1 = new Project_PrintControl(this);
             splitContainer_horiz_right = new System.Windows.Forms.SplitContainer();
             splitContainer_mid_horiz = new System.Windows.Forms.SplitContainer();
-            project_DetailsControl1 = new Tab_Project.Project_DetailsControl();
+            project_DetailsControl1 = new Tab_Project.Project_DetailsControl(this);
             project_FolderControl1 = new Tab_Project.Project_FolderControl();
             splitContainer_right_vert = new System.Windows.Forms.SplitContainer();
             pictureList1 = new PictureList();
@@ -149,15 +150,17 @@
             tableLayoutPanel2.AutoScroll = true;
             tableLayoutPanel2.AutoSize = true;
             tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.49531F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.49532F));
-            tableLayoutPanel2.Controls.Add(label10, 0, 0);
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.99999F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0000076F));
+            tableLayoutPanel2.Controls.Add(project_MainControl1, 0, 2);
             tableLayoutPanel2.Controls.Add(button4, 1, 0);
-            tableLayoutPanel2.Controls.Add(project_MainControl1, 0, 1);
+            tableLayoutPanel2.Controls.Add(project_PrintControl1, 1, 1);
+            tableLayoutPanel2.Controls.Add(label10, 0, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowCount = 3;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             tableLayoutPanel2.Size = new System.Drawing.Size(200, 578);
@@ -174,6 +177,17 @@
             label10.TabIndex = 19;
             label10.Text = "ProjID(Vorläufig)";
             // 
+            // project_MainControl1
+            // 
+            project_MainControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            project_MainControl1.AutoSize = true;
+            tableLayoutPanel2.SetColumnSpan(project_MainControl1, 2);
+            project_MainControl1.Location = new System.Drawing.Point(3, 62);
+            project_MainControl1.MinimumSize = new System.Drawing.Size(150, 440);
+            project_MainControl1.Name = "project_MainControl1";
+            project_MainControl1.Size = new System.Drawing.Size(194, 513);
+            project_MainControl1.TabIndex = 20;
+            // 
             // button4
             // 
             button4.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
@@ -187,16 +201,15 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
-            // project_MainControl1
+            // project_PrintControl1
             // 
-            project_MainControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            project_MainControl1.AutoSize = true;
-            tableLayoutPanel2.SetColumnSpan(project_MainControl1, 2);
-            project_MainControl1.Location = new System.Drawing.Point(3, 33);
-            project_MainControl1.MinimumSize = new System.Drawing.Size(150, 440);
-            project_MainControl1.Name = "project_MainControl1";
-            project_MainControl1.Size = new System.Drawing.Size(194, 542);
-            project_MainControl1.TabIndex = 20;
+            project_PrintControl1.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            project_PrintControl1.AutoSize = true;
+            project_PrintControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            project_PrintControl1.Location = new System.Drawing.Point(102, 32);
+            project_PrintControl1.Name = "project_PrintControl1";
+            project_PrintControl1.Size = new System.Drawing.Size(95, 24);
+            project_PrintControl1.TabIndex = 21;
             // 
             // splitContainer_horiz_right
             // 
@@ -396,7 +409,7 @@
             tabPage5.Location = new System.Drawing.Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            tabPage5.Size = new System.Drawing.Size(947, 554);
+            tabPage5.Size = new System.Drawing.Size(192, 72);
             tabPage5.TabIndex = 1;
             tabPage5.Text = "Gruppen";
             tabPage5.UseVisualStyleBackColor = true;
@@ -406,7 +419,7 @@
             settingsControl_Folder1.AutoSize = true;
             settingsControl_Folder1.Location = new System.Drawing.Point(6, 6);
             settingsControl_Folder1.Name = "settingsControl_Folder1";
-            settingsControl_Folder1.Size = new System.Drawing.Size(623, 238);
+            settingsControl_Folder1.Size = new System.Drawing.Size(623, 253);
             settingsControl_Folder1.TabIndex = 0;
             // 
             // Main
@@ -480,6 +493,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private SettingsControl_Folder settingsControl_Folder1;
+        private Project_PrintControl project_PrintControl1;
     }
 }
 

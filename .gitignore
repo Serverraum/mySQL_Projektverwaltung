@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/mySQL_Projektverwaltung/Resources/LMU_Logo_RGB_FlaechigGruen.png
+/mySQL_Projektverwaltung/Resources/LMU_Logo_RGB_InvertiertGruen.png
+/mySQL_Projektverwaltung/Resources/LMU_Logo_RGB_InvertiertSchwarz.png
+/mySQL_Projektverwaltung/Resources/LMU_Logo_RGB_InvertiertWeiss.png

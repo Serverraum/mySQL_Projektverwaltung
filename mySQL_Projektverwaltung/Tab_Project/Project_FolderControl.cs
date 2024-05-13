@@ -19,6 +19,26 @@ namespace mySQL_Projektverwaltung.Tab_Project
         public Project_FolderControl()
         {
             InitializeComponent();
+            setctrl.FolderRegex(Settings.Instance.ProjFolder.ProjRegex, projID);
         }
+        SettingsControl_Folder setctrl = new SettingsControl_Folder();
+        int projID;
+
+        public void ReLoad_Project_FolderControl(int projId)
+        {
+            projId = projID;
+            //Future: Check, if Files are available for Download. If yes, push Filenames into DownloadList and enable Download-Button.
+
+
+            //Load Folder from DB
+            //If Cell "folder" empty, set prevFolder to Regex and check if folder exists; else set prevFolder to Cell "folder (from DB)
+            // string prevFolder = Regex OR Db[proj - folder]; bool FolderCreated = true|false 
+            // Set tb_folder to prevFolder
+            //
+            //On bool FolderCreated == true; load Files (and maybe also Subfolders) into Listview.
+        }       
+        // Drag'n'Drop: On bool FolderCreated == false, create Folder. Then regardless of FolderCreated push File into folder
+        // Same for Download and
+        
     }
 }

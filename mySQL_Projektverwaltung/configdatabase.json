@@ -1,0 +1,19 @@
+{
+  "DbConnParam": {
+    "SQLiteAddr": null,
+    "DbType": 0,
+    "mySQL_Addr": null,
+    "mySQL_Dat": null,
+    "mySQL_PWD": null,
+    "mySQL_UID": null
+  },
+  "MainSlider": {
+    "Slider1": 907,
+    "Slider2": 504,
+    "Slider3": 504
+  },
+  "ProjFolder": {
+    "MainFolder": "C:\\",
+    "ProjRegex": "Projekt"
+  }
+}

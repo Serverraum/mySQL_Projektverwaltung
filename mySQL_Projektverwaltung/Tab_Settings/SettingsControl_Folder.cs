@@ -65,9 +65,9 @@ namespace mySQL_Projektverwaltung
 #if NET7_0_OR_GREATER
             int count = regex.Count(regextext);
 #else
-
             int count = regex.Matches(regextext).Count();
 #endif
+
             /*Debug*/
             string debugstr;
             debugstr = "Count: " + count.ToString();

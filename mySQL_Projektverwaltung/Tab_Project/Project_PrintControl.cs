@@ -1,4 +1,4 @@
-﻿using QuestPDF.Helpers;
+using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 //using QuestPDF.Drawing;
 using QuestPDF.Fluent;
@@ -24,6 +24,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using ZstdSharp.Unsafe;
+
 namespace mySQL_Projektverwaltung
 {
 
@@ -36,6 +37,7 @@ namespace mySQL_Projektverwaltung
             main = main2; //sets Parent
             InitializeComponent();
 
+
             //main.CreateDocument(projID);
 
 
@@ -46,7 +48,9 @@ namespace mySQL_Projektverwaltung
         public void button1_Click(object sender, EventArgs e)
         {
 
+
             main.CreateDocument(projID);
+
         }
 
 
@@ -59,6 +63,7 @@ namespace mySQL_Projektverwaltung
             projID = projId;
         }
     }
+
 
     public partial class Main
     {
@@ -130,7 +135,9 @@ namespace mySQL_Projektverwaltung
                     page.Size(PageSizes.A4);
                     page.Margin(2, Unit.Centimetre);
                     page.PageColor(Colors.White);
+
                     page.DefaultTextStyle(x => x.FontSize(12));
+
 
                     page.Header()
                         .Column(row =>
@@ -149,6 +156,7 @@ namespace mySQL_Projektverwaltung
                             });
                             //row.Item().ShowOnce().Text("Hello PDF!")
                             //.SemiBold().FontSize(36).FontColor(Colors.LightGreen.Medium);
+
                         });
 
 
@@ -159,6 +167,7 @@ namespace mySQL_Projektverwaltung
                         .Column(x =>
                         {
                             x.Spacing(20);
+
                             x.Item().Text(drproj["desc_short"].ToString()).AlignCenter().Underline().Overline().FontSize(14);
                             x.Spacing(5, Unit.Millimetre);
                             x.Item().Table(x =>
@@ -296,6 +305,7 @@ namespace mySQL_Projektverwaltung
                             x.CurrentPageNumber();
                         });
                 });
+
             }).GeneratePdfAndShow();//.ShowInPreviewer();//
             /**/
         }
@@ -316,3 +326,4 @@ namespace mySQL_Projektverwaltung
         }
     }
 }
+

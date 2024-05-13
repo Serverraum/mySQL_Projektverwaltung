@@ -8,10 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mySQL_Projektverwaltung.Properties {
+namespace mySQL_Projektverwaltung.Properties
+{
     using System;
-    
-    
+    using System.Drawing;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Windows.Media.Imaging;
+
+
     /// <summary>
     ///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
     /// </summary>
@@ -22,61 +28,111 @@ namespace mySQL_Projektverwaltung.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
-        
+    internal class Resources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources()
+        {
         }
-        
+
         /// <summary>
         ///   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("mySQL_Projektverwaltung.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
         ///   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pen3 {
-            get {
+        internal static System.Drawing.Bitmap pen3
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("pen3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap save {
-            get {
+        internal static System.Drawing.Bitmap save
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+
+        internal static Stream Logo_fGn //Internal
+        {
+            get
+            {
+                Stream stream = Utility.GetEmbeddedResourceStream("mySQL_Projektverwaltung.Resources.LMU_Logo_RGB_FlaechigGruen.png");
+                return stream;
+            }
+        }
+        public class Utility
+        {
+            /// <summary>
+            /// Takes the full name of a resource and loads it in to a stream.
+            /// </summary>
+            /// <param name="resourceName">Assuming an embedded resource is a file
+            /// called info.png and is located in a folder called Resources, it
+            /// will be compiled in to the assembly with this fully qualified
+            /// name: Full.Assembly.Name.Resources.info.png. That is the string
+            /// that you should pass to this method.</param>
+            /// <returns></returns>
+            public static Stream GetEmbeddedResourceStream(string resourceName)
+            {
+                return Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+            }
+
+            /// <summary>
+            /// Get the list of all emdedded resources in the assembly.
+            /// </summary>
+            /// <returns>An array of fully qualified resource names</returns>
+            public static string[] GetEmbeddedResourceNames()
+            {
+                return Assembly.GetExecutingAssembly().GetManifestResourceNames();
             }
         }
     }

@@ -62,7 +62,11 @@ namespace mySQL_Projektverwaltung
         {
             string regexPattern = @"([[](?<group>[A-Za-z0-9]*)[\]])"; // [], [n], [M], [n5], ... werden gezählt.  Elemente innerhalb der Klammer werden als ${group}-Variable gespeichert.
             Regex regex = new Regex(regexPattern);
+#if NET7_0_OR_GREATER
             int count = regex.Count(regextext);
+#else
+            int count = regex.Matches(regextext).Count();
+#endif
 
             /*Debug*/
             string debugstr;

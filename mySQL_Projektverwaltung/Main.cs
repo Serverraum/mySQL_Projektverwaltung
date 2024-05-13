@@ -58,6 +58,7 @@ namespace mySQL_Projektverwaltung
             if (!project_DetailsControl1.Enabled) { project_DetailsControl1.Enabled = !project_DetailsControl1.Enabled; };
             project_DetailsControl1.ReLoad_Project_DetailsControl(projID);
             project_FolderControl1.ReLoad_Project_FolderControl(projID);
+            project_PrintControl1.ReLoad_Project_PrintControl(projID);
 
         }
 

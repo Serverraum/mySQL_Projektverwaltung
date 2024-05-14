@@ -18,12 +18,17 @@ namespace mySQL_Projektverwaltung.Tab_Project
 {
     public partial class Project_DetailsControl : UserControl
     {
-        Main main;
-        public Project_DetailsControl(Main main)
+        public Project_DetailsControl()
         {
             InitializeComponent();
-            this.main = main;
         }
+        public event EventHandler SaveStateChanged;
+
+        private void OnSaveStateChanged()
+        {
+            SaveStateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         public void ReLoad_Project_DetailsControl(int projID)
         {
             string sql = "SELECT desc_long FROM proj WHERE projID=@projID";
@@ -45,7 +50,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             /*------ Change SaveState ------*/
-            main.project_MainControl1.SaveStateChanged();
+            OnSaveStateChanged();
             // Searched all Applications. Now this will be returned at first Startup of this function.
             //
             //foreach (var item in Application.OpenForms)
@@ -60,7 +65,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
 using static mySQL_Projektverwaltung.Main;
@@ -24,14 +25,13 @@ using static mySQL_Projektverwaltung.Main;
 
 namespace mySQL_Projektverwaltung.Tab_Project
 {
-    public partial class Project_MainControl : UserControl
+    public partial class Project_MainControl : System.Windows.Forms.UserControl
     {
+        private Project_DetailsControl detailsControl;
         public int projID = 0;
-        Main main;
         DataTable dtProj = new DataTable();
-        public Project_MainControl(Main main)
+        public Project_MainControl(Main main = null)
         {
-            this.main = main;
             InitializeComponent();
         }
         public void ReLoad_Project_MainControl(int projId)
@@ -157,7 +157,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
                 /*Poll desc_long*/
                 string desc_long = "";
-                desc_long = main.project_DetailsControl1.Save_Project_DetailsControl();
+                desc_long = GetTextBoxTextFromUserControl1();// main.project_DetailsControl1.Save_Project_DetailsControl();
 
 
                 // Save_Project_DetailsControl
@@ -191,7 +191,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
                         }
                     }
                     /*------ Reload Main Project Page ------*/
-                    main.LoadProject(projID);
+                    OnUpdateProject(projID);
+                    //main.LoadProject(projID);
                 }
             }
             catch (Exception ex)
@@ -255,6 +256,12 @@ namespace mySQL_Projektverwaltung.Tab_Project
             }
         }
 
+
+        private void bt_completed_Click(object sender, EventArgs e)
+        {
+            completed = !completed;
+            bt_completed_change(completed);
+        }
 
         private void cb_AG_Refill(string projDate, string LSID)//Refill Function used by my other functions
         {
@@ -338,7 +345,23 @@ namespace mySQL_Projektverwaltung.Tab_Project
             return datestring;
         }
 
+        // Methode zum Aktualisieren der Referenz auf UserControl1
+        public void UpdateUserControl1Reference(Project_DetailsControl uc1)
+        {
+            detailsControl = uc1;
+        }
 
+        // Methode zum Zugriff auf den Textinhalt der TextBox in UserControl1
+        public string GetTextBoxTextFromUserControl1()
+        {
+            if (detailsControl != null)
+                return detailsControl.Save_Project_DetailsControl();
+            else
+                return string.Empty;
+        }
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+        /*--- --- --- Exceptions --- --- ---*/
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         [Serializable]
         public class InvalidDateException : Exception
         {
@@ -347,13 +370,19 @@ namespace mySQL_Projektverwaltung.Tab_Project
             public InvalidDateException(string message, Exception inner) : base(message, inner) { }
         }
 
-        private void bt_completed_Click(object sender, EventArgs e)
+
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+        /*--- --- --- Events --- --- ---*/
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+        public event EventHandler<ProjIdEventArgs> UpdateProj;
+        private void OnUpdateProject(int projID)
         {
-            completed = !completed;
-            bt_completed_change(completed);
+            UpdateProj?.Invoke(this, new ProjIdEventArgs(projID));
         }
 
-
+        //project_PrintControl1.CreateDocumentProj += Project_PrintControl1_CreateDocumentProj;
+     
 
 
     }

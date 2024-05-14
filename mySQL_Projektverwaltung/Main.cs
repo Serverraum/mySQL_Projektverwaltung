@@ -19,6 +19,7 @@ using System.Runtime.InteropServices.ComTypes;
 using mySQL_Projektverwaltung.Tab_Project;
 using System.Configuration;
 using QuestPDF.Infrastructure;
+using System.Windows.Controls;
 
 namespace mySQL_Projektverwaltung
 {
@@ -45,9 +46,22 @@ namespace mySQL_Projektverwaltung
             splitContainer_horiz_right.SplitterDistance = Settings.Instance.MainSlider.Slider1;
             splitContainer_mid_horiz.SplitterDistance = Settings.Instance.MainSlider.Slider2;
             splitContainer_right_vert.SplitterDistance = Settings.Instance.MainSlider.Slider3;
+            project_PrintControl1.CreateDocumentProj += Project_PrintControl1_CreateDocumentProj;
+            project_DetailsControl1.SaveStateChanged += ProjectSaveStateChanged;
+            project_MainControl1.UpdateProj += UpdateProj;
+            project_MainControl1.UpdateUserControl1Reference(project_DetailsControl1);
+        }
 
 
 
+        private void ProjectSaveStateChanged(object sender, EventArgs e)
+        {
+            project_MainControl1.SaveStateChanged();
+        }
+
+        private void UpdateProj(object sender, ProjIdEventArgs e)
+        {
+            LoadProject(e.projID);
         }
         public void LoadProject(int projID)
         {

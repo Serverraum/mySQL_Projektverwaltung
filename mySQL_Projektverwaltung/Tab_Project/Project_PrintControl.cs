@@ -24,6 +24,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using ZstdSharp.Unsafe;
+using static mySQL_Projektverwaltung.Project_PrintControl;
 
 namespace mySQL_Projektverwaltung
 {
@@ -31,16 +32,10 @@ namespace mySQL_Projektverwaltung
 
     public partial class Project_PrintControl : UserControl
     {
-        public Main main;
-        public Project_PrintControl(Main main2)
+        public Project_PrintControl()
         {
-            main = main2; //sets Parent
             InitializeComponent();
-
-
             //main.CreateDocument(projID);
-
-
 
             //.GeneratePdf("hello.pdf"); 
         }
@@ -49,8 +44,15 @@ namespace mySQL_Projektverwaltung
         {
 
 
-            main.CreateDocument(projID);
+            OnCreateDocument(projID);
 
+
+        }
+        public event EventHandler<ProjIdEventArgs> CreateDocumentProj;
+
+        private void OnCreateDocument(int projID)
+        {
+            CreateDocumentProj?.Invoke(this, new ProjIdEventArgs(projID));
         }
 
 
@@ -63,12 +65,21 @@ namespace mySQL_Projektverwaltung
             projID = projId;
         }
     }
-
-
-    public partial class Main
+    public class ProjIdEventArgs : EventArgs
     {
-        public void CreateDocument(int projID)
+        public int projID { get; }
+
+        public ProjIdEventArgs(int ProjID)
         {
+            projID = ProjID;
+        }
+    }
+
+    public partial class Main : Form
+    {
+        private void Project_PrintControl1_CreateDocumentProj(object sender, ProjIdEventArgs e)
+        {
+            projID = e.projID;
             //Get ProjTime
             string sql = "SELECT * FROM projtime WHERE projID = @projID";
             DbConnParam.DbConn.Instance.DbAddCmd(sql);
@@ -149,8 +160,8 @@ namespace mySQL_Projektverwaltung
                                     columns.ConstantColumn(44, Unit.Millimetre);//1750, Unit.Mil);//44, Unit.Millimetre);
                                     columns.RelativeColumn();
                                 });
-                                //x.Cell()./*Border(1, Unit.Mil).*/PaddingRight(1, Unit.Millimetre).MaxHeight(20,Unit.Millimetre).Image(Properties.Resources.Logo_fGn).FitHeight();//GetLogo("LMU_Logo_RGB_FlaechigGruen.png"));//Placeholders.Image(300, 200));
-                                x.Cell()./*Border(1, Unit.Mil).PaddingRight(2, Unit.Millimetre).*/MaxHeight(20, Unit.Millimetre).Image(Placeholders.Image(574, 242));
+                                x.Cell()./*Border(1, Unit.Mil).*/PaddingRight(1, Unit.Millimetre).MaxHeight(20, Unit.Millimetre).Image(Properties.Resources.Logo_fGn).FitHeight();//GetLogo("LMU_Logo_RGB_FlaechigGruen.png"));//Placeholders.Image(300, 200));
+                                //x.Cell()./*Border(1, Unit.Mil).PaddingRight(2, Unit.Millimetre).*/MaxHeight(20, Unit.Millimetre).Image(Placeholders.Image(574, 242));
                                 x.Cell().Background(QuestPDF.Infrastructure.Color.FromHex("F5F5F5")).Border(1, Unit.Mil).PaddingLeft(5, Unit.Millimetre).AlignMiddle().Text("Ludwig-Maximilians-Universität\r\nElektroniklabor").LineHeight(2).FontColor(QuestPDF.Infrastructure.Color.FromHex("626468")).AlignLeft();//Colors.Grey.Darken2).AlignLeft();
 
                             });
@@ -201,9 +212,11 @@ namespace mySQL_Projektverwaltung
                                         index++;
                                     }
 
-                                    if (index == 1) {
+                                    if (index == 1)
+                                    {
                                         x.Cell().RowSpan(6).Image(QuestPDF.Infrastructure.Image.FromBinaryData(Pictures[0])).FitArea();
-                                    } else if (index > 1)
+                                    }
+                                    else if (index > 1)
                                     {
                                         x.Cell().RowSpan(6).Table(x =>
                                         {
@@ -312,7 +325,8 @@ namespace mySQL_Projektverwaltung
 
 
 
-        public byte[] GetLogo(string file) {
+        public byte[] GetLogo(string file)
+        {
             //Get Logo from Ressources
             Bitmap bm = Properties.Resources.pen3;
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

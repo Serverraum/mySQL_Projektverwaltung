@@ -30,7 +30,7 @@
         {
             button1 = new System.Windows.Forms.Button();
             listBox1 = new System.Windows.Forms.ListBox();
-            listView1 = new System.Windows.Forms.ListView();
+            listView_projfolder = new System.Windows.Forms.ListView();
             label1 = new System.Windows.Forms.Label();
             button2 = new System.Windows.Forms.Button();
             tb_folder = new System.Windows.Forms.TextBox();
@@ -55,14 +55,14 @@
             listBox1.Size = new System.Drawing.Size(296, 79);
             listBox1.TabIndex = 1;
             // 
-            // listView1
+            // listView_projfolder
             // 
-            listView1.Location = new System.Drawing.Point(54, 249);
-            listView1.Name = "listView1";
-            listView1.Size = new System.Drawing.Size(391, 139);
-            listView1.TabIndex = 2;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = System.Windows.Forms.View.List;
+            listView_projfolder.Location = new System.Drawing.Point(54, 249);
+            listView_projfolder.Name = "listView_projfolder";
+            listView_projfolder.Size = new System.Drawing.Size(391, 139);
+            listView_projfolder.TabIndex = 2;
+            listView_projfolder.UseCompatibleStateImageBehavior = false;
+            listView_projfolder.View = System.Windows.Forms.View.SmallIcon;
             // 
             // label1
             // 
@@ -106,7 +106,7 @@
             Controls.Add(tb_folder);
             Controls.Add(button2);
             Controls.Add(label1);
-            Controls.Add(listView1);
+            Controls.Add(listView_projfolder);
             Controls.Add(listBox1);
             Controls.Add(button1);
             Name = "Project_FolderControl";
@@ -119,7 +119,7 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listView_projfolder;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox tb_folder;

@@ -35,6 +35,10 @@
             button2 = new System.Windows.Forms.Button();
             tb_folder = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
+            button_LargeIcon = new System.Windows.Forms.Button();
+            button_Details = new System.Windows.Forms.Button();
+            button_SmallItem = new System.Windows.Forms.Button();
+            button_Tile = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // button1
@@ -62,7 +66,8 @@
             listView_projfolder.Size = new System.Drawing.Size(391, 139);
             listView_projfolder.TabIndex = 2;
             listView_projfolder.UseCompatibleStateImageBehavior = false;
-            listView_projfolder.View = System.Windows.Forms.View.SmallIcon;
+            listView_projfolder.View = System.Windows.Forms.View.List;
+            listView_projfolder.DoubleClick += listView_projfolder_DoubleClick_1;
             // 
             // label1
             // 
@@ -98,10 +103,54 @@
             label2.TabIndex = 6;
             label2.Text = "(Max 15MB - MediumBLOB or 4 GB - LargeBLOB)";
             // 
+            // button_LargeIcon
+            // 
+            button_LargeIcon.Location = new System.Drawing.Point(144, 159);
+            button_LargeIcon.Name = "button_LargeIcon";
+            button_LargeIcon.Size = new System.Drawing.Size(84, 55);
+            button_LargeIcon.TabIndex = 7;
+            button_LargeIcon.Text = "LargeItem";
+            button_LargeIcon.UseVisualStyleBackColor = true;
+            button_LargeIcon.Click += button_LargeIcon_Click;
+            // 
+            // button_Details
+            // 
+            button_Details.Location = new System.Drawing.Point(234, 159);
+            button_Details.Name = "button_Details";
+            button_Details.Size = new System.Drawing.Size(84, 55);
+            button_Details.TabIndex = 8;
+            button_Details.Text = "Details";
+            button_Details.UseVisualStyleBackColor = true;
+            button_Details.Click += button_Details_Click;
+            // 
+            // button_SmallItem
+            // 
+            button_SmallItem.Location = new System.Drawing.Point(324, 159);
+            button_SmallItem.Name = "button_SmallItem";
+            button_SmallItem.Size = new System.Drawing.Size(84, 55);
+            button_SmallItem.TabIndex = 9;
+            button_SmallItem.Text = "SmallItem";
+            button_SmallItem.UseVisualStyleBackColor = true;
+            button_SmallItem.Click += button_SmallItem_Click;
+            // 
+            // button_Tile
+            // 
+            button_Tile.Location = new System.Drawing.Point(414, 159);
+            button_Tile.Name = "button_Tile";
+            button_Tile.Size = new System.Drawing.Size(84, 55);
+            button_Tile.TabIndex = 10;
+            button_Tile.Text = "Tile";
+            button_Tile.UseVisualStyleBackColor = true;
+            button_Tile.Click += button_Tile_Click;
+            // 
             // Project_FolderControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(button_Tile);
+            Controls.Add(button_SmallItem);
+            Controls.Add(button_Details);
+            Controls.Add(button_LargeIcon);
             Controls.Add(label2);
             Controls.Add(tb_folder);
             Controls.Add(button2);
@@ -124,5 +173,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox tb_folder;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button_LargeIcon;
+        private System.Windows.Forms.Button button_Details;
+        private System.Windows.Forms.Button button_SmallItem;
+        private System.Windows.Forms.Button button_Tile;
     }
 }

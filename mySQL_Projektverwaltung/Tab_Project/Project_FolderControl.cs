@@ -15,6 +15,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MySqlX.XDevAPI.Common;
 using System.Drawing.Imaging;
+using System.Diagnostics;
+using System.Windows.Shapes;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //  Hard Connection to/from:                 //
 //   - MainProj    (project_MainControl1)    //
@@ -31,7 +33,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
         }
         SettingsControl_Folder setctrl = new SettingsControl_Folder();
         int projID;
-        string folderprev;
+        string folderprev; //Root Project Folder
+        string folder; // Folder, where the user is, when he's in subdirectories
         bool FolderCreated;
         public void ReLoad_Project_FolderControl(int projId)
         {
@@ -47,27 +50,29 @@ namespace mySQL_Projektverwaltung.Tab_Project
             ///On bool FolderCreated == true; load Files (and maybe also Subfolders) into Listview.
             listView_projfolder.Clear();
             //Load Folder From DB
-            string sql ="SELECT folder FROM proj WHERE projID=@projID";
+            string sql = "SELECT folder FROM proj WHERE projID=@projID";
             DbConnParam.DbConn.Instance.DbAddCmd(sql);
             DbConnParam.DbConn.Instance.CmdAddParam("@projID", projId);
             folderprev = DbConnParam.DbConn.Instance.DbScalar().ToString();
             //If Cell "folder" empty, set prevFolder to Regex and check if folder exists;
             // else set prevFolder to Cell "folder (from DB)
-            if(folderprev == null || folderprev == "") { 
+            if (folderprev == null || folderprev == "")
+            {
                 SettingsControl_Folder cf = new SettingsControl_Folder();
-                folderprev = cf.FolderRegex(Settings.Instance.ProjFolder.ProjRegex,projID);
+                folderprev = cf.FolderRegex(Settings.Instance.ProjFolder.ProjRegex, projID);
                 //check if created; On Error Do Nothing, Else LoadFiles
                 //Check TopDir
                 if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder)) { MessageBox.Show("Top Project Directory nonexistent! \r\n \r\n Change Topdir? \r\n Chancel?"); return; }
                 //Check Proj-Subdir
-                if(!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev)) {return; } ;
+                if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev)) { return; };
                 //Load Files + Add to DB
                 sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
                 DbConnParam.DbConn.Instance.CmdAddParam("@projID", projId);
                 DbConnParam.DbConn.Instance.CmdAddParam("@folder", Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev);
                 int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
-                if (i == 1) { 
+                if (i == 1)
+                {
                     MessageBox.Show("ProjFolder Successfully added");
                     LoadFiles(Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev);
                 }
@@ -86,31 +91,122 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
 
 
-        public void LoadFiles(string dirstr) {
+        public void LoadFiles(string dirstr, bool WithoutClear = false)
+        {
             DirectoryInfo topdir = new DirectoryInfo(dirstr);
             DirectoryInfo[] subdirs = topdir.GetDirectories();
             FileInfo[] subfiles = topdir.GetFiles();
 
-            listView_projfolder.Clear();
+            if (!WithoutClear) { listView_projfolder.Clear(); }
+            listView_projfolder.Columns.Add("Name");
+            listView_projfolder.Columns.Add("Changed");
             if (listView_projfolder.SmallImageList is not null) { listView_projfolder.SmallImageList.Dispose(); }
             int i = 0;
-            foreach( DirectoryInfo dir in subdirs ) {
+            foreach (DirectoryInfo dir in subdirs)
+            {
                 ListViewHelper.AddItemToListView(listView_projfolder, dir.FullName, i);
                 i++;
             }
-            foreach( FileInfo file in subfiles) {
+            foreach (FileInfo file in subfiles)
+            {
                 ListViewHelper.AddItemToListView(listView_projfolder, file.FullName, i);
                 i++;
             }
             //ListViewHelper.AddItemToListView(yourListView, "C:\\example\\example.txt");
             //ListViewHelper.AddItemToListView(yourListView, "C:\\example\\exampleFolder");
+
+        }
+
+
+        private void listView_projfolder_DoubleClick_1(object sender, EventArgs e)
+        {
+            var item = listView_projfolder.SelectedItems[0];
+            if (item != null)
+            {
+                //MessageBox.Show(item.Tag.ToString());
+                if (item.Tag.ToString() == "FileTop")
+                {
+                    MessageBox.Show("TopFolder");
+                    folder = Directory.GetParent(folder).ToString();
+                    listView_projfolder.Clear();
+                    if (folder != folderprev) //Maybe convert locally to DirectoryInfo to check, if it's the same folder.
+                    {
+                        //Add Back-Document
+                        ListViewItem BackDir = new ListViewItem();
+                        BackDir.Tag = "FileTop"; // or any other object
+                        BackDir.Text = "Back";
+                        //myItem.ImageIndex = count;
+
+                        //if (listView.LargeImageList is null) { listView.LargeImageList = new ImageList(); }
+                        ////Bitmap imageL = WindowsThumbnailProvider.GetThumbnail(path, 256, 256, ThumbnailOptions.BiggerSizeOk);
+                        //if (imageL != null) { listView.LargeImageList.Images.Add(path, imageL); } else { listView.LargeImageList.Images.Add(path, image); }
+                        ////listView.LargeImageList.Images.Add(path,image);
+                        //listView.SmallImageList.Images.Add(path, image);
+
+                        listView_projfolder.Items.Add(BackDir);
+                    }
+
+                    LoadFiles(folder, true);
+                    return;
+                }
+                if (Directory.Exists(item.Tag.ToString()))
+                {
+                    //MessageBox.Show("Dir: " + item.Tag.ToString());
+                    //Add Back-Document
+                    ListViewItem BackDir = new ListViewItem();
+                    BackDir.Tag = "FileTop"; // or any other object
+                    BackDir.Text = "Back";
+                    //myItem.ImageIndex = count;
+
+                    //if (listView.LargeImageList is null) { listView.LargeImageList = new ImageList(); }
+                    ////Bitmap imageL = WindowsThumbnailProvider.GetThumbnail(path, 256, 256, ThumbnailOptions.BiggerSizeOk);
+                    //if (imageL != null) { listView.LargeImageList.Images.Add(path, imageL); } else { listView.LargeImageList.Images.Add(path, image); }
+                    ////listView.LargeImageList.Images.Add(path,image);
+                    //listView.SmallImageList.Images.Add(path, image);
+                    folder = item.Tag.ToString();
+                    listView_projfolder.Clear();
+                    listView_projfolder.Items.Add(BackDir);
+                    LoadFiles(folder, true);
+                    return;
+                }
+
+                ///Start File
+
+                if (File.Exists(item.Tag.ToString()))
+                {
+                    MessageBox.Show("File: " + item.Tag.ToString());
+                    System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = @item.Tag.ToString()/*@"http://. . . ."*/, UseShellExecute = true });
+                    return;
+                }
+
+            }
+        }
+
+        private void button_LargeIcon_Click(object sender, EventArgs e)
+        {
+            listView_projfolder.View = View.LargeIcon;
+        }
+
+        private void button_Details_Click(object sender, EventArgs e)
+        {
+            listView_projfolder.View = View.Details;
+        }
+
+        private void button_SmallItem_Click(object sender, EventArgs e)
+        {
+            listView_projfolder.View = View.SmallIcon;
+        }
+
+        private void button_Tile_Click(object sender, EventArgs e)
+        {
+            listView_projfolder.View = View.Tile;
         }
     }
 
 
     /*------ ------ ------ HELPER Functions ------ ------ ------*/
     public class ListViewHelper
-    {       
+    {
         /// <summary>
         /// Comment
         /// </summary>
@@ -123,8 +219,36 @@ namespace mySQL_Projektverwaltung.Tab_Project
             if (image != null)
             {
                 if (listView.SmallImageList is null) { listView.SmallImageList = new ImageList(); }
+                //create new Tag
+                ListViewItem myItem = new ListViewItem();
+                myItem.Tag = path; // or any other object
+                myItem.Text = System.IO.Path.GetFileName(path);
+                myItem.ImageIndex = count;
+
+                ///Add SUB-Details for DetailView
+                ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem(myItem, "Name");
+                subItem.Name = "Name";
+                subItem.Text = "" + System.IO.Path.GetFileName(path);
+                myItem.SubItems.Add(subItem);
+
+                subItem = new ListViewItem.ListViewSubItem(myItem, "Changed");
+                subItem.Name = "Changed";
+                subItem.Text = "" + "12.12.2021";
+                myItem.SubItems.Add(subItem);
+
+                //myItem.SubItems.Add(System.IO.Path.GetFileName(path));
+                //myItem.SubItems.Add("12.12.2021");
+                ///**
+
+
+
+
+                if (listView.LargeImageList is null) { listView.LargeImageList = new ImageList(); Size s = new Size(); s.Width = 64; s.Height = 64; listView.LargeImageList.ImageSize = s; }
+                Bitmap imageL = WindowsThumbnailProvider.GetThumbnail(path, 256, 256, ThumbnailOptions.None);
+                if (imageL != null) { listView.LargeImageList.Images.Add(path, imageL); }// else { listView.LargeImageList.Images.Add(path, image); }
+                //listView.LargeImageList.Images.Add(path,image);
                 listView.SmallImageList.Images.Add(path, image);
-                listView.Items.Add(path, Path.GetFileName(path), count);
+                listView.Items.Add(myItem);
             }
         }
     }
@@ -133,10 +257,10 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
 
     /*________________________________________________-*/
-   /// <summary>
-   /// Code by snickers; 2017, Stackoverflow
-   /// https://stackoverflow.com/questions/21751747/extract-thumbnail-for-any-file-in-windows/42178963#42178963
-   /// </summary>
+    /// <summary>
+    /// Code by snickers; 2017, Stackoverflow
+    /// https://stackoverflow.com/questions/21751747/extract-thumbnail-for-any-file-in-windows/42178963#42178963
+    /// </summary>
     [Flags]
     public enum ThumbnailOptions
     {
@@ -169,7 +293,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
         public static Bitmap GetThumbnail(string fileName, int width, int height, ThumbnailOptions options)
         {
-            var hBitmap = GetHBitmap(Path.GetFullPath(fileName), width, height, options);
+            var hBitmap = GetHBitmap(System.IO.Path.GetFullPath(fileName), width, height, options);
 
             try
             {
@@ -198,7 +322,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
         {
             var result = new Bitmap(srcBitmap.Width, srcBitmap.Height, targetPixelFormat);
 
-            var bmpBounds = new Rectangle(0, 0, srcBitmap.Width, srcBitmap.Height);
+            var bmpBounds = new System.Drawing.Rectangle(0, 0, srcBitmap.Width, srcBitmap.Height);
             var srcData = srcBitmap.LockBits(bmpBounds, ImageLockMode.ReadOnly, srcBitmap.PixelFormat);
             var destData = result.LockBits(bmpBounds, ImageLockMode.ReadOnly, targetPixelFormat);
 

@@ -61,12 +61,15 @@
             // 
             // listView_projfolder
             // 
+            listView_projfolder.AllowDrop = true;
             listView_projfolder.Location = new System.Drawing.Point(54, 249);
             listView_projfolder.Name = "listView_projfolder";
             listView_projfolder.Size = new System.Drawing.Size(391, 139);
             listView_projfolder.TabIndex = 2;
             listView_projfolder.UseCompatibleStateImageBehavior = false;
             listView_projfolder.View = System.Windows.Forms.View.List;
+            listView_projfolder.DragDrop += Folder_DragDrop;
+            listView_projfolder.DragEnter += Folder_DragEnter;
             listView_projfolder.DoubleClick += listView_projfolder_DoubleClick_1;
             // 
             // label1

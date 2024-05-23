@@ -27,9 +27,6 @@ namespace mySQL_Projektverwaltung
 
     public partial class Main : Form
     {
-        ReadTest robertzeigtmirwas = new ReadTest();
-
-
         public String connectString;
         int projID = 0;
         int i;

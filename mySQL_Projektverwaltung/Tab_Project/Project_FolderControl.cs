@@ -17,6 +17,10 @@ using MySqlX.XDevAPI.Common;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Windows.Shapes;
+using RtfPipe;
+using System.Security.AccessControl;
+using System.Reflection.Metadata.Ecma335;
+using CSharpLib;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //  Hard Connection to/from:                 //
 //   - MainProj    (project_MainControl1)    //
@@ -61,19 +65,20 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 SettingsControl_Folder cf = new SettingsControl_Folder();
                 folderprev = cf.FolderRegex(Settings.Instance.ProjFolder.ProjRegex, projID);
                 //check if created; On Error Do Nothing, Else LoadFiles
-                //Check TopDir
+                //Check RootDirectory
                 if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder)) { MessageBox.Show("Top Project Directory nonexistent! \r\n \r\n Change Topdir? \r\n Chancel?"); return; }
                 //Check Proj-Subdir
-                if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev)) { return; };
+                if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev)) { return; };
                 //Load Files + Add to DB
                 sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
                 DbConnParam.DbConn.Instance.CmdAddParam("@projID", projId);
-                DbConnParam.DbConn.Instance.CmdAddParam("@folder", Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev);
+                DbConnParam.DbConn.Instance.CmdAddParam("@folder", Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
                 int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
                 if (i == 1)
                 {
                     MessageBox.Show("ProjFolder Successfully added");
+                    folder = folderprev;
                     LoadFiles(Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev);
                 }
 
@@ -83,6 +88,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             {
                 // check if created; On Error Show Message { Create-Folder; ChangeFolder; Clear[Reset Db[folder] to null or ""] }
                 // Else LoadFiles(folderprev)
+                folder = folderprev;
                 LoadFiles(folderprev);
             }
         }
@@ -98,8 +104,9 @@ namespace mySQL_Projektverwaltung.Tab_Project
             FileInfo[] subfiles = topdir.GetFiles();
 
             if (!WithoutClear) { listView_projfolder.Clear(); }
-            listView_projfolder.Columns.Add("Name");
-            listView_projfolder.Columns.Add("Changed");
+            listView_projfolder.Columns.Add("Name", "Name");
+            listView_projfolder.Columns.Add("Changed", "Changed");
+            listView_projfolder.Columns.Add("Size", "Size");
             if (listView_projfolder.SmallImageList is not null) { listView_projfolder.SmallImageList.Dispose(); }
             int i = 0;
             foreach (DirectoryInfo dir in subdirs)
@@ -201,6 +208,124 @@ namespace mySQL_Projektverwaltung.Tab_Project
         {
             listView_projfolder.View = View.Tile;
         }
+
+
+
+        private void Folder_DragDrop(object sender, DragEventArgs e)
+        {
+            // Handle FileDrop data.
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                // Assign the file names to a string array, in 
+                // case the user has selected multiple files.
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                try
+                {
+                    int i = 0;
+                    foreach (string file in files)
+                    {
+                        if (File.Exists(file))
+                        {
+                            FileInfo fileInfo = new FileInfo(file);
+                            if (File.Exists(folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name))
+                            {
+                                int x = 1;
+                                while (File.Exists(folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name.Substring(0,fileInfo.Name.Length - fileInfo.Extension.Length) + "(" + x.ToString() + ")" + fileInfo.Extension)) { x++; }
+                                System.IO.File.Copy(file, folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name.Substring(0,fileInfo.Name.Length - fileInfo.Extension.Length ) + "(" + x.ToString() + ")" + fileInfo.Extension);
+                            }
+                            else System.IO.File.Copy(file, folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name);
+                        }
+                        else if (Directory.Exists(file))
+                        {
+                            DirectoryInfo directoryInfo = new DirectoryInfo(file);
+                            if (Directory.Exists(folder + System.IO.Path.DirectorySeparatorChar + directoryInfo.Name))
+                            {
+                                int x = 1;
+                                while (Directory.Exists(folder + System.IO.Path.DirectorySeparatorChar + directoryInfo.Name + "(" + x.ToString() + ")")) { x++; }
+                                //System.IO.Directory.Copy(file, folder + System.IO.Path.DirectorySeparatorChar + directoryInfo.Name + "(" + x.ToString() + ")");
+                                CopyDirectory(@file, folder + System.IO.Path.DirectorySeparatorChar + directoryInfo.Name + "(" + x.ToString() + ")", true);
+                            }
+                            else CopyDirectory(@file, folder + System.IO.Path.DirectorySeparatorChar + directoryInfo.Name, true);
+                        }
+
+                        i++;
+                    }
+                    LoadFiles(folder);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+            /*
+            // Handle Bitmap data.
+            if (e.Data.GetDataPresent(DataFormats.Bitmap))
+            {
+                try
+                {
+                    // Create an Image and assign it to the picture variable.
+                    this.picture = (Image)e.Data.GetData(DataFormats.Bitmap);
+                    // Set the picture location equal to the drop point.
+                    this.pictureLocation = this.PointToClient(new Point(e.X, e.Y));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+            // Force the form to be redrawn with the image.
+            this.Invalidate();*/
+        }
+
+        private void Folder_DragEnter(object sender, DragEventArgs e)
+        {
+
+            // If the data is a file, display the copy cursor.
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        
+
+        static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
+        {
+            // Get information about the source directory
+            var dir = new DirectoryInfo(sourceDir);
+
+            // Check if the source directory exists
+            if (!dir.Exists)
+                throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
+
+            // Cache directories before we start copying
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // Create the destination directory
+            Directory.CreateDirectory(destinationDir);
+
+            // Get the files in the source directory and copy to the destination directory
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                string targetFilePath = System.IO.Path.Combine(destinationDir, file.Name);
+                file.CopyTo(targetFilePath);
+            }
+
+            // If recursive and copying subdirectories, recursively call this method
+            if (recursive)
+            {
+                foreach (DirectoryInfo subDir in dirs)
+                {
+                    string newDestinationDir = System.IO.Path.Combine(destinationDir, subDir.Name);
+                    CopyDirectory(subDir.FullName, newDestinationDir, true);
+                }
+            }
+        }
     }
 
 
@@ -226,16 +351,35 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 myItem.ImageIndex = count;
 
                 ///Add SUB-Details for DetailView
-                ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem(myItem, "Name");
-                subItem.Name = "Name";
-                subItem.Text = "" + System.IO.Path.GetFileName(path);
-                myItem.SubItems.Add(subItem);
-
-                subItem = new ListViewItem.ListViewSubItem(myItem, "Changed");
+                ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem(myItem, "Changed");
                 subItem.Name = "Changed";
-                subItem.Text = "" + "12.12.2021";
+                string date = "";
+                switch (Convert.ToInt16(Directory.Exists(path)) + Convert.ToInt16(File.Exists(path)) * 2)
+                {
+                    case 1: DateTime dt = Directory.GetLastWriteTime(path); date = dt.ToShortDateString(); break;
+                    case 2: dt = File.GetLastWriteTime(path); date = dt.ToShortDateString(); break;
+                    default: MessageBox.Show("Error. Case either 0 or >2"); break;
+                }
+                subItem.Text = "" + date;
                 myItem.SubItems.Add(subItem);
 
+                subItem = new ListViewItem.ListViewSubItem(myItem, "FileSize");
+                subItem.Name = "FileSize";
+                FileInfo fileInfo;
+                DirectoryInfo directoryInfo;
+                string lenght;
+                switch (Convert.ToInt16(Directory.Exists(path)) + Convert.ToInt16(File.Exists(path)) * 2)
+                {
+                    case 1: directoryInfo = new DirectoryInfo(path); lenght = directoryInfo.FormatBytes(); break;
+                    case 2: fileInfo = new FileInfo(path); lenght = fileInfo.FormatBytes(); break;
+                    default: lenght = ""; break;
+                }
+                switch (lenght == "0 B")
+                {
+                    case true: lenght = ""; break;
+                }
+                subItem.Text = "" + lenght;
+                myItem.SubItems.Add(subItem);
                 //myItem.SubItems.Add(System.IO.Path.GetFileName(path));
                 //myItem.SubItems.Add("12.12.2021");
                 ///**

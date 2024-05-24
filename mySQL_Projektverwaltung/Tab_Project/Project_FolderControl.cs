@@ -72,14 +72,14 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 //Load Files + Add to DB
                 sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
-                DbConnParam.DbConn.Instance.CmdAddParam("@projID", projId);
+                DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
                 DbConnParam.DbConn.Instance.CmdAddParam("@folder", Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
                 int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
                 if (i == 1)
                 {
                     MessageBox.Show("ProjFolder Successfully added");
                     folder = folderprev;
-                    LoadFiles(Settings.Instance.ProjFolder.MainFolder + @"\" + folderprev);
+                    LoadFiles(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
                 }
 
                 //LoadFiles(dir);
@@ -88,10 +88,76 @@ namespace mySQL_Projektverwaltung.Tab_Project
             {
                 // check if created; On Error Show Message { Create-Folder; ChangeFolder; Clear[Reset Db[folder] to null or ""] }
                 // Else LoadFiles(folderprev)
+                if (!Directory.Exists(folderprev)) // -> Directory not found!!!
+                {
+                    bool ProblemSolved = false;
+                    while (ProblemSolved == false)
+                    {
+                        using (var form = new ProjFolder_Missing())
+                        {
+                            var result = form.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                RETURN ret = form.ReturnValue;
+
+                                MessageBox.Show(ret.ToString());
+                                ///Create Folder
+                                if (ret == RETURN.Create)
+                                {
+                                    Directory.CreateDirectory(folderprev);
+                                    ProblemSolved = true;
+                                };
+                                if (ret == RETURN.Change)
+                                {
+                                    var dlg = new FolderPicker();
+                                    if (Directory.Exists(Settings.Instance.ProjFolder.MainFolder)) { dlg.InputPath = Settings.Instance.ProjFolder.MainFolder; } else { dlg.InputPath = @"C:\"; };
+                                    //dlg.InputPath = Settings.Instance.projFolder.MainFolder;//@"c:\windows\system32";
+                                    dlg.Title = "Select Project Folder";
+                                    if (dlg.ShowDialog() == true)
+                                    {
+                                        //MessageBox.Show(dlg.ResultPath);
+                                        folderprev = dlg.ResultPath;
+                                        sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
+                                        DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                                        DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                                        DbConnParam.DbConn.Instance.CmdAddParam("@folder", Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
+                                        int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+                                        if (i == 1)
+                                        {
+                                            MessageBox.Show("ProjFolder Successfully added");
+                                            folder = folderprev;
+                                            LoadFiles(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
+                                        }
+                                        ProblemSolved = true;
+                                    }
+                                    
+                                }
+                                if (ret == RETURN.Reset)
+                                {
+                                    sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
+                                    DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                                    DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                                    DbConnParam.DbConn.Instance.CmdAddParam("@folder", null);
+                                    int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+                                    if (i == 1)
+                                    {
+                                        MessageBox.Show("ProjFolder Successfully Resetted");
+                                        
+                                    }
+                                    ProblemSolved = true;
+                                }
+                            }
+
+                        }
+                    }
+
+                    //Yes Create No Change Retry Reset
+                }
                 folder = folderprev;
                 LoadFiles(folderprev);
             }
         }
+
         // Drag'n'Drop: On bool FolderCreated == false, create Folder. Then regardless of FolderCreated push File into folder
         // Same for Download and
 
@@ -133,7 +199,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 //MessageBox.Show(item.Tag.ToString());
                 if (item.Tag.ToString() == "FileTop")
                 {
-                    MessageBox.Show("TopFolder");
+                    //MessageBox.Show("TopFolder");
                     folder = Directory.GetParent(folder).ToString();
                     listView_projfolder.Clear();
                     if (folder != folderprev) //Maybe convert locally to DirectoryInfo to check, if it's the same folder.
@@ -221,6 +287,31 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 try
                 {
+                    switch (FolderCreated)
+                    {
+                        case true: break; // Folder already created
+                        case false:
+                            try
+                            {
+                                Directory.CreateDirectory(folderprev);
+                                FolderCreated = true;
+                                string sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
+                                DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                                DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                                DbConnParam.DbConn.Instance.CmdAddParam("@folder", folderprev);
+                                int y = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+                                if (y == 1)
+                                {
+                                    MessageBox.Show("ProjFolder Successfully added");
+                                    folder = folderprev;
+                                    LoadFiles(folderprev);
+                                }
+                            }
+                            catch (Exception) { throw; }
+                            break;
+                    }
+
+
                     int i = 0;
                     foreach (string file in files)
                     {
@@ -230,8 +321,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
                             if (File.Exists(folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name))
                             {
                                 int x = 1;
-                                while (File.Exists(folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name.Substring(0,fileInfo.Name.Length - fileInfo.Extension.Length) + "(" + x.ToString() + ")" + fileInfo.Extension)) { x++; }
-                                System.IO.File.Copy(file, folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name.Substring(0,fileInfo.Name.Length - fileInfo.Extension.Length ) + "(" + x.ToString() + ")" + fileInfo.Extension);
+                                while (File.Exists(folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length) + "(" + x.ToString() + ")" + fileInfo.Extension)) { x++; }
+                                System.IO.File.Copy(file, folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length) + "(" + x.ToString() + ")" + fileInfo.Extension);
                             }
                             else System.IO.File.Copy(file, folder + System.IO.Path.DirectorySeparatorChar + fileInfo.Name);
                         }
@@ -292,7 +383,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 e.Effect = DragDropEffects.None;
             }
         }
-        
+
 
         static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
         {
@@ -390,7 +481,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 if (listView.LargeImageList is null) { listView.LargeImageList = new ImageList(); Size s = new Size(); s.Width = 64; s.Height = 64; listView.LargeImageList.ImageSize = s; }
                 Bitmap imageL = WindowsThumbnailProvider.GetThumbnail(path, 256, 256, ThumbnailOptions.None);
                 if (imageL != null) { listView.LargeImageList.Images.Add(path, imageL); }// else { listView.LargeImageList.Images.Add(path, image); }
-                //listView.LargeImageList.Images.Add(path,image);
+                                                                                         //listView.LargeImageList.Images.Add(path,image);
                 listView.SmallImageList.Images.Add(path, image);
                 listView.Items.Add(myItem);
             }
@@ -602,33 +693,4 @@ namespace mySQL_Projektverwaltung.Tab_Project
             public byte rgbReserved;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-

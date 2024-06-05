@@ -58,6 +58,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             DbConnParam.DbConn.Instance.DbAddCmd(sql);
             DbConnParam.DbConn.Instance.CmdAddParam("@projID", projId);
             folderprev = DbConnParam.DbConn.Instance.DbScalar().ToString();
+            
             //If Cell "folder" empty, set prevFolder to Regex and check if folder exists;
             // else set prevFolder to Cell "folder (from DB)
             if (folderprev == null || folderprev == "")
@@ -68,7 +69,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 //Check RootDirectory
                 if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder)) { MessageBox.Show("Top Project Directory nonexistent! \r\n \r\n Change Topdir? \r\n Chancel?"); return; }
                 //Check Proj-Subdir
-                if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev)) { return; };
+                if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev))
+                {tb_folder.Text = ""; return; };
                 //Load Files + Add to DB
                 sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
@@ -78,8 +80,10 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 if (i == 1)
                 {
                     MessageBox.Show("ProjFolder Successfully added");
+                    //to complete Dir
+                    folderprev = Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev;
                     folder = folderprev;
-                    LoadFiles(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
+                    LoadFiles(folderprev);
                 }
 
                 //LoadFiles(dir);
@@ -120,13 +124,13 @@ namespace mySQL_Projektverwaltung.Tab_Project
                                         sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                                         DbConnParam.DbConn.Instance.DbAddCmd(sql);
                                         DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
-                                        DbConnParam.DbConn.Instance.CmdAddParam("@folder", Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
+                                        DbConnParam.DbConn.Instance.CmdAddParam("@folder", folderprev);
                                         int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
                                         if (i == 1)
                                         {
                                             MessageBox.Show("ProjFolder Successfully added");
                                             folder = folderprev;
-                                            LoadFiles(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
+                                            LoadFiles(folderprev);
                                         }
                                         ProblemSolved = true;
                                     }
@@ -142,7 +146,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                                     if (i == 1)
                                     {
                                         MessageBox.Show("ProjFolder Successfully Resetted");
-                                        
+                                        return;
                                     }
                                     ProblemSolved = true;
                                 }
@@ -170,6 +174,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             FileInfo[] subfiles = topdir.GetFiles();
 
             if (!WithoutClear) { listView_projfolder.Clear(); }
+            tb_folder.Text = folderprev;
             listView_projfolder.Columns.Add("Name", "Name");
             listView_projfolder.Columns.Add("Changed", "Changed");
             listView_projfolder.Columns.Add("Size", "Size");

@@ -30,10 +30,12 @@ namespace mySQL_Projektverwaltung.Tab_Project
         private Project_DetailsControl detailsControl;
         public int projID = 0;
         DataTable dtProj = new DataTable();
-        public Project_MainControl(Main main = null)
+
+        public Project_MainControl()
         {
             InitializeComponent();
         }
+
         public void ReLoad_Project_MainControl(int projId)
         {
             projID = projId;

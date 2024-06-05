@@ -43,7 +43,7 @@
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(54, 188);
+            button1.Location = new System.Drawing.Point(17, 188);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(84, 55);
             button1.TabIndex = 0;
@@ -62,9 +62,10 @@
             // listView_projfolder
             // 
             listView_projfolder.AllowDrop = true;
-            listView_projfolder.Location = new System.Drawing.Point(54, 249);
+            listView_projfolder.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listView_projfolder.Location = new System.Drawing.Point(17, 249);
             listView_projfolder.Name = "listView_projfolder";
-            listView_projfolder.Size = new System.Drawing.Size(391, 139);
+            listView_projfolder.Size = new System.Drawing.Size(481, 239);
             listView_projfolder.TabIndex = 2;
             listView_projfolder.UseCompatibleStateImageBehavior = false;
             listView_projfolder.View = System.Windows.Forms.View.List;
@@ -92,9 +93,9 @@
             // 
             // tb_folder
             // 
-            tb_folder.Location = new System.Drawing.Point(144, 220);
+            tb_folder.Location = new System.Drawing.Point(107, 220);
             tb_folder.Name = "tb_folder";
-            tb_folder.Size = new System.Drawing.Size(301, 23);
+            tb_folder.Size = new System.Drawing.Size(391, 23);
             tb_folder.TabIndex = 5;
             // 
             // label2

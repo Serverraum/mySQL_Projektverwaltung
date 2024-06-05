@@ -38,14 +38,25 @@ namespace mySQL_Projektverwaltung
                     MessageBox.Show("Neuer Eintrag");
                     try
                     {
-                        DbConnParam.DbConn.Instance.DbAddCmd("");
-                        string sql = @"INSERT INTO projTime (date, description, time_h, ProjID, LSID, AGID) VALUES (@date, @description, @time_h, @projID, 1, 1)";
+                        string sql = @"SELECT LSID FROM proj WHERE projID=@projID";
+                        DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                        DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                        string LSID = DbConnParam.DbConn.Instance.DbScalar().ToString();
+
+                        sql = @"SELECT AGID FROM proj WHERE projID=@projID";
+                        DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                        DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                        string AGID = DbConnParam.DbConn.Instance.DbScalar().ToString();
+
+                        sql = @"INSERT INTO projTime (date, description, time_h, projID, LSID, AGID) VALUES (@date, @description, @time_h, @projID, @LSID, @AGID)";
                         DbConnParam.DbConn.Instance.DbAddCmd(sql);
                         string currentDateTimeString = DateTime.Now.ToString("s");
                         DbConnParam.DbConn.Instance.CmdAddParam("@date", currentDateTimeString);//dataGridView1.Rows[e.RowIndex].Cells[1].Value);
                         DbConnParam.DbConn.Instance.CmdAddParam("@description", dataGridView1.Rows[e.RowIndex].Cells[2].Value);
                         DbConnParam.DbConn.Instance.CmdAddParam("@time_h", dataGridView1.Rows[e.RowIndex].Cells[3].Value);
                         DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                        DbConnParam.DbConn.Instance.CmdAddParam("@LSID", LSID);
+                        DbConnParam.DbConn.Instance.CmdAddParam("@AGID", AGID);
                         int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
 
                         if (i == 1)

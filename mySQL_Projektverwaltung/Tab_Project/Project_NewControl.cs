@@ -24,6 +24,27 @@ namespace mySQL_Projektverwaltung.Tab_Project
             var result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
+                string sql = "SELECT LAST_INSERT_ID()";
+                DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                int projID = Convert.ToInt16(DbConnParam.DbConn.Instance.DbScalar());
+                /*------ Reload projAuswahl-Windows ------*/
+                foreach (var item in Application.OpenForms)
+                {
+                    ProjAuswahl projAuswahl = item as ProjAuswahl;
+                    if (projAuswahl != null)
+                    {
+                        projAuswahl.UpdateSurface();
+                    }
+                }
+                /*------ Reload Main Project Page ------*/
+                foreach (var item in Application.OpenForms)
+                {
+                    Main main = item as Main;
+                    if (main != null)
+                    {
+                        main.LoadProject(projID);
+                    }
+                }
                 //LoadNewProject
             }
             /*using (var form = new NewProj_Form())

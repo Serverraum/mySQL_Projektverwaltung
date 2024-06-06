@@ -51,7 +51,7 @@
             label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label2.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label2, 5);
-            label2.Location = new System.Drawing.Point(2, 97);
+            label2.Location = new System.Drawing.Point(2, 67);
             label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(120, 15);
@@ -62,7 +62,7 @@
             // 
             tb_email.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.SetColumnSpan(tb_email, 3);
-            tb_email.Location = new System.Drawing.Point(48, 213);
+            tb_email.Location = new System.Drawing.Point(48, 183);
             tb_email.Margin = new System.Windows.Forms.Padding(2);
             tb_email.Name = "tb_email";
             tb_email.Size = new System.Drawing.Size(283, 23);
@@ -72,7 +72,7 @@
             // 
             tb_tel.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.SetColumnSpan(tb_tel, 3);
-            tb_tel.Location = new System.Drawing.Point(48, 183);
+            tb_tel.Location = new System.Drawing.Point(48, 153);
             tb_tel.Margin = new System.Windows.Forms.Padding(2);
             tb_tel.Name = "tb_tel";
             tb_tel.Size = new System.Drawing.Size(283, 23);
@@ -82,7 +82,7 @@
             // 
             tb_shortdesc.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.SetColumnSpan(tb_shortdesc, 4);
-            tb_shortdesc.Location = new System.Drawing.Point(12, 303);
+            tb_shortdesc.Location = new System.Drawing.Point(12, 273);
             tb_shortdesc.Margin = new System.Windows.Forms.Padding(2);
             tb_shortdesc.Name = "tb_shortdesc";
             tb_shortdesc.Size = new System.Drawing.Size(319, 23);
@@ -92,7 +92,7 @@
             // 
             tb_name.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.SetColumnSpan(tb_name, 3);
-            tb_name.Location = new System.Drawing.Point(48, 153);
+            tb_name.Location = new System.Drawing.Point(48, 123);
             tb_name.Margin = new System.Windows.Forms.Padding(2);
             tb_name.Name = "tb_name";
             tb_name.Size = new System.Drawing.Size(283, 23);
@@ -103,7 +103,7 @@
             label7.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             label7.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label7, 5);
-            label7.Location = new System.Drawing.Point(2, 277);
+            label7.Location = new System.Drawing.Point(2, 247);
             label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(329, 15);
@@ -116,7 +116,7 @@
             cb_LS.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             tableLayoutPanel1.SetColumnSpan(cb_LS, 4);
             cb_LS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cb_LS.Location = new System.Drawing.Point(12, 63);
+            cb_LS.Location = new System.Drawing.Point(12, 33);
             cb_LS.Margin = new System.Windows.Forms.Padding(2);
             cb_LS.Name = "cb_LS";
             cb_LS.Size = new System.Drawing.Size(319, 23);
@@ -130,7 +130,7 @@
             tableLayoutPanel1.SetColumnSpan(cb_AG, 4);
             cb_AG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cb_AG.FormattingEnabled = true;
-            cb_AG.Location = new System.Drawing.Point(12, 123);
+            cb_AG.Location = new System.Drawing.Point(12, 93);
             cb_AG.Margin = new System.Windows.Forms.Padding(2);
             cb_AG.Name = "cb_AG";
             cb_AG.Size = new System.Drawing.Size(319, 23);
@@ -141,7 +141,7 @@
             label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             label3.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label3, 2);
-            label3.Location = new System.Drawing.Point(2, 157);
+            label3.Location = new System.Drawing.Point(2, 127);
             label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(42, 15);
@@ -153,7 +153,7 @@
             label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             label5.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label5, 2);
-            label5.Location = new System.Drawing.Point(5, 217);
+            label5.Location = new System.Drawing.Point(5, 187);
             label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(39, 15);
@@ -165,7 +165,7 @@
             label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             label4.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label4, 2);
-            label4.Location = new System.Drawing.Point(20, 187);
+            label4.Location = new System.Drawing.Point(20, 157);
             label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(24, 15);
@@ -177,7 +177,7 @@
             label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label1.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label1, 5);
-            label1.Location = new System.Drawing.Point(2, 37);
+            label1.Location = new System.Drawing.Point(2, 7);
             label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(89, 15);
@@ -193,25 +193,24 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            tableLayoutPanel1.Controls.Add(label2, 0, 3);
-            tableLayoutPanel1.Controls.Add(tb_email, 2, 7);
-            tableLayoutPanel1.Controls.Add(tb_tel, 2, 6);
-            tableLayoutPanel1.Controls.Add(tb_shortdesc, 1, 10);
-            tableLayoutPanel1.Controls.Add(tb_name, 2, 5);
-            tableLayoutPanel1.Controls.Add(label7, 0, 9);
-            tableLayoutPanel1.Controls.Add(cb_LS, 1, 2);
-            tableLayoutPanel1.Controls.Add(cb_AG, 1, 4);
-            tableLayoutPanel1.Controls.Add(label3, 0, 5);
-            tableLayoutPanel1.Controls.Add(label5, 0, 7);
-            tableLayoutPanel1.Controls.Add(label4, 0, 6);
-            tableLayoutPanel1.Controls.Add(label1, 0, 1);
-            tableLayoutPanel1.Controls.Add(button2, 4, 11);
-            tableLayoutPanel1.Controls.Add(button1, 1, 11);
+            tableLayoutPanel1.Controls.Add(label2, 0, 2);
+            tableLayoutPanel1.Controls.Add(tb_email, 2, 6);
+            tableLayoutPanel1.Controls.Add(tb_tel, 2, 5);
+            tableLayoutPanel1.Controls.Add(tb_shortdesc, 1, 9);
+            tableLayoutPanel1.Controls.Add(tb_name, 2, 4);
+            tableLayoutPanel1.Controls.Add(label7, 0, 8);
+            tableLayoutPanel1.Controls.Add(cb_LS, 1, 1);
+            tableLayoutPanel1.Controls.Add(cb_AG, 1, 3);
+            tableLayoutPanel1.Controls.Add(label3, 0, 4);
+            tableLayoutPanel1.Controls.Add(label5, 0, 6);
+            tableLayoutPanel1.Controls.Add(label4, 0, 5);
+            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(button2, 4, 10);
+            tableLayoutPanel1.Controls.Add(button1, 1, 10);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 12;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel1.RowCount = 11;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));

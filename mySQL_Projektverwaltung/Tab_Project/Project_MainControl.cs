@@ -128,6 +128,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
         {
             bt_completed.Enabled = editProj.Checked;
             cb_LS.Enabled = editProj.Checked;
+            cb_AG.Enabled = editProj.Checked;
             tb_name.Enabled = editProj.Checked;
             tb_tel.Enabled = editProj.Checked;
             tb_email.Enabled = editProj.Checked;
@@ -181,7 +182,16 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
                 if (i == 1)
                 {
-                    MessageBox.Show("Successfully Updated!");
+                    sql = "UPDATE projTime SET LSID = @LSID, AGID = @AGID WHERE projID=@ProjID";
+                    DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                    DbConnParam.DbConn.Instance.CmdAddParam("@LSID", LSID);
+                    DbConnParam.DbConn.Instance.CmdAddParam("@AGID", AGID);
+                    DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
+                    i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+                    if (i == 1)
+                    {
+                        MessageBox.Show("Successfully Updated!");                        
+                    }
                     //update windows
                     /*------ Reload projAuswahl-Windows ------*/
                     foreach (var item in Application.OpenForms)
@@ -261,6 +271,10 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
         private void bt_completed_Click(object sender, EventArgs e)
         {
+            if (editProj.Checked == true)//&& cb_LS.SelectedItem.ToString() == "LS ()")
+            {
+                bt_proj_save.Enabled = true;
+            }
             completed = !completed;
             bt_completed_change(completed);
         }
@@ -384,7 +398,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
         }
 
         //project_PrintControl1.CreateDocumentProj += Project_PrintControl1_CreateDocumentProj;
-     
+
 
 
     }

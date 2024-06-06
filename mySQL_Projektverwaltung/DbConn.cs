@@ -122,6 +122,10 @@ namespace mySQL_Projektverwaltung
                     MessageBox.Show("DB not configured", "Warning");
                     // ToDo: config DB
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
             }
             public void connSaveParam()// Save Param to JSON
             {

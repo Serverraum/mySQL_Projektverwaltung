@@ -21,6 +21,7 @@ using RtfPipe;
 using System.Security.AccessControl;
 using System.Reflection.Metadata.Ecma335;
 using CSharpLib;
+using static System.Net.Mime.MediaTypeNames;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //  Hard Connection to/from:                 //
 //   - MainProj    (project_MainControl1)    //
@@ -92,7 +93,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             {
                 // check if created; On Error Show Message { Create-Folder; ChangeFolder; Clear[Reset Db[folder] to null or ""] }
                 // Else LoadFiles(folderprev)
-                if (!Directory.Exists(folderprev)) // -> Directory not found!!!
+                if ((!Directory.Exists(folderprev)) && (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev))) // -> Directory not found!!!
                 {
                     bool ProblemSolved = false;
                     while (ProblemSolved == false)
@@ -108,7 +109,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                                 ///Create Folder
                                 if (ret == RETURN.Create)
                                 {
-                                    Directory.CreateDirectory(folderprev);
+                                    Directory.CreateDirectory(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
                                     ProblemSolved = true;
                                 };
                                 if (ret == RETURN.Change)
@@ -156,9 +157,16 @@ namespace mySQL_Projektverwaltung.Tab_Project
                     }
 
                     //Yes Create No Change Retry Reset
+
                 }
-                folder = folderprev;
-                LoadFiles(folderprev);
+
+                if (folderprev.Contains(@"\")) { folder = folderprev; }
+                else
+                {
+                    folder = Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev;
+                }
+
+                LoadFiles(folder);
             }
         }
 
@@ -298,7 +306,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                         case false:
                             try
                             {
-                                Directory.CreateDirectory(folderprev);
+                                Directory.CreateDirectory(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
                                 FolderCreated = true;
                                 string sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
@@ -308,8 +316,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
                                 if (y == 1)
                                 {
                                     MessageBox.Show("ProjFolder Successfully added");
-                                    folder = folderprev;
-                                    LoadFiles(folderprev);
+                                    folder = (Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev);
+                                    LoadFiles(folder);
                                 }
                             }
                             catch (Exception) { throw; }
@@ -484,7 +492,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
 
                 if (listView.LargeImageList is null) { listView.LargeImageList = new ImageList(); Size s = new Size(); s.Width = 64; s.Height = 64; listView.LargeImageList.ImageSize = s; }
-                Bitmap imageL = WindowsThumbnailProvider.GetThumbnail(path, 256, 256, ThumbnailOptions.None);
+                Bitmap imageL = WindowsThumbnailProvider.GetThumbnail(path, 64, 64, ThumbnailOptions.BiggerSizeOk);
                 if (imageL != null) { listView.LargeImageList.Images.Add(path, imageL); }// else { listView.LargeImageList.Images.Add(path, image); }
                                                                                          //listView.LargeImageList.Images.Add(path,image);
                 listView.SmallImageList.Images.Add(path, image);
@@ -549,9 +557,9 @@ namespace mySQL_Projektverwaltung.Tab_Project
 
         public static Bitmap GetBitmapFromHBitmap(IntPtr nativeHBitmap)
         {
-            Bitmap bmp = Image.FromHbitmap(nativeHBitmap);
+            Bitmap bmp = System.Drawing.Image.FromHbitmap(nativeHBitmap);
 
-            if (Image.GetPixelFormatSize(bmp.PixelFormat) < 32)
+            if (System.Drawing.Image.GetPixelFormatSize(bmp.PixelFormat) < 32)
                 return bmp;
 
             using (bmp)

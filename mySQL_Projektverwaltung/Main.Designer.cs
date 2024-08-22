@@ -30,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             button2 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
@@ -47,6 +48,7 @@
             pictureList1 = new PictureList();
             project_TimeControl1 = new Project_TimeControl();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            project_NewControl1 = new Tab_Project.Project_NewControl();
             tabPage2 = new System.Windows.Forms.TabPage();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             button3 = new System.Windows.Forms.Button();
@@ -56,7 +58,6 @@
             settingsControl1 = new SettingsControl();
             tabPage5 = new System.Windows.Forms.TabPage();
             settingsControl_Folder1 = new SettingsControl_Folder();
-            project_NewControl1 = new Tab_Project.Project_NewControl();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_left).BeginInit();
@@ -332,6 +333,15 @@
             flowLayoutPanel1.Size = new System.Drawing.Size(951, 31);
             flowLayoutPanel1.TabIndex = 22;
             // 
+            // project_NewControl1
+            // 
+            project_NewControl1.AutoSize = true;
+            project_NewControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            project_NewControl1.Location = new System.Drawing.Point(3, 3);
+            project_NewControl1.Name = "project_NewControl1";
+            project_NewControl1.Size = new System.Drawing.Size(90, 25);
+            project_NewControl1.TabIndex = 1;
+            // 
             // tabPage2
             // 
             tabPage2.Controls.Add(tableLayoutPanel1);
@@ -437,15 +447,6 @@
             settingsControl_Folder1.Size = new System.Drawing.Size(623, 253);
             settingsControl_Folder1.TabIndex = 0;
             // 
-            // project_NewControl1
-            // 
-            project_NewControl1.AutoSize = true;
-            project_NewControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            project_NewControl1.Location = new System.Drawing.Point(3, 3);
-            project_NewControl1.Name = "project_NewControl1";
-            project_NewControl1.Size = new System.Drawing.Size(90, 25);
-            project_NewControl1.TabIndex = 1;
-            // 
             // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -453,6 +454,7 @@
             AutoSize = true;
             ClientSize = new System.Drawing.Size(963, 613);
             Controls.Add(tabControl1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(2);
             MinimumSize = new System.Drawing.Size(231, 107);
             Name = "Main";

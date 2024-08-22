@@ -20,7 +20,7 @@ namespace mySQL_Projektverwaltung
         public event EventHandler<TreeNodeClickedEventArgs> TreeNodeClicked;
 
         DataTable dt = new DataTable();
- 
+
 
         public ProjAuswahl()
         {
@@ -103,6 +103,20 @@ namespace mySQL_Projektverwaltung
             newNode.Tag = tag;
             nodes.Add(newNode);
             return newNode;
+        }
+
+        private void treeView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Right)
+            {
+                // Prüfe, ob ein Knoten ausgewählt ist
+                if (treeView1.SelectedNode != null)
+                {
+                    // Erzeuge das gleiche Ereignis wie bei einem Mausklick
+                    OnTreeNodeClicked(new TreeNodeClickedEventArgs(treeView1.SelectedNode));
+                }
+                 treeView1.Focus();
+            }
         }
     }
 }

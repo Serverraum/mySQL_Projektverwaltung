@@ -47,6 +47,9 @@ namespace mySQL_Projektverwaltung.Tab_Project
             //Future: Check, if Files are available for Download. If yes, push Filenames into DownloadList and enable Download-Button.
             FolderCreated = false;
 
+            SettingsControl_Folder cf = new SettingsControl_Folder();
+            lb_ProjRegex.Text = cf.FolderRegex(Settings.Instance.ProjFolder.ProjRegex, projID);
+
             ///Load Folder from DB
             ///If Cell "folder" empty, set prevFolder to Regex and check if folder exists; else set prevFolder to Cell "folder (from DB)
             /// string prevFolder = Regex OR Db[proj - folder]; bool FolderCreated = true|false 
@@ -59,19 +62,19 @@ namespace mySQL_Projektverwaltung.Tab_Project
             DbConnParam.DbConn.Instance.DbAddCmd(sql);
             DbConnParam.DbConn.Instance.CmdAddParam("@projID", projId);
             folderprev = DbConnParam.DbConn.Instance.DbScalar().ToString();
-            
+
             //If Cell "folder" empty, set prevFolder to Regex and check if folder exists;
             // else set prevFolder to Cell "folder (from DB)
             if (folderprev == null || folderprev == "")
             {
-                SettingsControl_Folder cf = new SettingsControl_Folder();
+                //SettingsControl_Folder cf = new SettingsControl_Folder();
                 folderprev = cf.FolderRegex(Settings.Instance.ProjFolder.ProjRegex, projID);
                 //check if created; On Error Do Nothing, Else LoadFiles
                 //Check RootDirectory
                 if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder)) { MessageBox.Show("Top Project Directory nonexistent! \r\n \r\n Change Topdir? \r\n Chancel?"); return; }
                 //Check Proj-Subdir
                 if (!Directory.Exists(Settings.Instance.ProjFolder.MainFolder + System.IO.Path.DirectorySeparatorChar + folderprev))
-                {tb_folder.Text = ""; return; };
+                { tb_folder.Text = ""; return; };
                 //Load Files + Add to DB
                 sql = "UPDATE proj SET folder=@folder WHERE projID=@projID";
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
@@ -135,7 +138,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
                                         }
                                         ProblemSolved = true;
                                     }
-                                    
+
                                 }
                                 if (ret == RETURN.Reset)
                                 {
@@ -430,6 +433,8 @@ namespace mySQL_Projektverwaltung.Tab_Project
                 }
             }
         }
+
+
     }
 
 

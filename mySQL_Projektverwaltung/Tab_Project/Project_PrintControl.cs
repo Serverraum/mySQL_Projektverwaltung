@@ -81,7 +81,7 @@ namespace mySQL_Projektverwaltung
         {
             projID = e.projID;
             //Get ProjTime
-            string sql = "SELECT * FROM projtime WHERE projID = @projID";
+            string sql = "SELECT * FROM projTime WHERE projID = @projID";
             DbConnParam.DbConn.Instance.DbAddCmd(sql);
             DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
             DataTable dthour = DbConnParam.DbConn.Instance.DbGetDataTable();
@@ -98,7 +98,8 @@ namespace mySQL_Projektverwaltung
 
             string html = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    <div class=\"reader-container container container_center\">\r\n        <div class=\"article-image\">\r\n            <a href=\"https://www.pexels.com/ru-ru/photo/7961265/\">\r\n                <img src=\"https://images.pexels.com/photos/7961265/pexels-photo-7961265.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\" />\r\n            </a>\r\n        </div>\r\n        <p>Lorem</p>\r\n        <h1>h1</h1>\r\n        <h2><s>h2</s></h2>\r\n        <h3>h3</h3>\r\n        <h4>h4</h4>\r\n        <h5>h5</h5>\r\n        <br />\r\n        <br />\r\n        <h6>h6</h6>\r\n        <p>\r\n            <s>Lorem &nbsp;&nbsp;ipsum</s> dolor <br />\r\n            sit, <b>amet</b> consectetur <strike>adipisicing</strike> elit. Illo\r\n            aperiam perferendis soluta nam <small>ducimus</small> ipsa <br />\r\n            alias animi asperiores quisquam aut ex minus, cum\r\n            <u>possimus</u> accusamus corporis\r\n            <a href=\"https://www.google.com/\">Test link</a> consequatur\r\n            <i>ipsam</i> praesentium.\r\n        </p>\r\n        <table class=\"tg\">\r\n            <thead>\r\n                <tr>\r\n                    <td class=\"tg-0lax\" rowspan=\"3\">1</td>\r\n                    <td class=\"tg-0lax\">2</td>\r\n                    <td class=\"tg-0lax\">3</td>\r\n                    <td class=\"tg-0lax\">4</td>\r\n                </tr>\r\n                <tr>\r\n                    <td class=\"tg-0lax\" rowspan=\"2\">5</td>\r\n                    <td class=\"tg-0lax\" colspan=\"2\">6</td>\r\n                </tr>\r\n                <tr>\r\n                    <td class=\"tg-0lax\">7</td>\r\n                    <td class=\"tg-0lax\">8</td>\r\n                </tr>\r\n            </thead>\r\n        </table>\r\n        <br />\r\n        <table>\r\n            <tr>\r\n                <th>First Name</th>\r\n                <th>Last Name</th>\r\n                <th>Email Address</th>\r\n            </tr>\r\n            <tr>\r\n                <td>Hillary</td>\r\n                <td>Nyakundi</td>\r\n                <td>tables@mail.com</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Lary</td>\r\n                <td>Mak</td>\r\n                <td>developer@mail.com</td>\r\n            </tr>\r\n        </table>\r\n\r\n        <ul>\r\n            <li>\r\n                <p>\r\n                    <s>Lorem &nbsp;&nbsp;ipsum</s> dolor <br />\r\n                    sit, <b>amet</b> consectetur <strike>adipisicing</strike> elit. Illo\r\n                    aperiam perferendis soluta nam <small>ducimus</small> ipsa <br />\r\n                    alias animi asperiores quisquam aut ex minus, cum\r\n                    <u>possimus</u> accusamus corporis\r\n                    <a href=\"https://www.google.com/\">Test link</a> consequatur\r\n                    <i>ipsam</i> praesentium.\r\n                </p>\r\n            </li>\r\n            lorem\r\n            <li>\r\n                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam\r\n                voluptates dignissimos, praesentium non necessitatibus reiciendis\r\n                nihil repudiandae quibusdam deleniti, placeat accusantium impedit\r\n                aperiam laborum. Cupiditate sed repellendus eos quam harum.\r\n                <ol>\r\n                    <li>Option 1</li>\r\n                    <li>Option 2</li>\r\n                </ol>\r\n            </li>\r\n        </ul>\r\n\r\n        <p>\r\n            Лорем ипсум долор сит амет, хинц феугаит албуциус не пер, вис еу темпор\r\n            номинати маиестатис. Еу ерос оптион яуи. Ерат миним ехерци хас еа, нец\r\n            легимус детерруиссет ат. Еирмод тхеопхрастус те хис, еи яуо видит аугуе,\r\n            дицтас цонсецтетуер при ад. Бруте сенсибус вис ат, нам путант форенсибус\r\n            ид, мел еа порро толлит перфецто. Яуот цлита ут нец. Ан иус алиа\r\n            цонсецтетуер, те хис тале неморе. Цу сусципит апеириан торяуатос цум.\r\n            Яуи ут адхуц аппареат цомпрехенсам, граецис еррорибус еи вел.\r\n        </p>\r\n\r\n        <p>—————————————————————</p>\r\n        <br />\r\n        <p>● Lorem ipsum dolor sit amet</p>\r\n        <p>● Lorem ipsum dolor sit amet</p>\r\n        <p>Lorem ipsum dolor sit amet. 😊</p>\r\n    </div>\r\n</body>\r\n</html>";
             string html2 = "<!DOCTYPE html>\r\n<html lang=\"de\">\r\n  <head>\r\n    <meta charset=\"utf-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Titel der Seite | Name der Website</title>\r\n  </head>\r\n  <body>\r\n    <!-- Sichtbarer Dokumentinhalt im body -->\r\n    <p>Sehen Sie sich den Quellcode dieser Seite an.\r\n      <kbd>(Kontextmenu: Seitenquelltext anzeigen)</kbd></p>\r\n  </body>\r\n</html>"; // "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    <div class=\"reader-container container container_center\\\">\\r\\n        <div class=\\\"article-image\\\">\\r\\n            <a href=\\\"https://www.pexels.com/ru-ru/photo/7961265/\\\">\\r\\n                <img src=\\\"https://images.pexels.com/photos/7961265/pexels-photo-7961265.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\\\" />\\r\\n            </a>\\r\\n        </div>\\r\\n        <p>Lorem</p>\\r\\n        <h1>h1</h1>\\r\\n        <h2><s>h2</s></h2>\\r\\n        <h3>h3</h3>\\r\\n        <h4>h4</h4>\\r\\n        <h5>h5</h5>\\r\\n        <br />\\r\\n        <br />\\r\\n        <h6>h6</h6>\\r\\n        <p>\\r\\n            <s>Lorem &nbsp;&nbsp;ipsum</s> dolor <br />\\r\\n            sit, <b>amet</b> consectetur <strike>adipisicing</strike> elit. Illo\\r\\n            aperiam perferendis soluta nam <small>ducimus</small> ipsa <br />\\r\\n            alias animi asperiores quisquam aut ex minus, cum\\r\\n            <u>possimus</u> accusamus corporis\\r\\n            <a href=\\\"https://www.google.com/\\\">Test link</a> consequatur\\r\\n            <i>ipsam</i> praesentium.\\r\\n        </p>\\r\\n        <table class=\\\"tg\\\">\\r\\n            <thead>\\r\\n                <tr>\\r\\n                    <td class=\\\"tg-0lax\\\" rowspan=\\\"3\\\">1</td>\\r\\n                    <td class=\\\"tg-0lax\\\">2</td>\\r\\n                    <td class=\\\"tg-0lax\\\">3</td>\\r\\n                    <td class=\\\"tg-0lax\\\">4</td>\\r\\n                </tr>\\r\\n                <tr>\\r\\n                    <td class=\\\"tg-0lax\\\" rowspan=\\\"2\\\">5</td>\\r\\n                    <td class=\\\"tg-0lax\\\" colspan=\\\"2\\\">6</td>\\r\\n                </tr>\\r\\n                <tr>\\r\\n                    <td class=\\\"tg-0lax\\\">7</td>\\r\\n                    <td class=\\\"tg-0lax\\\">8</td>\\r\\n                </tr>\\r\\n            </thead>\\r\\n        </table>\\r\\n        <br />\\r\\n        <table>\\r\\n            <tr>\\r\\n                <th>First Name</th>\\r\\n                <th>Last Name</th>\\r\\n                <th>Email Address</th>\\r\\n            </tr>\\r\\n            <tr>\\r\\n                <td>Hillary</td>\\r\\n                <td>Nyakundi</td>\\r\\n                <td>tables@mail.com</td>\\r\\n            </tr>\\r\\n            <tr>\\r\\n                <td>Lary</td>\\r\\n                <td>Mak</td>\\r\\n                <td>developer@mail.com</td>\\r\\n            </tr>\\r\\n        </table>\\r\\n\\r\\n        <ul>\\r\\n            <li>\\r\\n                <p>\\r\\n                    <s>Lorem &nbsp;&nbsp;ipsum</s> dolor <br />\\r\\n                    sit, <b>amet</b> consectetur <strike>adipisicing</strike> elit. Illo\\r\\n                    aperiam perferendis soluta nam <small>ducimus</small> ipsa <br />\\r\\n                    alias animi asperiores quisquam aut ex minus, cum\\r\\n                    <u>possimus</u> accusamus corporis\\r\\n                    <a href=\\\"https://www.google.com/\\\">Test link</a> consequatur\\r\\n                    <i>ipsam</i> praesentium.\\r\\n                </p>\\r\\n            </li>\\r\\n            lorem\\r\\n            <li>\\r\\n                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam\\r\\n                voluptates dignissimos, praesentium non necessitatibus reiciendis\\r\\n                nihil repudiandae quibusdam deleniti, placeat accusantium impedit\\r\\n                aperiam laborum. Cupiditate sed repellendus eos quam harum.\\r\\n                <ol>\\r\\n                    <li>Option 1</li>\\r\\n                    <li>Option 2</li>\\r\\n                </ol>\\r\\n            </li>\\r\\n        </ul> <p>\r\n  \r\n<p>—————————————————————</p>\r\n        <br />\r\n    <p>Lorem ipsum dolor sit amet. 😊</p> </div>\r\n</body>\r\n</html>";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //string html3 = Rtf.ToHtml()
+
+
 #if NETCORE
             // Add a reference to the NuGet package System.Text.Encoding.CodePages for .Net core only
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -199,6 +200,11 @@ namespace mySQL_Projektverwaltung
                                     /*********************************************/
                                     /* --- --- --- ADD SOME PICTURES --- --- --- */
                                     /*********************************************/
+                                    ///Check here for Error.
+                                    ///
+                                    /// Falls die Bilder größer als der vorhandene Platz sind, stürzt das Programm ab.
+                                    ///
+                                    ///
                                     string sql = "SELECT * FROM pictures WHERE projID=@projID ";
                                     DbConnParam.DbConn.Instance.DbAddCmd(sql);
                                     DbConnParam.DbConn.Instance.CmdAddParam("@projID", projID);
@@ -218,6 +224,7 @@ namespace mySQL_Projektverwaltung
                                     }
                                     else if (index > 1)
                                     {
+
                                         x.Cell().RowSpan(6).Table(x =>
                                         {
                                             x.ColumnsDefinition(col =>
@@ -226,17 +233,20 @@ namespace mySQL_Projektverwaltung
                                                 col.RelativeColumn();
                                                 if (index > 4) { col.RelativeColumn(); }
                                             });
+                                            int i = 0;
                                             foreach (byte[] b in Pictures)
                                             {
-                                                x.Cell().Image(QuestPDF.Infrastructure.Image.FromBinaryData(b)).FitArea();
+                                                i++;
+                                                //x.Cell().Image(QuestPDF.Infrastructure.Image.FromBinaryData(b)).FitArea();
+                                                if (i < 10) { x.Cell().Image(b).FitArea().WithCompressionQuality(ImageCompressionQuality.Medium); }
                                             }
 
                                         });
 
                                     }
-                                    /*********************************************/
-                                    /* --- --- - End ADD SOME PICTURES - --- --- */
-                                    /*********************************************/
+                                    /************************************************/
+                                    /* --- --- - End ADD SOME PICTURES_V1 - --- --- */
+                                    /************************************************/
 
                                     x.Cell().Text("Arbeitsgruppe: ");
                                     x.Cell().Text(ag);
@@ -252,8 +262,8 @@ namespace mySQL_Projektverwaltung
 
                                 });
 
-
-                            x.Item().Text("Beschreibung").AlignCenter().Underline().Overline().FontSize(14);
+                            
+                            x.Item().EnsureSpace(600).Text("Beschreibung").AlignCenter().Underline().Overline().FontSize(14);
                             x.Item().HTML(handler => { try { handler.SetHtml(Rtf.ToHtml(drproj["desc_long"].ToString())); } catch (Exception e) { MessageBox.Show(e.Message); } });
                             x.Spacing(5, Unit.Millimetre);
                             x.Item().Table(x => //Add ProjTime to PDF 

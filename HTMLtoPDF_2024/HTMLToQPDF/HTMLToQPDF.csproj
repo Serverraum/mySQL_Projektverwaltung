@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
-    <PackageReference Include="QuestPDF" Version="2024.3.5" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.64" />
+    <PackageReference Include="QuestPDF" Version="2024.7.2" />
     <PackageReference Include="SkiaSharp" Version="2.88.8" />
   </ItemGroup>
 

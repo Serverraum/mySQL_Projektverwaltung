@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "mySQL_Projektverwaltung": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

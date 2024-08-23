@@ -39,6 +39,7 @@
             button_Details = new System.Windows.Forms.Button();
             button_SmallItem = new System.Windows.Forms.Button();
             button_Tile = new System.Windows.Forms.Button();
+            lb_ProjRegex = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // button1
@@ -56,7 +57,7 @@
             listBox1.ItemHeight = 15;
             listBox1.Location = new System.Drawing.Point(68, 49);
             listBox1.Name = "listBox1";
-            listBox1.Size = new System.Drawing.Size(296, 79);
+            listBox1.Size = new System.Drawing.Size(250, 79);
             listBox1.TabIndex = 1;
             // 
             // listView_projfolder
@@ -65,7 +66,7 @@
             listView_projfolder.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             listView_projfolder.Location = new System.Drawing.Point(17, 249);
             listView_projfolder.Name = "listView_projfolder";
-            listView_projfolder.Size = new System.Drawing.Size(481, 239);
+            listView_projfolder.Size = new System.Drawing.Size(481, 288);
             listView_projfolder.TabIndex = 2;
             listView_projfolder.UseCompatibleStateImageBehavior = false;
             listView_projfolder.View = System.Windows.Forms.View.List;
@@ -84,7 +85,7 @@
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(370, 49);
+            button2.Location = new System.Drawing.Point(324, 49);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(75, 47);
             button2.TabIndex = 4;
@@ -93,6 +94,7 @@
             // 
             // tb_folder
             // 
+            tb_folder.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tb_folder.Location = new System.Drawing.Point(107, 220);
             tb_folder.Name = "tb_folder";
             tb_folder.Size = new System.Drawing.Size(391, 23);
@@ -109,6 +111,7 @@
             // 
             // button_LargeIcon
             // 
+            button_LargeIcon.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             button_LargeIcon.Location = new System.Drawing.Point(144, 159);
             button_LargeIcon.Name = "button_LargeIcon";
             button_LargeIcon.Size = new System.Drawing.Size(84, 55);
@@ -119,6 +122,7 @@
             // 
             // button_Details
             // 
+            button_Details.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             button_Details.Location = new System.Drawing.Point(234, 159);
             button_Details.Name = "button_Details";
             button_Details.Size = new System.Drawing.Size(84, 55);
@@ -129,6 +133,7 @@
             // 
             // button_SmallItem
             // 
+            button_SmallItem.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             button_SmallItem.Location = new System.Drawing.Point(324, 159);
             button_SmallItem.Name = "button_SmallItem";
             button_SmallItem.Size = new System.Drawing.Size(84, 55);
@@ -139,6 +144,7 @@
             // 
             // button_Tile
             // 
+            button_Tile.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             button_Tile.Location = new System.Drawing.Point(414, 159);
             button_Tile.Name = "button_Tile";
             button_Tile.Size = new System.Drawing.Size(84, 55);
@@ -147,10 +153,22 @@
             button_Tile.UseVisualStyleBackColor = true;
             button_Tile.Click += button_Tile_Click;
             // 
+            // lb_ProjRegex
+            // 
+            lb_ProjRegex.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            lb_ProjRegex.AutoSize = true;
+            lb_ProjRegex.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lb_ProjRegex.Location = new System.Drawing.Point(419, 49);
+            lb_ProjRegex.Name = "lb_ProjRegex";
+            lb_ProjRegex.Size = new System.Drawing.Size(79, 19);
+            lb_ProjRegex.TabIndex = 11;
+            lb_ProjRegex.Text = "ProjRegex";
+            // 
             // Project_FolderControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(lb_ProjRegex);
             Controls.Add(button_Tile);
             Controls.Add(button_SmallItem);
             Controls.Add(button_Details);
@@ -163,7 +181,7 @@
             Controls.Add(listBox1);
             Controls.Add(button1);
             Name = "Project_FolderControl";
-            Size = new System.Drawing.Size(516, 504);
+            Size = new System.Drawing.Size(516, 553);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -181,5 +199,6 @@
         private System.Windows.Forms.Button button_Details;
         private System.Windows.Forms.Button button_SmallItem;
         private System.Windows.Forms.Button button_Tile;
+        private System.Windows.Forms.Label lb_ProjRegex;
     }
 }

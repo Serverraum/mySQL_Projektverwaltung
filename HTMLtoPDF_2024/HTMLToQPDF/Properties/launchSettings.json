@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HTMLToQPDF": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

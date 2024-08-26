@@ -30,8 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            button2 = new System.Windows.Forms.Button();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             splitContainer_horiz_left = new System.Windows.Forms.SplitContainer();
@@ -50,14 +50,14 @@
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             project_NewControl1 = new Tab_Project.Project_NewControl();
             tabPage2 = new System.Windows.Forms.TabPage();
-            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            button3 = new System.Windows.Forms.Button();
+            uebersicht_Control1 = new Tab_Übersicht.Uebersicht_MainControl();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage4 = new System.Windows.Forms.TabPage();
             settingsControl1 = new SettingsControl();
             tabPage5 = new System.Windows.Forms.TabPage();
             settingsControl_Folder1 = new SettingsControl_Folder();
+            notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_left).BeginInit();
@@ -79,24 +79,11 @@
             splitContainer_right_vert.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabPage2.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
             tabPage3.SuspendLayout();
             tabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
             SuspendLayout();
-            // 
-            // button2
-            // 
-            tableLayoutPanel1.SetColumnSpan(button2, 2);
-            button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            button2.Location = new System.Drawing.Point(8, 8);
-            button2.Margin = new System.Windows.Forms.Padding(8);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(175, 212);
-            button2.TabIndex = 3;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -344,7 +331,7 @@
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(tableLayoutPanel1);
+            tabPage2.Controls.Add(uebersicht_Control1);
             tabPage2.Location = new System.Drawing.Point(4, 27);
             tabPage2.Margin = new System.Windows.Forms.Padding(2);
             tabPage2.Name = "tabPage2";
@@ -354,34 +341,13 @@
             tabPage2.Text = "Übersicht";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // uebersicht_Control1
             // 
-            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(button2, 0, 0);
-            tableLayoutPanel1.Controls.Add(button3, 0, 1);
-            tableLayoutPanel1.Location = new System.Drawing.Point(7, 15);
-            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(191, 457);
-            tableLayoutPanel1.TabIndex = 9;
-            // 
-            // button3
-            // 
-            button3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            button3.Location = new System.Drawing.Point(8, 236);
-            button3.Margin = new System.Windows.Forms.Padding(8);
-            button3.MaximumSize = new System.Drawing.Size(0, 80);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(79, 80);
-            button3.TabIndex = 1;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            uebersicht_Control1.Dock = System.Windows.Forms.DockStyle.Fill;
+            uebersicht_Control1.Location = new System.Drawing.Point(2, 2);
+            uebersicht_Control1.Name = "uebersicht_Control1";
+            uebersicht_Control1.Size = new System.Drawing.Size(951, 578);
+            uebersicht_Control1.TabIndex = 10;
             // 
             // tabPage3
             // 
@@ -389,7 +355,7 @@
             tabPage3.Location = new System.Drawing.Point(4, 27);
             tabPage3.Margin = new System.Windows.Forms.Padding(2);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new System.Drawing.Size(955, 582);
+            tabPage3.Size = new System.Drawing.Size(192, 69);
             tabPage3.TabIndex = 2;
             tabPage3.Tag = "dbConn";
             tabPage3.Text = "Settings";
@@ -403,7 +369,7 @@
             tabControl2.Location = new System.Drawing.Point(0, 0);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(955, 582);
+            tabControl2.Size = new System.Drawing.Size(192, 69);
             tabControl2.TabIndex = 10;
             // 
             // tabPage4
@@ -412,7 +378,7 @@
             tabPage4.Location = new System.Drawing.Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            tabPage4.Size = new System.Drawing.Size(947, 554);
+            tabPage4.Size = new System.Drawing.Size(184, 41);
             tabPage4.TabIndex = 0;
             tabPage4.Text = "Datenbank";
             tabPage4.UseVisualStyleBackColor = true;
@@ -425,7 +391,7 @@
             settingsControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             settingsControl1.MinimumSize = new System.Drawing.Size(259, 316);
             settingsControl1.Name = "settingsControl1";
-            settingsControl1.Size = new System.Drawing.Size(941, 548);
+            settingsControl1.Size = new System.Drawing.Size(259, 316);
             settingsControl1.TabIndex = 3;
             // 
             // tabPage5
@@ -446,6 +412,11 @@
             settingsControl_Folder1.Name = "settingsControl_Folder1";
             settingsControl_Folder1.Size = new System.Drawing.Size(623, 253);
             settingsControl_Folder1.TabIndex = 0;
+            // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
             // 
             // Main
             // 
@@ -488,7 +459,6 @@
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             tabPage2.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabControl2.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
@@ -498,12 +468,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button4;
         private SettingsControl settingsControl1;
@@ -525,5 +492,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Tab_Project.Project_MainControl project_MainControl1;
         private Tab_Project.Project_NewControl project_NewControl1;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private Tab_Übersicht.Uebersicht_MainControl uebersicht_Control1;
     }
 }

@@ -60,6 +60,7 @@ namespace mySQL_Projektverwaltung.Tab_Übersicht
                 tabControl1.TabPages.Add(tpo);
 
                 Uebersicht_AG ag1 = new Uebersicht_AG();
+                ag1.Tag = year;
                 ag1.Name = dr[0].ToString();
                 ag1.Dock = DockStyle.Fill;
                 tpo.Controls.Add(ag1);

@@ -191,6 +191,14 @@ namespace mySQL_Projektverwaltung
                         // Setze das konvertierte Datum zurück in die erste Spalte der DataRow
                         row[1] = shortDateString;
                     }
+                    else if (DateTime.TryParseExact(dateString, "dd.MM.yyyy hh:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AllowInnerWhite, out date))
+                    {
+                        // Konvertiere das Datum in das ShortDateString-Format
+                        string shortDateString = date.ToShortDateString();
+
+                        // Setze das konvertierte Datum zurück in die erste Spalte der DataRow
+                        row[1] = shortDateString;
+                    }
                     else
                     {
                         MessageBox.Show("Date wrong: '" + row[1].ToString() + "' not in Format of dd.mm.yy");

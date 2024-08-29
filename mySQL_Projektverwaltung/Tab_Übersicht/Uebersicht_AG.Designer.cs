@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            AG = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Stunden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Prozent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             LS_name = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -43,7 +40,6 @@
             dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { AG, Stunden, Prozent });
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(0, 21);
             dataGridView1.Name = "dataGridView1";
@@ -52,29 +48,6 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new System.Drawing.Size(121, 41);
             dataGridView1.TabIndex = 16;
-            // 
-            // AG
-            // 
-            AG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            AG.HeaderText = "AG";
-            AG.Name = "AG";
-            AG.ReadOnly = true;
-            // 
-            // Stunden
-            // 
-            Stunden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            Stunden.HeaderText = "h";
-            Stunden.Name = "Stunden";
-            Stunden.ReadOnly = true;
-            Stunden.Width = 39;
-            // 
-            // Prozent
-            // 
-            Prozent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            Prozent.HeaderText = "%";
-            Prozent.Name = "Prozent";
-            Prozent.ReadOnly = true;
-            Prozent.Width = 42;
             // 
             // LS_name
             // 
@@ -106,9 +79,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stunden;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Prozent;
         private System.Windows.Forms.Label LS_name;
     }
 }

@@ -111,7 +111,7 @@
             label1.TabIndex = 14;
             label1.Text = "label1";
             // 
-            // Uebersicht_Control
+            // Uebersicht_MainControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,7 +119,7 @@
             Controls.Add(tabControl1);
             Controls.Add(year_select_UD);
             Controls.Add(button2);
-            Name = "Uebersicht_Control";
+            Name = "Uebersicht_MainControl";
             Size = new System.Drawing.Size(631, 620);
             ((System.ComponentModel.ISupportInitialize)year_select_UD).EndInit();
             tabControl1.ResumeLayout(false);

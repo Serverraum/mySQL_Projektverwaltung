@@ -17,7 +17,6 @@ using MySqlX.XDevAPI.Common;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Windows.Shapes;
-using RtfPipe;
 using System.Security.AccessControl;
 using System.Reflection.Metadata.Ecma335;
 using CSharpLib;

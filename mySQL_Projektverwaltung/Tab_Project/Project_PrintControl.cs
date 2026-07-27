@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ZstdSharp.Unsafe;
 using static mySQL_Projektverwaltung.Project_PrintControl;
+using mySQL_Projektverwaltung.Tab_Search;
 
 namespace mySQL_Projektverwaltung
 {
@@ -264,7 +265,8 @@ namespace mySQL_Projektverwaltung
 
                             
                             x.Item().EnsureSpace(600).Text("Beschreibung").AlignCenter().Underline().Overline().FontSize(14);
-                            x.Item().HTML(handler => { try { handler.SetHtml(Rtf.ToHtml(drproj["desc_long"].ToString())); } catch (Exception e) { MessageBox.Show(e.Message); } });
+                            //x.Item().HTML(handler => { try { handler.SetHtml(Rtf.ToHtml(drproj["desc_long"].ToString())); } catch (Exception e) { MessageBox.Show(e.Message); } }); //OLD
+                            x.Item().Text(RichTextStripper.StripRichTextFormat(drproj["desc_long"].ToString())).FontSize(12).LineHeight(1.5f); //String-Only
                             x.Spacing(5, Unit.Millimetre);
                             x.Item().Table(x => //Add ProjTime to PDF 
                             {

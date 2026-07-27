@@ -32,8 +32,8 @@
             label1 = new System.Windows.Forms.Label();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             button1 = new System.Windows.Forms.Button();
-            richTextBox1 = new System.Windows.Forms.RichTextBox();
             label2 = new System.Windows.Forms.Label();
+            richTextBox1 = new System.Windows.Forms.RichTextBox();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -51,7 +51,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label1.Location = new System.Drawing.Point(3, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(60, 21);
@@ -80,6 +80,16 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(3, 31);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(367, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Please use Notepad.exe for extended Functionality";
+            // 
             // richTextBox1
             // 
             richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -91,16 +101,6 @@
             richTextBox1.Text = "test";
             richTextBox1.KeyPress += richTextBox1_KeyPress;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            label2.Location = new System.Drawing.Point(3, 31);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(367, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Please use Notepad.exe for extended Functionality";
-            // 
             // Project_DetailsControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -111,6 +111,7 @@
             Name = "Project_DetailsControl";
             Padding = new System.Windows.Forms.Padding(5);
             Size = new System.Drawing.Size(426, 465);
+            KeyPress += KeySave;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,8 +29,12 @@ namespace mySQL_Projektverwaltung.Tab_Übersicht
             }
         }
 
+        
+
         private void button2_Click(object sender, EventArgs e)
         {
+            List<int> ListRowCount = new List<int>();
+
             label1.Text = year_select_UD.Value.ToString();
             int year = (int)year_select_UD.Value;
             /*TabPage tp = new TabPage("Test");
@@ -53,28 +58,34 @@ namespace mySQL_Projektverwaltung.Tab_Übersicht
 
             DataTable dt = DbConnParam.DbConn.Instance.DbGetDataTable();
 
-            TabPage tp = new TabPage("Test");
+            int i = 0;
             foreach (DataRow dr in dt.Rows)
             {
+                
                 TabPage tpo = new TabPage(dr[1].ToString());
                 tabControl1.TabPages.Add(tpo);
-
+                
                 Uebersicht_AG ag1 = new Uebersicht_AG();
                 ag1.Tag = year;
                 ag1.Name = dr[0].ToString();
                 ag1.Dock = DockStyle.Fill;
                 tpo.Controls.Add(ag1);
+                ag1.Uebersicht_AG_Count();
+                ListRowCount.Add(ag1.rowCount);
+                if (ListRowCount[i] == 0) {tabControl1.TabPages.Remove(tpo); } else { ag1.ForeColor = Color.Green; }
+                i++;
             }
 
 
-            //TabPage tp = new TabPage("Test");
-            tabControl1.TabPages.Add(tp);
+            int c = ListRowCount[0];
+            i = ListRowCount.Count;
+            //while (i > 0)
+            //{
+            //    i--;
+            //    if (ListRowCount[i] > 0) { ag1.BackColor = Color.OliveDrab; } else { ag1.ForeColor = Color.Green; }
+            //}
 
-            TextBox tb = new TextBox();
-            tb.Dock = DockStyle.Fill;
-            tb.Multiline = true;
 
-            tp.Controls.Add(tb);
         }
     }
 }

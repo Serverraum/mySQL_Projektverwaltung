@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Asn1.Mozilla;
+﻿using Microsoft.VisualBasic;
+using Org.BouncyCastle.Asn1.Mozilla;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,6 +67,22 @@ namespace mySQL_Projektverwaltung.Tab_Project
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void KeySave(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyData == Keys.S)
+            {
+                MessageBox.Show("Do you want to save the changes?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            };
+        }
+
+        private void KeySave(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.S && e.KeyChar == (char)Keys.ControlKey)
+            {
+                MessageBox.Show("Do you want to save the changes?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            };
         }
     }
 }

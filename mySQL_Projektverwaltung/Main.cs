@@ -28,7 +28,7 @@ namespace mySQL_Projektverwaltung
     public partial class Main : Form
     {
         public String connectString;
-        int projID = 0;
+        long projID = 0;
         int i;
         public Boolean ProjLoad;
         private ProjAuswahl projAuswahl;
@@ -40,9 +40,9 @@ namespace mySQL_Projektverwaltung
             QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
             InitializeComponent();
             DbConnParam.DbConn.Instance.connLoadParam();
-            splitContainer_horiz_right.SplitterDistance = Settings.Instance.MainSlider.Slider1;
-            splitContainer_mid_horiz.SplitterDistance = Settings.Instance.MainSlider.Slider2;
-            splitContainer_right_vert.SplitterDistance = Settings.Instance.MainSlider.Slider3;
+            splitContainer_horiz_right.SplitterDistance = mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider1;
+            splitContainer_mid_horiz.SplitterDistance = mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider2;
+            splitContainer_right_vert.SplitterDistance = mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider3;
             project_PrintControl1.CreateDocumentProj += Project_PrintControl1_CreateDocumentProj;
             project_DetailsControl1.SaveStateChanged += ProjectSaveStateChanged;
             project_MainControl1.UpdateProj += UpdateProj;
@@ -60,7 +60,7 @@ namespace mySQL_Projektverwaltung
         {
             LoadProject(e.projID);
         }
-        public void LoadProject(int projID)
+        public void LoadProject(long projID)
         {
             project_TimeControl1.ReLoad_Project_TimeControl(projID);
             project_MainControl1.ReLoad_Project_MainControl(projID);
@@ -121,9 +121,9 @@ namespace mySQL_Projektverwaltung
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Settings.Instance.MainSlider.Slider1 = splitContainer_horiz_right.SplitterDistance;
-            Settings.Instance.MainSlider.Slider2 = splitContainer_mid_horiz.SplitterDistance;
-            Settings.Instance.MainSlider.Slider3 = splitContainer_right_vert.SplitterDistance;
+            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider1 = splitContainer_horiz_right.SplitterDistance;
+            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider2 = splitContainer_mid_horiz.SplitterDistance;
+            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider3 = splitContainer_right_vert.SplitterDistance;
             DbConnParam.DbConn.Instance.connSaveParam();
             DbConnParam.DbConn.Instance.connClose();
         }

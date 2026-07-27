@@ -52,7 +52,7 @@ namespace mySQL_Projektverwaltung
         {
             try
             {
-                String sql = "SELECT * FROM proj"; //WHERE projID=" + projID;
+                String sql = "SELECT * FROM proj ORDER BY projID DESC"; //WHERE projID=" + projID;
                 DbConn.Instance.DbAddCmd(sql);
                 dt = DbConn.Instance.DbGetDataTable();
                 PopulateTreeView(treeView1 as TreeView, dt);

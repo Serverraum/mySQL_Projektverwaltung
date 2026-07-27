@@ -28,7 +28,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
     public partial class Project_MainControl : System.Windows.Forms.UserControl
     {
         private Project_DetailsControl detailsControl;
-        public int projID = 0;
+        public long projID = 0;
         DataTable dtProj = new DataTable();
 
         public Project_MainControl()
@@ -36,7 +36,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             InitializeComponent();
         }
 
-        public void ReLoad_Project_MainControl(int projId)
+        public void ReLoad_Project_MainControl(long projId)
         {
             projID = projId;
             /*Enable Items after first Project has been loaded*/
@@ -53,7 +53,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             ReadDataProj(projID);
         }
         bool completed;
-        private void ReadDataProj(int projID)
+        private void ReadDataProj(double projID)
         {
             //cmd.CommandText = @"INSERT INTO projTime (date, description, time_h, ProjID, LSID, AGID) VALUES (@date, @description, @time_h, @projID, 1, 1)";
             try
@@ -392,7 +392,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
         public event EventHandler<ProjIdEventArgs> UpdateProj;
-        private void OnUpdateProject(int projID)
+        private void OnUpdateProject(long projID)
         {
             UpdateProj?.Invoke(this, new ProjIdEventArgs(projID));
         }

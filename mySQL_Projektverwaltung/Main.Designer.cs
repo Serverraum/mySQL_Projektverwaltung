@@ -33,7 +33,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             tabControl1 = new System.Windows.Forms.TabControl();
-            tabPage1 = new System.Windows.Forms.TabPage();
+            Projekt = new System.Windows.Forms.TabPage();
             splitContainer_horiz_left = new System.Windows.Forms.SplitContainer();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             button4 = new System.Windows.Forms.Button();
@@ -49,9 +49,11 @@
             project_TimeControl1 = new Project_TimeControl();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             project_NewControl1 = new Tab_Project.Project_NewControl();
-            tabPage2 = new System.Windows.Forms.TabPage();
+            Übersicht = new System.Windows.Forms.TabPage();
             uebersicht_Control1 = new Tab_Übersicht.Uebersicht_MainControl();
-            tabPage3 = new System.Windows.Forms.TabPage();
+            Search = new System.Windows.Forms.TabPage();
+            searchControl11 = new Tab_Search.SearchControl1();
+            Settings = new System.Windows.Forms.TabPage();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage4 = new System.Windows.Forms.TabPage();
             settingsControl1 = new SettingsControl();
@@ -59,7 +61,7 @@
             settingsControl_Folder1 = new SettingsControl_Folder();
             notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
             tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            Projekt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_horiz_left).BeginInit();
             splitContainer_horiz_left.Panel1.SuspendLayout();
             splitContainer_horiz_left.Panel2.SuspendLayout();
@@ -78,8 +80,9 @@
             splitContainer_right_vert.Panel2.SuspendLayout();
             splitContainer_right_vert.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            tabPage2.SuspendLayout();
-            tabPage3.SuspendLayout();
+            Übersicht.SuspendLayout();
+            Search.SuspendLayout();
+            Settings.SuspendLayout();
             tabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
@@ -88,32 +91,33 @@
             // tabControl1
             // 
             tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(Projekt);
+            tabControl1.Controls.Add(Übersicht);
+            tabControl1.Controls.Add(Search);
+            tabControl1.Controls.Add(Settings);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl1.Location = new System.Drawing.Point(0, 0);
             tabControl1.Margin = new System.Windows.Forms.Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.ShowToolTips = true;
-            tabControl1.Size = new System.Drawing.Size(963, 613);
+            tabControl1.Size = new System.Drawing.Size(1024, 583);
             tabControl1.TabIndex = 8;
             tabControl1.Click += Main_Load;
             // 
-            // tabPage1
+            // Projekt
             // 
-            tabPage1.AutoScroll = true;
-            tabPage1.Controls.Add(splitContainer_horiz_left);
-            tabPage1.Controls.Add(flowLayoutPanel1);
-            tabPage1.Location = new System.Drawing.Point(4, 27);
-            tabPage1.Margin = new System.Windows.Forms.Padding(2);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            tabPage1.Size = new System.Drawing.Size(955, 582);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Auftrag/Projekt";
-            tabPage1.UseVisualStyleBackColor = true;
+            Projekt.AutoScroll = true;
+            Projekt.Controls.Add(splitContainer_horiz_left);
+            Projekt.Controls.Add(flowLayoutPanel1);
+            Projekt.Location = new System.Drawing.Point(4, 27);
+            Projekt.Margin = new System.Windows.Forms.Padding(2);
+            Projekt.Name = "Projekt";
+            Projekt.Padding = new System.Windows.Forms.Padding(2);
+            Projekt.Size = new System.Drawing.Size(1016, 552);
+            Projekt.TabIndex = 0;
+            Projekt.Text = "Auftrag/Projekt";
+            Projekt.UseVisualStyleBackColor = true;
             // 
             // splitContainer_horiz_left
             // 
@@ -135,7 +139,7 @@
             splitContainer_horiz_left.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_horiz_left.Panel2MinSize = 100;
             splitContainer_horiz_left.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            splitContainer_horiz_left.Size = new System.Drawing.Size(951, 547);
+            splitContainer_horiz_left.Size = new System.Drawing.Size(1012, 517);
             splitContainer_horiz_left.SplitterDistance = 200;
             splitContainer_horiz_left.TabIndex = 24;
             // 
@@ -157,7 +161,7 @@
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(200, 547);
+            tableLayoutPanel2.Size = new System.Drawing.Size(200, 517);
             tableLayoutPanel2.TabIndex = 21;
             // 
             // button4
@@ -201,7 +205,7 @@
             project_MainControl1.Location = new System.Drawing.Point(3, 62);
             project_MainControl1.MinimumSize = new System.Drawing.Size(150, 440);
             project_MainControl1.Name = "project_MainControl1";
-            project_MainControl1.Size = new System.Drawing.Size(194, 482);
+            project_MainControl1.Size = new System.Drawing.Size(194, 452);
             project_MainControl1.TabIndex = 22;
             // 
             // splitContainer_horiz_right
@@ -221,8 +225,8 @@
             splitContainer_horiz_right.Panel2.Controls.Add(splitContainer_right_vert);
             splitContainer_horiz_right.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_horiz_right.Panel2MinSize = 150;
-            splitContainer_horiz_right.Size = new System.Drawing.Size(747, 547);
-            splitContainer_horiz_right.SplitterDistance = 433;
+            splitContainer_horiz_right.Size = new System.Drawing.Size(808, 517);
+            splitContainer_horiz_right.SplitterDistance = 467;
             splitContainer_horiz_right.TabIndex = 0;
             // 
             // splitContainer_mid_horiz
@@ -244,8 +248,8 @@
             splitContainer_mid_horiz.Panel2.Controls.Add(project_FolderControl1);
             splitContainer_mid_horiz.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_mid_horiz.Panel2MinSize = 100;
-            splitContainer_mid_horiz.Size = new System.Drawing.Size(433, 547);
-            splitContainer_mid_horiz.SplitterDistance = 160;
+            splitContainer_mid_horiz.Size = new System.Drawing.Size(467, 517);
+            splitContainer_mid_horiz.SplitterDistance = 150;
             splitContainer_mid_horiz.TabIndex = 0;
             // 
             // project_DetailsControl1
@@ -255,7 +259,7 @@
             project_DetailsControl1.Location = new System.Drawing.Point(0, 0);
             project_DetailsControl1.Name = "project_DetailsControl1";
             project_DetailsControl1.Padding = new System.Windows.Forms.Padding(5);
-            project_DetailsControl1.Size = new System.Drawing.Size(431, 158);
+            project_DetailsControl1.Size = new System.Drawing.Size(465, 148);
             project_DetailsControl1.TabIndex = 0;
             // 
             // project_FolderControl1
@@ -263,7 +267,7 @@
             project_FolderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             project_FolderControl1.Location = new System.Drawing.Point(0, 0);
             project_FolderControl1.Name = "project_FolderControl1";
-            project_FolderControl1.Size = new System.Drawing.Size(431, 381);
+            project_FolderControl1.Size = new System.Drawing.Size(465, 361);
             project_FolderControl1.TabIndex = 0;
             // 
             // splitContainer_right_vert
@@ -285,8 +289,8 @@
             splitContainer_right_vert.Panel2.Controls.Add(project_TimeControl1);
             splitContainer_right_vert.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             splitContainer_right_vert.Panel2MinSize = 50;
-            splitContainer_right_vert.Size = new System.Drawing.Size(310, 547);
-            splitContainer_right_vert.SplitterDistance = 100;
+            splitContainer_right_vert.Size = new System.Drawing.Size(337, 517);
+            splitContainer_right_vert.SplitterDistance = 109;
             splitContainer_right_vert.TabIndex = 0;
             // 
             // pictureList1
@@ -298,7 +302,7 @@
             pictureList1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureList1.MinimumSize = new System.Drawing.Size(152, 58);
             pictureList1.Name = "pictureList1";
-            pictureList1.Size = new System.Drawing.Size(308, 98);
+            pictureList1.Size = new System.Drawing.Size(335, 107);
             pictureList1.TabIndex = 21;
             // 
             // project_TimeControl1
@@ -307,7 +311,7 @@
             project_TimeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             project_TimeControl1.Location = new System.Drawing.Point(0, 0);
             project_TimeControl1.Name = "project_TimeControl1";
-            project_TimeControl1.Size = new System.Drawing.Size(308, 441);
+            project_TimeControl1.Size = new System.Drawing.Size(335, 402);
             project_TimeControl1.TabIndex = 19;
             // 
             // flowLayoutPanel1
@@ -317,7 +321,7 @@
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             flowLayoutPanel1.Location = new System.Drawing.Point(2, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(951, 31);
+            flowLayoutPanel1.Size = new System.Drawing.Size(1012, 31);
             flowLayoutPanel1.TabIndex = 22;
             // 
             // project_NewControl1
@@ -329,37 +333,56 @@
             project_NewControl1.Size = new System.Drawing.Size(90, 25);
             project_NewControl1.TabIndex = 1;
             // 
-            // tabPage2
+            // Übersicht
             // 
-            tabPage2.Controls.Add(uebersicht_Control1);
-            tabPage2.Location = new System.Drawing.Point(4, 27);
-            tabPage2.Margin = new System.Windows.Forms.Padding(2);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            tabPage2.Size = new System.Drawing.Size(955, 582);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Übersicht";
-            tabPage2.UseVisualStyleBackColor = true;
+            Übersicht.Controls.Add(uebersicht_Control1);
+            Übersicht.Location = new System.Drawing.Point(4, 27);
+            Übersicht.Margin = new System.Windows.Forms.Padding(2);
+            Übersicht.Name = "Übersicht";
+            Übersicht.Padding = new System.Windows.Forms.Padding(2);
+            Übersicht.Size = new System.Drawing.Size(192, 69);
+            Übersicht.TabIndex = 1;
+            Übersicht.Text = "Übersicht";
+            Übersicht.UseVisualStyleBackColor = true;
             // 
             // uebersicht_Control1
             // 
             uebersicht_Control1.Dock = System.Windows.Forms.DockStyle.Fill;
             uebersicht_Control1.Location = new System.Drawing.Point(2, 2);
             uebersicht_Control1.Name = "uebersicht_Control1";
-            uebersicht_Control1.Size = new System.Drawing.Size(951, 578);
+            uebersicht_Control1.Size = new System.Drawing.Size(188, 65);
             uebersicht_Control1.TabIndex = 10;
             // 
-            // tabPage3
+            // Search
             // 
-            tabPage3.Controls.Add(tabControl2);
-            tabPage3.Location = new System.Drawing.Point(4, 27);
-            tabPage3.Margin = new System.Windows.Forms.Padding(2);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Size = new System.Drawing.Size(192, 69);
-            tabPage3.TabIndex = 2;
-            tabPage3.Tag = "dbConn";
-            tabPage3.Text = "Settings";
-            tabPage3.UseVisualStyleBackColor = true;
+            Search.Controls.Add(searchControl11);
+            Search.Location = new System.Drawing.Point(4, 27);
+            Search.Name = "Search";
+            Search.Padding = new System.Windows.Forms.Padding(3);
+            Search.Size = new System.Drawing.Size(1016, 552);
+            Search.TabIndex = 3;
+            Search.Text = "Suche";
+            Search.UseVisualStyleBackColor = true;
+            // 
+            // searchControl11
+            // 
+            searchControl11.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            searchControl11.Location = new System.Drawing.Point(0, 0);
+            searchControl11.Name = "searchControl11";
+            searchControl11.Size = new System.Drawing.Size(1016, 552);
+            searchControl11.TabIndex = 0;
+            // 
+            // Settings
+            // 
+            Settings.Controls.Add(tabControl2);
+            Settings.Location = new System.Drawing.Point(4, 27);
+            Settings.Margin = new System.Windows.Forms.Padding(2);
+            Settings.Name = "Settings";
+            Settings.Size = new System.Drawing.Size(192, 69);
+            Settings.TabIndex = 2;
+            Settings.Tag = "dbConn";
+            Settings.Text = "Settings";
+            Settings.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
@@ -423,7 +446,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new System.Drawing.Size(963, 613);
+            ClientSize = new System.Drawing.Size(1024, 583);
             Controls.Add(tabControl1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(2);
@@ -433,8 +456,8 @@
             FormClosed += Main_FormClosed;
             Load += Main_Load;
             tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
+            Projekt.ResumeLayout(false);
+            Projekt.PerformLayout();
             splitContainer_horiz_left.Panel1.ResumeLayout(false);
             splitContainer_horiz_left.Panel1.PerformLayout();
             splitContainer_horiz_left.Panel2.ResumeLayout(false);
@@ -458,8 +481,9 @@
             splitContainer_right_vert.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            tabPage2.ResumeLayout(false);
-            tabPage3.ResumeLayout(false);
+            Übersicht.ResumeLayout(false);
+            Search.ResumeLayout(false);
+            Settings.ResumeLayout(false);
             tabControl2.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
@@ -469,12 +493,12 @@
 
         #endregion
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage Projekt;
+        private System.Windows.Forms.TabPage Übersicht;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button4;
         private SettingsControl settingsControl1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage Settings;
         private Project_TimeControl project_TimeControl1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private mySQL_Projektverwaltung.PictureList pictureList1;
@@ -494,5 +518,7 @@
         private Tab_Project.Project_NewControl project_NewControl1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private Tab_Übersicht.Uebersicht_MainControl uebersicht_Control1;
+        private System.Windows.Forms.TabPage Search;
+        private Tab_Search.SearchControl1 searchControl11;
     }
 }

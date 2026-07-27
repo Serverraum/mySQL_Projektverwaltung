@@ -37,11 +37,11 @@ namespace mySQL_Projektverwaltung.Tab_Project
             setctrl.FolderRegex(Settings.Instance.ProjFolder.ProjRegex, projID);
         }
         SettingsControl_Folder setctrl = new SettingsControl_Folder();
-        int projID;
+        long projID;
         string folderprev; //Root Project Folder
         string folder; // Folder, where the user is, when he's in subdirectories
         bool FolderCreated;
-        public void ReLoad_Project_FolderControl(int projId)
+        public void ReLoad_Project_FolderControl(long projId)
         {
             projID = projId;
             //Future: Check, if Files are available for Download. If yes, push Filenames into DownloadList and enable Download-Button.

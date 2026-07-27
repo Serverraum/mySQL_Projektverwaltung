@@ -39,7 +39,7 @@ namespace mySQL_Projektverwaltung
 
             //.GeneratePdf("hello.pdf"); 
         }
-        int projID = 0;
+        long projID = 0;
         public void button1_Click(object sender, EventArgs e)
         {
 
@@ -50,7 +50,7 @@ namespace mySQL_Projektverwaltung
         }
         public event EventHandler<ProjIdEventArgs> CreateDocumentProj;
 
-        private void OnCreateDocument(int projID)
+        private void OnCreateDocument(long projID)
         {
             CreateDocumentProj?.Invoke(this, new ProjIdEventArgs(projID));
         }
@@ -60,16 +60,16 @@ namespace mySQL_Projektverwaltung
 
 
 
-        public void ReLoad_Project_PrintControl(int projId)
+        public void ReLoad_Project_PrintControl(long projId)
         {
             projID = projId;
         }
     }
     public class ProjIdEventArgs : EventArgs
     {
-        public int projID { get; }
+        public long projID { get; }
 
-        public ProjIdEventArgs(int ProjID)
+        public ProjIdEventArgs(long ProjID)
         {
             projID = ProjID;
         }

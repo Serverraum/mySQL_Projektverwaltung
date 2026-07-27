@@ -30,7 +30,7 @@ namespace mySQL_Projektverwaltung.Tab_Project
             SaveStateChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public void ReLoad_Project_DetailsControl(int projID)
+        public void ReLoad_Project_DetailsControl(long projID)
         {
             string sql = "SELECT desc_long FROM proj WHERE projID=@projID";
             DbConnParam.DbConn.Instance.DbAddCmd(sql);

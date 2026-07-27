@@ -19,7 +19,7 @@ namespace mySQL_Projektverwaltung
         {
             InitializeComponent();
         }
-        public int projID = 0;
+        public double projID = 0;
         /*--------- --------- --------- --- Fremdcode Beginn -- --------- --------- ---------*/
         /*--------- http://www.csharphelper.com/howtos/howto_edit_picture_list.html ---------*/
         // The currently loaded pictures.
@@ -350,7 +350,7 @@ namespace mySQL_Projektverwaltung
             MessageBox.Show(projID.ToString() + ClickedIndex.ToString());
         }
         /*------ Load Pics from DB on ProjChange ------*/
-        public void ReLoad_Project_PictureList(int ProjID)
+        public void ReLoad_Project_PictureList(long ProjID)
         {
             //Reset pictureindex, so after reload the first picture is shown.
             pictureIndex = 0;

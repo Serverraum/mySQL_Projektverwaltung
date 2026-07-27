@@ -7,13 +7,13 @@ namespace mySQL_Projektverwaltung
 {
     public partial class Project_TimeControl : UserControl
     {
-        public int projID;
+        public double projID;
         public Project_TimeControl()//int projId)
         {
             projID = 0;// projId;
             InitializeComponent();
         }
-        public void ReLoad_Project_TimeControl(int projId)
+        public void ReLoad_Project_TimeControl(long projId)
         {
             if (this.dataGridView1.AllowUserToAddRows == false)
             {

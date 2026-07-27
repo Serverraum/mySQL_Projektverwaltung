@@ -58,7 +58,7 @@ namespace mySQL_Projektverwaltung
 
         }
 
-        public string FolderRegex(string regextext, int projID, bool debug = false)
+        public string FolderRegex(string regextext, long projID, bool debug = false)
         {
             string regexPattern = @"([[](?<group>[A-Za-z0-9]*)[\]])"; // [], [n], [M], [n5], ... werden gezählt.  Elemente innerhalb der Klammer werden als ${group}-Variable gespeichert.
             Regex regex = new Regex(regexPattern);
@@ -88,7 +88,7 @@ namespace mySQL_Projektverwaltung
                 Match match2 = regex2.Match(match.Result("${group}"));
                 if (match2.Success)
                 {
-                    int len = Int32.Parse(match2.Result("${nr}"));
+                    long len = long.Parse(match2.Result("${nr}"));
                     string replacestr = projID.ToString("D" + len);
                     regextext = ReplaceFirst(regextext, match.Value, replacestr);
                     //regextext = regex.Replace(regextext, replacestr ,match.Length, match.Index);//-Replaces all matches

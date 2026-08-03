@@ -20,6 +20,7 @@ using mySQL_Projektverwaltung.Tab_Project;
 using System.Configuration;
 using QuestPDF.Infrastructure;
 using System.Windows.Controls;
+using mySQL_Projektverwaltung.Tab_Search;
 
 namespace mySQL_Projektverwaltung
 {
@@ -40,9 +41,9 @@ namespace mySQL_Projektverwaltung
             QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
             InitializeComponent();
             DbConnParam.DbConn.Instance.connLoadParam();
-            splitContainer_horiz_right.SplitterDistance = mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider1;
-            splitContainer_mid_horiz.SplitterDistance = mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider2;
-            splitContainer_right_vert.SplitterDistance = mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider3;
+            splitContainer_horiz_right.SplitterDistance = splitContainer_horiz_right.Size.Width * mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider1 / 100;
+            splitContainer_mid_horiz.SplitterDistance = splitContainer_mid_horiz.Size.Width * mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider2 / 100;
+            splitContainer_right_vert.SplitterDistance = splitContainer_right_vert.Size.Height * mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider3 / 100;
             project_PrintControl1.CreateDocumentProj += Project_PrintControl1_CreateDocumentProj;
             project_DetailsControl1.SaveStateChanged += ProjectSaveStateChanged;
             project_MainControl1.UpdateProj += UpdateProj;
@@ -121,11 +122,19 @@ namespace mySQL_Projektverwaltung
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider1 = splitContainer_horiz_right.SplitterDistance;
-            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider2 = splitContainer_mid_horiz.SplitterDistance;
-            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider3 = splitContainer_right_vert.SplitterDistance;
+
+            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider1 = splitContainer_horiz_right.SplitterDistance * 100 / splitContainer_horiz_right.Size.Width ;
+            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider2 = splitContainer_mid_horiz.SplitterDistance * 100 / splitContainer_mid_horiz.Size.Width ;
+            mySQL_Projektverwaltung.Settings.Instance.MainSlider.Slider3 = splitContainer_right_vert.SplitterDistance * 100 / splitContainer_right_vert.Size.Height;
             DbConnParam.DbConn.Instance.connSaveParam();
             DbConnParam.DbConn.Instance.connClose();
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab.Name.ToString() == "Search") {
+                searchControl11.Focus();//ActiveControl = searchControl11.;//BackColor = System.Drawing.Color.Red;
+            };
         }
     }
 

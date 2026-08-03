@@ -103,6 +103,9 @@
             tabControl1.ShowToolTips = true;
             tabControl1.Size = new System.Drawing.Size(1024, 583);
             tabControl1.TabIndex = 8;
+            tabControl1.SelectedIndexChanged += tabControl1_TabIndexChanged;
+            tabControl1.TabIndexChanged += tabControl1_TabIndexChanged;
+            tabControl1.TabStopChanged += tabControl1_TabIndexChanged;
             tabControl1.Click += Main_Load;
             // 
             // Projekt
@@ -359,7 +362,7 @@
             Search.Location = new System.Drawing.Point(4, 27);
             Search.Name = "Search";
             Search.Padding = new System.Windows.Forms.Padding(3);
-            Search.Size = new System.Drawing.Size(1016, 552);
+            Search.Size = new System.Drawing.Size(192, 69);
             Search.TabIndex = 3;
             Search.Text = "Suche";
             Search.UseVisualStyleBackColor = true;
@@ -369,7 +372,7 @@
             searchControl11.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             searchControl11.Location = new System.Drawing.Point(0, 0);
             searchControl11.Name = "searchControl11";
-            searchControl11.Size = new System.Drawing.Size(1016, 552);
+            searchControl11.Size = new System.Drawing.Size(192, 69);
             searchControl11.TabIndex = 0;
             // 
             // Settings

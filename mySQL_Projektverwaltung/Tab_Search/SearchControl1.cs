@@ -23,11 +23,29 @@ namespace mySQL_Projektverwaltung.Tab_Search
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+            SearchLoad();
+        }
+
+        private void SearchLoad()
+        {
             try
             {
                 dataGridView1.DataSource = null;
-                string sql = "SELECT * FROM proj WHERE desc_short LIKE '%" + textBox1.Text + "%' OR desc_long LIKE '%" + textBox1.Text + "%'";
+                //Generierung des Suchstrings
+                string sql = "SELECT * FROM proj"; //"WHERE desc_short LIKE '%" + textBox1.Text + "%' OR desc_long LIKE '%" + textBox1.Text + "%'";
+                bool first = false;
+                if (cb_AG.Checked == true) { if (first == false) { sql += " WHERE "; first = true; } else { sql += " OR "; }; sql += "AGID IN ( SELECT AGID from ag WHERE AG LIKE '%" + textBox1.Text + "%')"; };
+                if (cb_desc_long.Checked == true) { if (first == false) { sql += " WHERE "; first = true; } else { sql += " OR "; }; sql += "desc_long LIKE '%" + textBox1.Text + "%'"; };
+                if (cb_desc_short.Checked == true) { if (first == false) { sql += " WHERE "; first = true; } else { sql += " OR "; }; sql += "desc_short LIKE '%" + textBox1.Text + "%'"; };
+                if (cb_LS.Checked == true) { if (first == false) { sql += " WHERE "; first = true; } else { sql += " OR "; }; sql += "LSID IN ( SELECT LSID from ls WHERE LS LIKE '%" + textBox1.Text + "%')"; };
+                if (cb_name.Checked == true) { if (first == false) { sql += " WHERE "; first = true; } else { sql += " OR "; }; sql += "name LIKE '%" + textBox1.Text + "%'"; };
+                if (cb_projID.Checked == true) { if (first == false) { sql += " WHERE "; first = true; } else { sql += " OR "; }; sql += "projID LIKE '%" + textBox1.Text + "%'"; };
+
+
+
+
+
+
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
                 DataTable dt = DbConnParam.DbConn.Instance.DbGetDataTable();
 
@@ -73,9 +91,9 @@ namespace mySQL_Projektverwaltung.Tab_Search
                 //dataGridView1.Columns[1].HeaderText = "Datum";
                 //dataGridView1.Columns[2].HeaderText = "Beschreibung";
                 //dataGridView1.Columns[3].HeaderText = "Zeit";
-                dataGridView1.Columns[0].Visible = false; //projID
-                dataGridView1.Columns[2].Visible = false; //LSID
-                dataGridView1.Columns[3].Visible = false; //AGID
+                //dataGridView1.Columns[0].Visible = false; //projID
+                //dataGridView1.Columns[2].Visible = false; //LSID
+                //dataGridView1.Columns[3].Visible = false; //AGID
                 dataGridView1.Columns[9].Visible = false; //completed
                 dataGridView1.Columns[10].Visible = false; //folder
                 dataGridView1.Columns[11].Visible = false; //datechanged
@@ -89,6 +107,7 @@ namespace mySQL_Projektverwaltung.Tab_Search
                 MessageBox.Show(ex.Message);
             }
         }
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -105,9 +124,10 @@ namespace mySQL_Projektverwaltung.Tab_Search
             }
         }
 
-        
-        
-        
+        private void cb_Load(object sender, EventArgs e)
+        {
+            SearchLoad();
+        }
     }
     /// <summary>
     /// Rich Text Stripper

@@ -45,7 +45,6 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new System.Drawing.Size(121, 41);
             dataGridView1.TabIndex = 16;
             // 
@@ -53,7 +52,7 @@
             // 
             LS_name.AutoSize = true;
             LS_name.Dock = System.Windows.Forms.DockStyle.Top;
-            LS_name.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            LS_name.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             LS_name.Location = new System.Drawing.Point(0, 0);
             LS_name.Name = "LS_name";
             LS_name.Size = new System.Drawing.Size(50, 21);

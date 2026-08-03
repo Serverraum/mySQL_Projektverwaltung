@@ -59,6 +59,8 @@
             settingsControl1 = new SettingsControl();
             tabPage5 = new System.Windows.Forms.TabPage();
             settingsControl_Folder1 = new SettingsControl_Folder();
+            Settings2 = new System.Windows.Forms.TabPage();
+            changelsag1 = new Tab_LS_AG.LSAG_Control();
             notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
             tabControl1.SuspendLayout();
             Projekt.SuspendLayout();
@@ -86,6 +88,7 @@
             tabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
+            Settings2.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -95,6 +98,7 @@
             tabControl1.Controls.Add(Übersicht);
             tabControl1.Controls.Add(Search);
             tabControl1.Controls.Add(Settings);
+            tabControl1.Controls.Add(Settings2);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl1.Location = new System.Drawing.Point(0, 0);
             tabControl1.Margin = new System.Windows.Forms.Padding(2);
@@ -343,7 +347,7 @@
             Übersicht.Margin = new System.Windows.Forms.Padding(2);
             Übersicht.Name = "Übersicht";
             Übersicht.Padding = new System.Windows.Forms.Padding(2);
-            Übersicht.Size = new System.Drawing.Size(192, 69);
+            Übersicht.Size = new System.Drawing.Size(1016, 552);
             Übersicht.TabIndex = 1;
             Übersicht.Text = "Übersicht";
             Übersicht.UseVisualStyleBackColor = true;
@@ -353,7 +357,7 @@
             uebersicht_Control1.Dock = System.Windows.Forms.DockStyle.Fill;
             uebersicht_Control1.Location = new System.Drawing.Point(2, 2);
             uebersicht_Control1.Name = "uebersicht_Control1";
-            uebersicht_Control1.Size = new System.Drawing.Size(188, 65);
+            uebersicht_Control1.Size = new System.Drawing.Size(1012, 548);
             uebersicht_Control1.TabIndex = 10;
             // 
             // Search
@@ -362,17 +366,17 @@
             Search.Location = new System.Drawing.Point(4, 27);
             Search.Name = "Search";
             Search.Padding = new System.Windows.Forms.Padding(3);
-            Search.Size = new System.Drawing.Size(192, 69);
+            Search.Size = new System.Drawing.Size(1016, 552);
             Search.TabIndex = 3;
             Search.Text = "Suche";
             Search.UseVisualStyleBackColor = true;
             // 
             // searchControl11
             // 
-            searchControl11.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            searchControl11.Location = new System.Drawing.Point(0, 0);
+            searchControl11.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchControl11.Location = new System.Drawing.Point(3, 3);
             searchControl11.Name = "searchControl11";
-            searchControl11.Size = new System.Drawing.Size(192, 69);
+            searchControl11.Size = new System.Drawing.Size(1010, 546);
             searchControl11.TabIndex = 0;
             // 
             // Settings
@@ -434,10 +438,29 @@
             // settingsControl_Folder1
             // 
             settingsControl_Folder1.AutoSize = true;
-            settingsControl_Folder1.Location = new System.Drawing.Point(6, 6);
+            settingsControl_Folder1.Dock = System.Windows.Forms.DockStyle.Fill;
+            settingsControl_Folder1.Location = new System.Drawing.Point(3, 3);
             settingsControl_Folder1.Name = "settingsControl_Folder1";
-            settingsControl_Folder1.Size = new System.Drawing.Size(623, 253);
+            settingsControl_Folder1.Size = new System.Drawing.Size(186, 66);
             settingsControl_Folder1.TabIndex = 0;
+            // 
+            // Settings2
+            // 
+            Settings2.Controls.Add(changelsag1);
+            Settings2.Location = new System.Drawing.Point(4, 27);
+            Settings2.Name = "Settings2";
+            Settings2.Size = new System.Drawing.Size(192, 69);
+            Settings2.TabIndex = 4;
+            Settings2.Text = "LS / AG";
+            Settings2.UseVisualStyleBackColor = true;
+            // 
+            // changelsag1
+            // 
+            changelsag1.Dock = System.Windows.Forms.DockStyle.Fill;
+            changelsag1.Location = new System.Drawing.Point(0, 0);
+            changelsag1.Name = "changelsag1";
+            changelsag1.Size = new System.Drawing.Size(192, 69);
+            changelsag1.TabIndex = 0;
             // 
             // notifyIcon1
             // 
@@ -491,6 +514,7 @@
             tabPage4.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
+            Settings2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -523,5 +547,7 @@
         private Tab_Übersicht.Uebersicht_MainControl uebersicht_Control1;
         private System.Windows.Forms.TabPage Search;
         private Tab_Search.SearchControl1 searchControl11;
+        private System.Windows.Forms.TabPage Settings2;
+        private Tab_LS_AG.LSAG_Control changelsag1;
     }
 }

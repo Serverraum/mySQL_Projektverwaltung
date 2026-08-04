@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lS_Control1 = new LS_Control();
             groupBox1 = new System.Windows.Forms.GroupBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
@@ -37,13 +36,6 @@
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             SuspendLayout();
-            // 
-            // lS_Control1
-            // 
-            lS_Control1.Location = new System.Drawing.Point(129, 75);
-            lS_Control1.Name = "lS_Control1";
-            lS_Control1.Size = new System.Drawing.Size(556, 333);
-            lS_Control1.TabIndex = 0;
             // 
             // groupBox1
             // 

@@ -30,34 +30,35 @@
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             label6 = new System.Windows.Forms.Label();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            dtp_datecreated = new System.Windows.Forms.DateTimePicker();
             label5 = new System.Windows.Forms.Label();
-            dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            dtp_dateremoved = new System.Windows.Forms.DateTimePicker();
+            cb_removed_null = new System.Windows.Forms.CheckBox();
             label2 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
-            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            tb_LS = new System.Windows.Forms.TextBox();
             bt_saveLS = new System.Windows.Forms.Button();
-            bt_deleteLS = new System.Windows.Forms.Button();
+            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             groupBox2 = new System.Windows.Forms.GroupBox();
-            tabControl2 = new System.Windows.Forms.TabControl();
+            tabControl1 = new System.Windows.Forms.TabControl();
             tabPage3 = new System.Windows.Forms.TabPage();
             aG_Control1 = new AG_Control();
             tabPage4 = new System.Windows.Forms.TabPage();
             flowLayoutPanel1.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
             groupBox2.SuspendLayout();
-            tabControl2.SuspendLayout();
+            tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(label6);
-            flowLayoutPanel1.Controls.Add(dateTimePicker1);
+            flowLayoutPanel1.Controls.Add(dtp_datecreated);
             flowLayoutPanel1.Controls.Add(label5);
-            flowLayoutPanel1.Controls.Add(dateTimePicker2);
+            flowLayoutPanel1.Controls.Add(dtp_dateremoved);
+            flowLayoutPanel1.Controls.Add(cb_removed_null);
             flowLayoutPanel1.Controls.Add(label2);
-            flowLayoutPanel1.Controls.Add(textBox1);
+            flowLayoutPanel1.Controls.Add(tb_LS);
+            flowLayoutPanel1.Controls.Add(bt_saveLS);
             flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -75,12 +76,12 @@
             label6.TabIndex = 7;
             label6.Text = "Ernannt";
             // 
-            // dateTimePicker1
+            // dtp_datecreated
             // 
-            dateTimePicker1.Location = new System.Drawing.Point(3, 18);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            dateTimePicker1.TabIndex = 2;
+            dtp_datecreated.Location = new System.Drawing.Point(3, 18);
+            dtp_datecreated.Name = "dtp_datecreated";
+            dtp_datecreated.Size = new System.Drawing.Size(200, 23);
+            dtp_datecreated.TabIndex = 2;
             // 
             // label5
             // 
@@ -91,66 +92,66 @@
             label5.TabIndex = 6;
             label5.Text = "Entfernt";
             // 
-            // dateTimePicker2
+            // dtp_dateremoved
             // 
-            dateTimePicker2.Location = new System.Drawing.Point(3, 62);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new System.Drawing.Size(200, 23);
-            dateTimePicker2.TabIndex = 3;
+            dtp_dateremoved.Location = new System.Drawing.Point(3, 62);
+            dtp_dateremoved.Name = "dtp_dateremoved";
+            dtp_dateremoved.Size = new System.Drawing.Size(200, 23);
+            dtp_dateremoved.TabIndex = 3;
+            // 
+            // cb_removed_null
+            // 
+            cb_removed_null.AutoSize = true;
+            cb_removed_null.Location = new System.Drawing.Point(3, 91);
+            cb_removed_null.Name = "cb_removed_null";
+            cb_removed_null.Size = new System.Drawing.Size(174, 19);
+            cb_removed_null.TabIndex = 14;
+            cb_removed_null.Text = "Noch aktiv / kein Enddatum";
+            cb_removed_null.UseVisualStyleBackColor = true;
+            cb_removed_null.CheckedChanged += cb_removed_null_CheckedChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(3, 88);
+            label2.Location = new System.Drawing.Point(3, 113);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(39, 15);
             label2.TabIndex = 5;
             label2.Text = "Name";
             // 
-            // textBox1
+            // tb_LS
             // 
-            textBox1.Location = new System.Drawing.Point(3, 106);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(200, 23);
-            textBox1.TabIndex = 4;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.AutoSize = true;
-            flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel2.Controls.Add(bt_saveLS);
-            flowLayoutPanel2.Controls.Add(bt_deleteLS);
-            flowLayoutPanel2.Location = new System.Drawing.Point(3, 135);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(126, 62);
-            flowLayoutPanel2.TabIndex = 10;
+            tb_LS.Location = new System.Drawing.Point(3, 131);
+            tb_LS.MaxLength = 49;
+            tb_LS.Name = "tb_LS";
+            tb_LS.Size = new System.Drawing.Size(200, 23);
+            tb_LS.TabIndex = 4;
             // 
             // bt_saveLS
             // 
             bt_saveLS.AutoSize = true;
             bt_saveLS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            bt_saveLS.Location = new System.Drawing.Point(3, 3);
+            bt_saveLS.Location = new System.Drawing.Point(3, 160);
             bt_saveLS.Name = "bt_saveLS";
             bt_saveLS.Size = new System.Drawing.Size(120, 25);
             bt_saveLS.TabIndex = 8;
             bt_saveLS.Text = "Lehrstuhl speichern";
             bt_saveLS.UseVisualStyleBackColor = true;
+            bt_saveLS.Click += bt_saveLS_Click;
             // 
-            // bt_deleteLS
+            // flowLayoutPanel2
             // 
-            bt_deleteLS.AutoSize = true;
-            bt_deleteLS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            bt_deleteLS.Location = new System.Drawing.Point(3, 34);
-            bt_deleteLS.Name = "bt_deleteLS";
-            bt_deleteLS.Size = new System.Drawing.Size(110, 25);
-            bt_deleteLS.TabIndex = 9;
-            bt_deleteLS.Text = "Lehrstuhl löschen";
-            bt_deleteLS.UseVisualStyleBackColor = true;
+            flowLayoutPanel2.AutoSize = true;
+            flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel2.Location = new System.Drawing.Point(3, 191);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new System.Drawing.Size(0, 0);
+            flowLayoutPanel2.TabIndex = 10;
             // 
             // groupBox2
             // 
             groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            groupBox2.Controls.Add(tabControl2);
+            groupBox2.Controls.Add(tabControl1);
             groupBox2.Location = new System.Drawing.Point(219, 0);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new System.Drawing.Size(873, 650);
@@ -158,16 +159,16 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Arbeitsgruppe";
             // 
-            // tabControl2
+            // tabControl1
             // 
-            tabControl2.Controls.Add(tabPage3);
-            tabControl2.Controls.Add(tabPage4);
-            tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl2.Location = new System.Drawing.Point(3, 19);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(867, 628);
-            tabControl2.TabIndex = 0;
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl1.Location = new System.Drawing.Point(3, 19);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(867, 628);
+            tabControl1.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -187,6 +188,7 @@
             aG_Control1.Name = "aG_Control1";
             aG_Control1.Size = new System.Drawing.Size(853, 594);
             aG_Control1.TabIndex = 9;
+            aG_Control1.Tag = "1";
             // 
             // tabPage4
             // 
@@ -206,12 +208,11 @@
             Controls.Add(groupBox2);
             Name = "LS_Control";
             Size = new System.Drawing.Size(1092, 650);
+            Load += LS_Control_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel2.PerformLayout();
             groupBox2.ResumeLayout(false);
-            tabControl2.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -220,18 +221,18 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtp_datecreated;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtp_dateremoved;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_LS;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button bt_saveLS;
-        private System.Windows.Forms.Button bt_deleteLS;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage3;
         private AG_Control aG_Control1;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.CheckBox cb_removed_null;
     }
 }

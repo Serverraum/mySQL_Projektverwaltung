@@ -1,4 +1,5 @@
-﻿using mySQL_Projektverwaltung.Tab_Übersicht;
+﻿using Microsoft.VisualBasic;
+using mySQL_Projektverwaltung.Tab_Übersicht;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,22 +22,26 @@ namespace mySQL_Projektverwaltung.Tab_LS_AG
 
         private void LSAG_Control_Load(object sender, EventArgs e)
         {
-            List<int> ListRowCount = new List<int>();
+            // Prüfen, ob das Control oder das übergeordnete Fenster gerade zerstört wird
+            if (this.Disposing || this.IsDisposed) return;
 
-            /*TabPage tp = new TabPage("Test");
-            tabControl1.TabPages.Add(tp);
+            Form parentForm = this.FindForm();
+            if (parentForm == null || parentForm.Disposing || parentForm.IsDisposed)
+            {
+                // Wenn wir hier landen, versucht WinForms das Control nach dem Schließen neu zu laden!
+                return;
+            }
 
-            TextBox tb = new TextBox();
-            tb.Dock = DockStyle.Fill;
-            tb.Multiline = true;
-
-            tp.Controls.Add(tb);*/
+            Load_LS();
+        }
+        long LSID = 0;
+        private void Load_LS() {
 
             ///Get all LS
             ///
-           
 
-            string sql = "SELECT * FROM ls WHERE dateremoved IS NULL";
+            //string sql = "SELECT * FROM ls WHERE dateremoved IS NULL";
+            string sql = "SELECT * FROM ls";
             DbConnParam.DbConn.Instance.DbAddCmd(sql);
             tabControl1.TabPages.Clear();
 
@@ -48,37 +53,51 @@ namespace mySQL_Projektverwaltung.Tab_LS_AG
             {
 
                 tpo = new TabPage(dr[1].ToString());
-                tpo.Tag = dr[1].ToString();
+                tpo.Tag = dr[0];
                 tabControl1.TabPages.Add(tpo);
 
                 LS_Control ls1 = new LS_Control();
-                ls1.Tag = 2026;
-                ls1.Name = dr[0].ToString();
+                ls1.Tag = dr[0].ToString(); //LSID: wird ausgelesen
+                ls1.Name = dr[0].ToString(); //Backup
                 ls1.Dock = DockStyle.Fill;
                 tpo.Controls.Add(ls1);
-                //ag1.Uebersicht_AG_Count();
-                //ListRowCount.Add(ls1.rowCount);
-                //if (ListRowCount[i] == 0) { tabControl1.TabPages.Remove(tpo); } else { ls1.ForeColor = Color.Green; }
                 i++;
             }
             tpo = new TabPage("Neu");
-            tpo.Tag = "new";
+            tpo.Tag = "0";
             tabControl1.TabPages.Add(tpo);
             tabControl1.Selecting += new TabControlCancelEventHandler(tabControl1_Selecting);
-            //int c = ListRowCount[0];
-            //i = ListRowCount.Count;
-            
-            //while (i > 0)
-            //{
-            //    i--;
-            //    if (ListRowCount[i] > 0) { ag1.BackColor = Color.OliveDrab; } else { ag1.ForeColor = Color.Green; }
-            //}
+
         }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPage.Tag.ToString() == "new") {
-                throw new NotImplementedException();
+            if(e.TabPage != null){
+                if ( e.TabPage.Tag.ToString() == null || e.TabPage.Tag.ToString() == "0")
+                {
+                    e.TabPage.Controls.Clear();
+                    LS_Control ls1 = new LS_Control();
+                    ls1.Load -= ls1.LS_Control_Load;
+                    ls1.Load += ls1.LS_Control_New;
+                    ls1.Tag = "0"; //LSID: wird ausgelesen
+                    ls1.Name = "0"; //Backup
+                    ls1.Dock = DockStyle.Fill;
+                    e.TabPage.Controls.Add(ls1);
+                    //throw new NotImplementedException();
+                }
+                else {
+                    tabControl1.SelectedTab.Controls.Clear();
+                    string sql = "SELECT * FROM ls WHERE lsid=@lsid";
+                    DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                    DbConnParam.DbConn.Instance.CmdAddParam("@lsid", e.TabPage.Tag.ToString());
+                    DataTable dt = DbConnParam.DbConn.Instance.DbGetDataTable();
+  
+                    LS_Control ls1 = new LS_Control();
+                    ls1.Tag = dt.Rows[0][0].ToString(); //LSID: wird ausgelesen
+                    ls1.Name = dt.Rows[0][1].ToString(); //Backup
+                    ls1.Dock = DockStyle.Fill;
+                    tabControl1.SelectedTab.Controls.Add(ls1);
+                }
             }
         }
     }

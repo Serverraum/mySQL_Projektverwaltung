@@ -41,12 +41,10 @@
             groupBox2 = new System.Windows.Forms.GroupBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage3 = new System.Windows.Forms.TabPage();
-            aG_Control1 = new AG_Control();
             tabPage4 = new System.Windows.Forms.TabPage();
             flowLayoutPanel1.SuspendLayout();
             groupBox2.SuspendLayout();
             tabControl1.SuspendLayout();
-            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -172,7 +170,6 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(aG_Control1);
             tabPage3.Location = new System.Drawing.Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -180,15 +177,6 @@
             tabPage3.TabIndex = 0;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // aG_Control1
-            // 
-            aG_Control1.Dock = System.Windows.Forms.DockStyle.Fill;
-            aG_Control1.Location = new System.Drawing.Point(3, 3);
-            aG_Control1.Name = "aG_Control1";
-            aG_Control1.Size = new System.Drawing.Size(853, 594);
-            aG_Control1.TabIndex = 9;
-            aG_Control1.Tag = "1";
             // 
             // tabPage4
             // 
@@ -213,7 +201,6 @@
             flowLayoutPanel1.PerformLayout();
             groupBox2.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
-            tabPage3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -231,7 +218,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage3;
-        private AG_Control aG_Control1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.CheckBox cb_removed_null;
     }

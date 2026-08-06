@@ -100,6 +100,7 @@
             cb_removed_null.TabIndex = 13;
             cb_removed_null.Text = "Noch aktiv / kein Enddatum";
             cb_removed_null.UseVisualStyleBackColor = true;
+            cb_removed_null.CheckedChanged += cb_removed_null_CheckedChanged;
             // 
             // label1
             // 
@@ -147,7 +148,7 @@
             Controls.Add(flowLayoutPanel1);
             Name = "AG_Control";
             Size = new System.Drawing.Size(765, 670);
-            Load += LS_Control_Load;
+            Load += AG_Control_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);

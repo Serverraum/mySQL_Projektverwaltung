@@ -80,18 +80,20 @@ namespace mySQL_Projektverwaltung.Tab_LS_AG
             {
 
                 tpo = new TabPage(dr[2].ToString());
-                tpo.Tag = dr[1].ToString();
+                tpo.Tag = dr[0].ToString();
                 tabControl1.TabPages.Add(tpo);
 
                 AG_Control ag1 = new AG_Control();
-                ag1.Tag = dr[0].ToString();
-                ag1.Name = dr[0].ToString();// Backup für die spätere Verwendung, um das Control zu identifizieren
+                ag1.Tag = dr[1].ToString(); //LSID
+                ag1.Name = dr[0].ToString();//AGID
                 ag1.Dock = DockStyle.Fill;
                 tpo.Controls.Add(ag1);
                 i++;
             }
             tpo = new TabPage("Neu");
-            tpo.Tag = "new";
+
+            tpo.Name = "0";
+            tpo.Tag = this.Tag.ToString();
             tabControl1.TabPages.Add(tpo);
             tabControl1.Selecting += new TabControlCancelEventHandler(tabControl1_Selecting);
             //int c = ListRowCount[0];
@@ -141,9 +143,36 @@ namespace mySQL_Projektverwaltung.Tab_LS_AG
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPage.Tag.ToString() == "new")
+            if (e.TabPage != null)
             {
-                throw new NotImplementedException();
+                if (e.TabPage.Name.ToString() == null || e.TabPage.Name.ToString() == "0")
+                {
+                    tabControl1.SelectedTab.Controls.Clear();
+                    //e.TabPage.Controls.Clear();
+                    AG_Control ag1 = new AG_Control();
+                    ag1.Load -= ag1.AG_Control_Load;
+                    ag1.Load += ag1.AG_Control_New;
+                    ag1.Tag = e.TabPage.Tag.ToString(); //LSID: wird ausgelesen
+                    ag1.Name = "0"; //Backup
+                    ag1.Dock = DockStyle.Fill;
+                    tabControl1.SelectedTab.Controls.Add(ag1);
+                    //e.TabPage.Controls.Add(ls1);
+                    //throw new NotImplementedException();
+                }
+                else
+                {
+                    tabControl1.SelectedTab.Controls.Clear();
+                    string sql = "SELECT * FROM ag WHERE agid=@agid";
+                    DbConnParam.DbConn.Instance.DbAddCmd(sql);
+                    DbConnParam.DbConn.Instance.CmdAddParam("@agid", e.TabPage.Tag.ToString());
+                    DataTable dt = DbConnParam.DbConn.Instance.DbGetDataTable();
+
+                    AG_Control ag1 = new AG_Control();
+                    ag1.Tag = dt.Rows[0][1].ToString(); //AGID
+                    ag1.Name = dt.Rows[0][0].ToString(); //LSID
+                    ag1.Dock = DockStyle.Fill;
+                    tabControl1.SelectedTab.Controls.Add(ag1);
+                }
             }
         }
 
@@ -164,9 +193,18 @@ namespace mySQL_Projektverwaltung.Tab_LS_AG
         private void bt_saveLS_Click(object sender, EventArgs e)
         {
             if (newLS == true){
-                string sql = "SELECT * FROM ag WHERE dateremoved IS NULL AND LSID = @lsid ";
+                string sql = @"INSERT INTO ls (LS, datecreated, dateremoved,) VALUES (@LS, @datecreated, @dateremoved)";
                 DbConnParam.DbConn.Instance.DbAddCmd(sql);
-                DbConnParam.DbConn.Instance.DbExecuteNonQuery();
+                DbConnParam.DbConn.Instance.CmdAddParam("@ls", tb_LS.Text);
+                string DateTimeString = DateTime.Now.ToString("s");
+                DbConnParam.DbConn.Instance.CmdAddParam("@datecreated", DateTimeString);
+                if (dtp_dateremoved.Value == DateTime.MinValue.AddYears(1752))
+                {
+                    DateTimeString = dtp_dateremoved.Value.ToString("s");
+                    DBNull dbNullValue = DBNull.Value;
+                    DbConnParam.DbConn.Instance.CmdAddParam("@dateremoved", dbNullValue);
+                }
+                int i = DbConnParam.DbConn.Instance.DbExecuteNonQuery();
             }
             else {
                 string sql = "UPDATE ls set LS=@ls, datecreated=@datecreated, dateremoved=@dateremoved WHERE LSID= @lsid";

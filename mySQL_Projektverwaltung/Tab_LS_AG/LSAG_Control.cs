@@ -75,14 +75,16 @@ namespace mySQL_Projektverwaltung.Tab_LS_AG
             if(e.TabPage != null){
                 if ( e.TabPage.Tag.ToString() == null || e.TabPage.Tag.ToString() == "0")
                 {
-                    e.TabPage.Controls.Clear();
+                    tabControl1.SelectedTab.Controls.Clear();
+                    //e.TabPage.Controls.Clear();
                     LS_Control ls1 = new LS_Control();
                     ls1.Load -= ls1.LS_Control_Load;
                     ls1.Load += ls1.LS_Control_New;
-                    ls1.Tag = "0"; //LSID: wird ausgelesen
-                    ls1.Name = "0"; //Backup
+                    ls1.Tag = "1"; //LSID: wird ausgelesen
+                    ls1.Name = "1"; //Backup
                     ls1.Dock = DockStyle.Fill;
-                    e.TabPage.Controls.Add(ls1);
+                    tabControl1.SelectedTab.Controls.Add(ls1);
+                    //e.TabPage.Controls.Add(ls1);
                     //throw new NotImplementedException();
                 }
                 else {

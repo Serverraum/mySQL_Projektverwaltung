@@ -66,6 +66,8 @@
             // cb_projID
             // 
             cb_projID.AutoSize = true;
+            cb_projID.Checked = true;
+            cb_projID.CheckState = System.Windows.Forms.CheckState.Checked;
             cb_projID.Location = new System.Drawing.Point(3, 3);
             cb_projID.Name = "cb_projID";
             cb_projID.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -78,6 +80,8 @@
             // cb_LS
             // 
             cb_LS.AutoSize = true;
+            cb_LS.Checked = true;
+            cb_LS.CheckState = System.Windows.Forms.CheckState.Checked;
             cb_LS.Location = new System.Drawing.Point(155, 3);
             cb_LS.Name = "cb_LS";
             cb_LS.Size = new System.Drawing.Size(75, 19);
@@ -89,6 +93,8 @@
             // cb_AG
             // 
             cb_AG.AutoSize = true;
+            cb_AG.Checked = true;
+            cb_AG.CheckState = System.Windows.Forms.CheckState.Checked;
             cb_AG.Location = new System.Drawing.Point(236, 3);
             cb_AG.Name = "cb_AG";
             cb_AG.Size = new System.Drawing.Size(101, 19);
@@ -100,6 +106,8 @@
             // cb_desc_short
             // 
             cb_desc_short.AutoSize = true;
+            cb_desc_short.Checked = true;
+            cb_desc_short.CheckState = System.Windows.Forms.CheckState.Checked;
             cb_desc_short.Location = new System.Drawing.Point(343, 3);
             cb_desc_short.Name = "cb_desc_short";
             cb_desc_short.Size = new System.Drawing.Size(121, 19);
@@ -111,6 +119,8 @@
             // cb_desc_long
             // 
             cb_desc_long.AutoSize = true;
+            cb_desc_long.Checked = true;
+            cb_desc_long.CheckState = System.Windows.Forms.CheckState.Checked;
             cb_desc_long.Location = new System.Drawing.Point(470, 3);
             cb_desc_long.Name = "cb_desc_long";
             cb_desc_long.Size = new System.Drawing.Size(47, 19);
@@ -122,6 +132,8 @@
             // cb_name
             // 
             cb_name.AutoSize = true;
+            cb_name.Checked = true;
+            cb_name.CheckState = System.Windows.Forms.CheckState.Checked;
             cb_name.Location = new System.Drawing.Point(91, 3);
             cb_name.Name = "cb_name";
             cb_name.Size = new System.Drawing.Size(58, 19);
